@@ -320,14 +320,4 @@ The study primarily focused on model building and evaluation while demonstrating
 
 ---
 
-# References
 
-1. Provost, F., & Fawcett, T. (2023). Data Science for Business. O'Reilly Media.
-
-2. Géron, A. (2022). Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow. O'Reilly Media.
-
-3. James, G., Witten, D., Hastie, T., & Tibshirani, R. (2023). An Introduction to Statistical Learning. Springer.
-
-4. Han, J., Kamber, M., & Pei, J. (2022). Data Mining: Concepts and Techniques. Morgan Kaufmann.
-
-5. Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.
