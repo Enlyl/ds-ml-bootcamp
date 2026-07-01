@@ -420,6 +420,7 @@
   .nb-btn:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 0 30px rgba(243,118,38,.4); }
   .nb-btn:active { transform:scale(.96); }
   .nb-btn .nb-icon { font-size:1.3em; line-height:1; }
+  .header-colab { margin:18px auto 0; display:inline-flex; }
   .link-card { padding:8px 14px; border-radius:10px; background:var(--surface-hover); transition:all .3s var(--curve); border:1px solid transparent; }
   .link-card:hover { background:rgba(0,229,255,.03); border-color:var(--border-hover); transform:translateY(-2px) scale(1.02); box-shadow:0 0 20px var(--glow); }
   .link-card a { color:var(--accent); text-decoration:none; font-weight:500; font-size:.84em; }
@@ -781,6 +782,8 @@
       <span class="prompt">$</span> <span class="cmd">python3 -c "import ds_ml_bootcamp"</span><br>
       <span class="out" id="termOutput"></span><span class="cursor">▌</span>
     </div>
+
+    <a class="nb-btn header-colab" href="https://colab.research.google.com/github/Enlyl/ds-ml-bootcamp/blob/main/code/blank-colab.ipynb" target="_blank"><span class="nb-icon">▶</span> Запустить в Colab</a>
 
     <div class="progress-wrap">
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
