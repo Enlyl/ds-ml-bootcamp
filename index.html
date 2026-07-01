@@ -2,8 +2,11 @@
 <html lang="ru" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DS-ML Bootcamp // NEURAL GUIDE v3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="theme-color" content="#08080f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -140,6 +143,7 @@
 
   /* ── UI TOGGLES ── */
   .ui-toggles { position:fixed; top:16px; right:16px; z-index:10000; display:flex; flex-direction:column; gap:8px; }
+  #pCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:9999; pointer-events:none; }
   .ui-btn {
     width:36px; height:36px; border-radius:50%;
     border:1px solid var(--border); background:var(--surface);
@@ -537,6 +541,30 @@
     .toc-grid { grid-template-columns:1fr; }
     .container { padding:10px 10px 60px; }
     .term-header { font-size:.6em; }
+    .ui-toggles { top:6px; right:6px; gap:4px; }
+    .ui-btn { width:30px; height:30px; font-size:.7em; }
+    .vol-wrap { width:50px; }
+    .vol-wrap .vol-label { display:none; }
+    .install-pwa { width:30px; height:30px; font-size:.7em; }
+    .synth-sun { width:120px; height:120px; }
+    .file-list { flex-direction:column; gap:4px; }
+    .links-grid { grid-template-columns:1fr; }
+    .step{animation:none!important;}
+    .md-modal-content { width:95%; max-height:85vh; top:7vh; border-radius:8px; }
+    .md-modal-body { max-height:65vh; padding:12px; }
+  }
+  @media(max-width:480px){
+    .header h1 { font-size:1.1em; }
+    .header .sub { font-size:.75em; }
+    .step-title { font-size:.82em; }
+    .step-header .arrow { font-size:.6em; }
+    .progress-label { font-size:.65em; }
+    .toc-item { font-size:.75em; padding:5px 8px; }
+    .summary-num { font-size:1.5em; }
+    .summary-label { font-size:.6em; }
+    .term-header { font-size:.5em; padding:6px 10px; }
+    .synth-sun { width:80px; height:80px; }
+    .code-body { font-size:.65em; }
   }
 </style>
 </head>
@@ -602,10 +630,14 @@
 
 <!-- UI TOGGLES -->
 <div class="ui-toggles">
+  <button class="ui-btn install-pwa" id="installBtn" onclick="installPWA()" title="Установить приложение">⬇</button>
   <button class="ui-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
   <button class="ui-btn" id="soundToggle" onclick="toggleSound()">🔇</button>
   <div class="vol-wrap"><span class="vol-label">VOL</span><input type="range" id="volSlider" min="0" max="1" step=".01" value=".5" oninput="setVolume(this.value)"></div>
 </div>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="pCanvas"></canvas>
 
 <div class="container">
 
@@ -1090,6 +1122,57 @@ function toggleMdRaw(){
 document.addEventListener('click',e=>{const m=document.getElementById('mdModal');if(e.target===m)closeMdModal()});
 document.addEventListener('click',e=>{const a=e.target.closest('a');if(a&&a.href&&a.href.match(/\.(md|py|csv)$/i)&&!(a.host&&a.host!==location.host)&&!a.closest('.md-modal')&&!a.closest('.md-modal-error')){e.preventDefault();openMdModal(a.href);if(typeof soundOn!=='undefined'&&soundOn)keyClick()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMdModal()});
+</script>
+
+<!-- PWA + PARTICLES + SWIPE -->
+<script>
+/* ── PWA ── */
+let _deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();_deferredPrompt=e;},false);
+function installPWA(){
+  if(_deferredPrompt){_deferredPrompt.prompt();_deferredPrompt.userChoice.then(()=>{_deferredPrompt=null})}
+  else if(window.matchMedia('(display-mode: standalone)').matches){}
+  else alert('Откройте через Chrome → ⋮ → Установить приложение');
+}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+/* ── PARTICLES ── */
+const _pc=document.getElementById('pCanvas'),_px=_pc.getContext('2d');
+let _particles=[],_pAnim=null;
+function resizePc(){_pc.width=window.innerWidth;_pc.height=window.innerHeight}
+window.addEventListener('resize',resizePc); resizePc();
+function burstParticles(){
+  _particles=[]; const w=_pc.width,h=_pc.height;
+  for(let i=0;i<80;i++){
+    _particles.push({
+      x:w/2+(Math.random()-.5)*w*.6, y:h/2+(Math.random()-.5)*h*.3,
+      vx:(Math.random()-.5)*6, vy:-Math.random()*8-2,
+      s:2+Math.random()*4, a:1, d:.005+Math.random()*.012,
+      c:['#00e5ff','#ff00ff','#00ff88','#ffcc00','#ff4488'][Math.floor(Math.random()*5)]
+    });
+  }
+  if(_pAnim)cancelAnimationFrame(_pAnim);
+  function draw(){
+    _px.clearRect(0,0,_pc.width,_pc.height); let alive=false;
+    _particles.forEach(p=>{
+      p.x+=p.vx; p.vy+=.12; p.y+=p.vy; p.a-=p.d;
+      if(p.a>0){alive=true;_px.globalAlpha=p.a;_px.fillStyle=p.c;_px.beginPath();_px.arc(p.x,p.y,p.s,0,Math.PI*2);_px.fill()}
+    });
+    _px.globalAlpha=1; if(alive)_pAnim=requestAnimationFrame(draw); else{_px.clearRect(0,0,_pc.width,_pc.height);_pAnim=null}
+  }
+  draw();
+}
+/* patch progress update for particles */
+const _origUp=updateProgress; updateProgress=function(){
+  _origUp();
+  const ck=document.querySelectorAll('.step-check:checked').length;
+  if(ck===STEPS.length)burstParticles();
+};
+
+/* ── SWIPE ── */
+let _sx=0,_sy=0,_sEl=null;
+document.addEventListener('touchstart',e=>{const s=e.target.closest('.step');if(s&&!s.querySelector('.md-modal')){_sx=e.touches[0].clientX;_sy=e.touches[0].clientY;_sEl=s}},{passive:true});
+document.addEventListener('touchend',e=>{if(!_sEl)return;const dx=e.changedTouches[0].clientX-_sx,dy=e.changedTouches[0].clientY-_sy;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){const steps=[...document.querySelectorAll('.step')],idx=steps.indexOf(_sEl);if(dx<0&&idx<steps.length-1){steps[idx+1].classList.add('open');steps[idx+1].scrollIntoView({behavior:'smooth',block:'start'})}else if(dx>0&&idx>0){steps[idx-1].classList.add('open');steps[idx-1].scrollIntoView({behavior:'smooth',block:'start'})}}_sEl=null},{passive:true});
 </script>
 
 </body>
