@@ -1,50 +1,49 @@
-# 📊 DS-ML Bootcamp
+# 📊 DS-ML Bootcamp (Интенсив по Data Science и Machine Learning)
 
-Welcome to the **Data Science & Machine Learning Bootcamp** repository! 🚀
+Добро пожаловать в репозиторий **Data Science & Machine Learning Bootcamp**! 🚀
 
-This repo contains all the lessons, code examples, and resources used during our one-month intensive bootcamp.  
-The program is designed to take participants from **zero to hands-on projects**, covering the full ML workflow:
+Этот репозиторий содержит все уроки, примеры кода и ресурсы, используемые во время нашего месячного интенсивного bootcamp (учебного интенсива).
+Программа разработана, чтобы провести участников от **нуля до практических проектов**, охватывая полный ML workflow (рабочий процесс машинного обучения):
 
-1. Collect Data  
-2. Preprocess Data  
-3. Split into Train/Test  
-4. Choose Model  
-5. Train Model  
-6. Evaluate Model  
-7. Deploy Model  
-
----
-
-## 🎯 Goal
-
-Our mission is simple:  
-Move from **unreal to real**, from **unimaginable to imaginable** — by practicing the entire DS/ML journey, step by step, **in just one month**.
+1. Collect Data (Сбор данных)
+2. Preprocess Data (Предобработка данных)
+3. Split into Train/Test (Разделение на обучающую и тестовую выборки)
+4. Choose Model (Выбор модели)
+5. Train Model (Обучение модели)
+6. Evaluate Model (Оценка модели)
+7. Deploy Model (Развёртывание модели)
 
 ---
 
+## 🎯 Goal (Цель)
 
-📘 **Tip:**  
-You can clone the repo, open Jupyter/VS Code, and follow along while watching each lesson for hands-on learning.
+Наша миссия проста:
+Перейти от **нереального к реальному**, от **невообразимого к вообразимому** — практикуя весь DS/ML путь, шаг за шагом, **всего за один месяц**.
 
 ---
 
-## 🙌 Contributors
+📘 **Tip (Совет):**
+Вы можете клонировать репозиторий, открыть Jupyter/VS Code и следовать за уроками для практического обучения.
 
-This bootcamp is proudly hosted by:
+---
 
-- [@sharafdin](https://github.com/sharafdin)  
+## 🙌 Contributors (Участники)
+
+Этот bootcamp организован:
+
+- [@sharafdin](https://github.com/sharafdin)
 - [@omartood](https://github.com/omartood)
 
-Together, our goal is to empower the next generation of data scientists.
+Вместе наша цель — помочь следующему поколению data scientists (специалистов по данным).
 
 ---
 
-## 🤝 Sponsored By
+## 🤝 Sponsored By (Спонсор)
 
-This bootcamp is fully sponsored by:
+Этот bootcamp полностью спонсируется:
 
 - **[Dugsiiye](https://dugsiiye.com)**
 
 ---
 
-⭐ If you find this useful, don’t forget to **star** the repo!
+⭐ Если вы находите это полезным, не забудьте **поставить звезду** репозиторию!

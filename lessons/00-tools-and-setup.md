@@ -1,84 +1,84 @@
-# Setup Guide – Tools and Environment
+# Setup Guide (Руководство по настройке) – Tools and Environment (Инструменты и окружение)
 
-> Complete this guide before your first hands-on coding session (**Lesson 3, Night 2**). In **Lesson 3**, we cover how data is structured — features, labels, preprocessing, and feature engineering. This guide sets up the tools you'll use to load, explore, and model that data in Python.
-
----
-
-## What You'll Learn
-
-By the end of this guide, students will be able to:
-
-- Explain why **Python**, **Anaconda**, and **Jupyter Notebook** are used in this course.
-- Install Anaconda and launch Jupyter Notebook on their machine.
-- Verify that **NumPy**, **Pandas**, and **Scikit-learn** import correctly.
-- Load a CSV in a notebook and explore it with `head()`, `describe()`, and `value_counts()`.
-- Know where the bootcamp datasets and code live in this repository.
+> Завершите это руководство до вашей первой практической coding session (сессии кодирования) (**Lesson 3, Night 2**). В **Lesson 3** мы рассматриваем, как структурированы данные — features (признаки), labels (метки), preprocessing (предобработка) и feature engineering (создание признаков). Это руководство настраивает инструменты, которые вы будете использовать для загрузки, изучения и моделирования этих данных в Python.
 
 ---
 
-## The Core Tools
+## What You'll Learn (Что вы изучите)
 
-To build Machine Learning models, you need the right tools. In this course, **Python** is our programming language of choice, supported by a set of industry-standard libraries.
+К концу этого руководства студенты смогут:
 
-In **Lesson 1**, we previewed the data science toolkit. This guide walks through how to **install and run** that toolkit so you're ready to write code alongside the rest of the bootcamp.
+- Объяснить, почему **Python**, **Anaconda** и **Jupyter Notebook** используются в этом курсе.
+- Установить Anaconda и запустить Jupyter Notebook на своём компьютере.
+- Проверить, что **NumPy**, **Pandas** и **Scikit-learn** импортируются корректно.
+- Загрузить CSV в ноутбук и изучить его с помощью `head()`, `describe()` и `value_counts()`.
+- Знать, где в этом репозитории находятся датасеты и код bootcamp (учебного интенсива).
+
+---
+
+## The Core Tools (Основные инструменты)
+
+Чтобы строить Machine Learning модели, вам нужны правильные инструменты. В этом курсе **Python** — наш язык программирования, поддерживаемый набором отраслевых стандартных библиотек.
+
+В **Lesson 1** мы кратко рассмотрели toolkit (набор инструментов) для Data Science. Это руководство показывает, как **установить и запустить** этот toolkit, чтобы вы были готовы писать код вместе с остальной частью bootcamp.
 
 ---
 
 ### Python
 
-Python is the most popular language for Data Science and Machine Learning. It is easy to read, easy to write, and has a massive ecosystem of pre-built tools for data manipulation and modeling.
+Python — самый популярный язык для Data Science и Machine Learning. Он легко читается, легко пишется и имеет огромную экосистему готовых инструментов для манипуляции данными и моделирования.
 
 ---
 
 ### Anaconda
 
-**Anaconda** is a free distribution of Python specifically geared towards data science. It comes with Python and the necessary libraries pre-installed, so you don't have to worry about complex dependency setups.
+**Anaconda** — это бесплатный дистрибутив Python, специально предназначенный для Data Science. Он поставляется с предустановленным Python и необходимыми библиотеками, так что вам не нужно беспокоиться о сложной настройке зависимостей.
 
 ---
 
 ### Jupyter Notebook
 
-**Jupyter Notebook** is a web-based interactive coding environment. Unlike traditional scripts where you run an entire file at once, Jupyter lets you run code in small **cells** one at a time. This makes it easy to experiment and see results immediately.
+**Jupyter Notebook** — это веб-интерактивная среда для кодирования. В отличие от традиционных скриптов, где вы запускаете весь файл сразу, Jupyter позволяет запускать код в небольших **ячейках (cells)** по одной. Это упрощает эксперименты и позволяет сразу видеть результаты.
 
 ---
 
-## Installation Guide
+## Installation Guide (Руководство по установке)
 
-The easiest route for this course is to use Anaconda.
+Самый простой путь для этого курса — использовать Anaconda.
 
-### Step 1: Download Anaconda
+### Step 1 (Шаг 1): Download Anaconda (Скачать Anaconda)
 
-Head to the official Anaconda website and download the installer for your operating system:
+Перейдите на официальный сайт Anaconda и скачайте установщик для вашей операционной системы:
 
 - [anaconda.com/download](https://www.anaconda.com/download)
 
-Choose the installer for **Windows**, **macOS**, or **Linux** as appropriate.
+Выберите установщик для **Windows**, **macOS** или **Linux** в зависимости от вашей системы.
 
 ---
 
-### Step 2: Install
+### Step 2 (Шаг 2): Install (Установка)
 
-Run the installer and follow the default prompts. No special configuration is required for this course.
-
----
-
-### Step 3: Launch Anaconda Navigator
-
-Once installation is complete, open the **Anaconda Navigator** application on your computer.
+Запустите установщик и следуйте стандартным подсказкам. Для этого курса не требуется специальной конфигурации.
 
 ---
 
-### Step 4: Open Jupyter Notebook
+### Step 3 (Шаг 3): Launch Anaconda Navigator (Запустите Anaconda Navigator)
 
-Inside Anaconda Navigator, find the **Jupyter Notebook** tile and click **Launch**. This opens a terminal window — **keep that window open** while you work. Jupyter will automatically open in your web browser.
-
-> If you close the terminal, Jupyter stops running. Re-launch it from Anaconda Navigator when you need it again.
+После завершения установки откройте приложение **Anaconda Navigator** на вашем компьютере.
 
 ---
 
-## Verify Your Setup
+### Step 4 (Шаг 4): Open Jupyter Notebook (Откройте Jupyter Notebook)
 
-Create a new notebook in Jupyter and run this cell to confirm everything is installed:
+В Anaconda Navigator найдите плитку **Jupyter Notebook** и нажмите **Launch**. Это откроет окно терминала — **держите это окно открытым**, пока работаете. Jupyter автоматически откроется в вашем веб-браузере.
+
+> Если вы закроете терминал, Jupyter остановится. Запустите его снова из Anaconda Navigator, когда он снова понадобится.
+
+---
+
+## Verify Your Setup (Проверьте вашу настройку)
+
+Создайте новый ноутбук в Jupyter и выполните эту ячейку, чтобы подтвердить, что всё установлено:
 
 ```python
 import numpy as np
@@ -91,76 +91,76 @@ print("Scikit-learn:", sklearn.__version__)
 print("Setup OK!")
 ```
 
-If all three libraries print a version number and you see `Setup OK!`, your environment is ready.
+Если все три библиотеки выведут номер версии и вы увидите `Setup OK!`, ваше окружение готово.
 
 ---
 
-## The Core Libraries
+## The Core Libraries (Основные библиотеки)
 
-Almost every ML project in this bootcamp relies on three foundational Python libraries. Anaconda installs them automatically. Here is what each one does:
+Почти каждый ML проект в этом bootcamp опирается на три фундаментальные библиотеки Python. Anaconda устанавливает их автоматически. Вот что делает каждая из них:
 
 ---
 
 ### NumPy (`numpy`)
 
-**Numerical Python** — used for fast mathematical operations on large multi-dimensional arrays and matrices. Think of it as the core calculator for data science. Pandas and Scikit-learn both depend on NumPy under the hood.
+**Numerical Python** — используется для быстрых математических операций над большими многомерными массивами и матрицами. Думайте о ней как о базовом калькуляторе для Data Science. Pandas и Scikit-learn обе зависят от NumPy внутри.
 
 ---
 
 ### Pandas (`pandas`)
 
-Your main tool for **data manipulation**. Use it to:
+Ваш основной инструмент для **манипуляции данными**. Используйте её, чтобы:
 
-- Load datasets into tables (DataFrames)
-- Clean and transform data
-- Explore data with printed output
+- Загружать датасеты в таблицы (DataFrames)
+- Очищать и преобразовывать данные
+- Изучать данные с помощью вывода на печать
 
-If you know Excel, think of Pandas as Excel on steroids. In this course you'll explore data using:
+Если вы знаете Excel, представляйте Pandas как Excel на стероидах. В этом курсе вы будете изучать данные с помощью:
 
-- `head()` — first few rows
-- `describe()` — summary statistics
-- `value_counts()` — count of each category
-- `.corr()` — correlation between numeric columns
+- `head()` — первые несколько строк
+- `describe()` — сводная статистика
+- `value_counts()` — количество каждой категории
+- `.corr()` — корреляция между числовыми колонками
 
-Plotting with **matplotlib** and **seaborn** appears in later lessons; for now, printed tables are enough to inspect your data.
+Построение графиков с помощью **matplotlib** и **seaborn** появится в следующих уроках; пока печатных таблиц достаточно для изучения данных.
 
 ---
 
 ### Scikit-learn (`sklearn`)
 
-The gold-standard library for Machine Learning in Python. It contains pre-built algorithms for:
+Эталонная библиотека для Machine Learning в Python. Она содержит готовые алгоритмы для:
 
-- **Classification** and **Regression** (supervised learning)
-- **Clustering** (unsupervised learning)
-- **Data preprocessing** (scaling, encoding, train/test split)
+- **Classification (классификация)** и **Regression (регрессия)** (supervised learning — обучение с учителем)
+- **Clustering (кластеризация)** (unsupervised learning — обучение без учителя)
+- **Data preprocessing (предобработка данных)** (scaling, encoding, train/test split)
 
-You don't have to write the complex math from scratch — Scikit-learn gives you ready-to-use implementations.
-
----
-
-### Library Overview
-
-| **Library**    | **Purpose**                                              |
-| -------------- | -------------------------------------------------------- |
-| `numpy`        | Numerical computing, arrays, math operations             |
-| `pandas`       | Data manipulation and analysis (DataFrames)              |
-| `scikit-learn` | Machine Learning models, preprocessing, and evaluation     |
+Вам не нужно писать сложную математику с нуля — Scikit-learn даёт готовые к использованию реализации.
 
 ---
 
-## Your First Notebook
+### Library Overview (Обзор библиотек)
 
-Let's get comfortable running code in Jupyter.
-
-### Create a new notebook
-
-In the Jupyter browser tab, click **New → Python 3 (ipykernel)**. This opens a blank notebook made up of **cells**.
+| **Library (Библиотека)** | **Purpose (Назначение)**                                              |
+| ------------------------ | --------------------------------------------------------------------- |
+| `numpy`                  | Numerical computing, arrays, math operations (численные вычисления)   |
+| `pandas`                 | Data manipulation and analysis (манипуляция и анализ данных)          |
+| `scikit-learn`           | ML models, preprocessing, and evaluation (модели, предобработка, оценка) |
 
 ---
 
-### Run a cell
+## Your First Notebook (Ваш первый ноутбук)
 
-Type some code into the first cell, then press **Shift + Enter** to run it and move to the next cell:
+Давайте освоимся с запуском кода в Jupyter.
+
+### Create a new notebook (Создать новый ноутбук)
+
+Во вкладке браузера Jupyter нажмите **New → Python 3 (ipykernel)**. Откроется пустой ноутбук, состоящий из **ячеек (cells)**.
+
+---
+
+### Run a cell (Запустить ячейку)
+
+Введите код в первую ячейку, затем нажмите **Shift + Enter**, чтобы запустить её и перейти к следующей:
 
 ```python
 print("Hello, Jupyter!")
@@ -170,13 +170,13 @@ y = 10
 print(x + y)
 ```
 
-The output appears directly below the cell. You can edit any cell and re-run it as many times as you like.
+Вывод появляется непосредственно под ячейкой. Вы можете редактировать любую ячейку и запускать её повторно сколько угодно раз.
 
 ---
 
-### Import the core libraries
+### Import the core libraries (Импорт основных библиотек)
 
-Each library only needs to be imported once per notebook. Run this in a new cell:
+Каждую библиотеку нужно импортировать только один раз за ноутбук. Выполните это в новой ячейке:
 
 ```python
 import numpy as np
@@ -194,34 +194,34 @@ print(df.describe())
 print(df["age"].mean())
 ```
 
-Here you build a small table with Pandas, preview it with `head()`, get summary statistics with `describe()`, and compute a column average — the same tools you'll use on real datasets.
+Здесь вы создаёте небольшую таблицу с помощью Pandas, просматриваете её через `head()`, получаете сводную статистику через `describe()` и вычисляете среднее колонки — те же инструменты, которые вы будете использовать на реальных датасетах.
 
 ---
 
-> **Tip:** Cells run in the order you execute them, not top to bottom. If results look strange, use **Kernel → Restart & Run All** to run every cell fresh from the top.
+> **Tip (Совет):** Ячейки выполняются в порядке их запуска, а не сверху вниз. Если результаты выглядят странно, используйте **Kernel → Restart & Run All**, чтобы выполнить все ячейки заново с начала.
 
 ---
 
-## Troubleshooting
+## Troubleshooting (Устранение неполадок)
 
-- **Import errors** — Close Jupyter and re-launch it from Anaconda Navigator so it picks up the correct Python environment.
-- **File not found** — When loading a file, make sure the path is relative to where you launched Jupyter, or use the full path.
-- **Jupyter won't open in the browser** — Check that the terminal window from Anaconda Navigator is still open.
+- **Import errors (Ошибки импорта)** — Закройте Jupyter и запустите его снова из Anaconda Navigator, чтобы он подхватил правильное Python окружение.
+- **File not found (Файл не найден)** — При загрузке файла убедитесь, что путь указан относительно места запуска Jupyter, или используйте полный путь.
+- **Jupyter won't open in the browser (Jupyter не открывается в браузере)** — Проверьте, что окно терминала из Anaconda Navigator всё ещё открыто.
 
-> **Alternative:** You can also use **VS Code** with the Jupyter extension instead of the browser interface. Anaconda remains the recommended way to install Python and the libraries for this course.
-
----
-
-## Summary
-
-- **Python** + **Anaconda** + **Jupyter Notebook** form the core environment for this bootcamp.
-- Anaconda bundles **NumPy**, **Pandas**, and **Scikit-learn** — no manual library installs needed.
-- Jupyter cells let you run code step by step (**Shift + Enter**) and see results immediately.
-- Load and explore data with Pandas using `head()`, `describe()`, and `value_counts()`.
-- After setup, continue **Lesson 3 (Night 2)** with [`code/data-processing.py`](../code/data-processing.py), then move on to **Lesson 4** for your first regression model.
+> **Alternative (Альтернатива):** Вы также можете использовать **VS Code** с расширением Jupyter вместо браузерного интерфейса. Anaconda остаётся рекомендуемым способом установки Python и библиотек для этого курса.
 
 ---
 
-*Setup guide — complete before Lesson 3 coding session*
+## Summary (Итог)
+
+- **Python** + **Anaconda** + **Jupyter Notebook** образуют основное окружение для этого bootcamp.
+- Anaconda включает **NumPy**, **Pandas** и **Scikit-learn** — ручная установка библиотек не требуется.
+- Ячейки Jupyter позволяют запускать код шаг за шагом (**Shift + Enter**) и сразу видеть результаты.
+- Загружайте и изучайте данные с помощью Pandas, используя `head()`, `describe()` и `value_counts()`.
+- После настройки переходите к **Lesson 3 (Night 2)** с [`code/data-processing.py`](../code/data-processing.py), затем к **Lesson 4** для вашей первой regression модели.
+
+---
+
+*Setup guide (руководство по настройке) — завершить до coding session (сессии кодирования) Lesson 3*
 
 ---

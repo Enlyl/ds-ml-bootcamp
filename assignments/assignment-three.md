@@ -1,87 +1,87 @@
-# Practical Assignment: Data Preprocessing Pipeline
+# Practical Assignment (Практическое задание): Data Preprocessing Pipeline (Конвейер предобработки данных)
 
-**Due:** Wednesday, June 24, 2026 — 12:00 PM (Africa/Mogadishu / EAT)
+**Due (Срок сдачи):** Wednesday, June 24, 2026 — 12:00 PM (Africa/Mogadishu / EAT)
 
-**Goal:** Build a clean, reproducible preprocessing pipeline on a messy tabular dataset, applying the cleaning, encoding, scaling, and feature engineering techniques from Lesson 3.
+**Goal (Цель):** Построить чистый, воспроизводимый preprocessing pipeline (конвейер предобработки) для необработанного табличного датасета, применяя техники очистки, кодирования, масштабирования и создания признаков (feature engineering) из Lesson 3.
 
-## Instructions
+## Instructions (Инструкции)
 
-- **Dataset (required):** Use the Car Price dataset — **dataset/raw_car_dataset.csv**.
-- The file intentionally includes missing values, typos, outliers, and duplicates.
-- Columns: Price (mixed numeric and currency strings), Odometer_km, Doors, Accidents, Location (City/Suburb/Rural plus typos/unknowns), Year.
-- You may use AI **only for advice and concept clarification** (e.g., "What is IQR capping?", "When should I use mode imputation?").
-- **Do not use AI to generate code or full solutions.** All implementation must be written by **you**.
-
----
-
-## Task
-
-Follow these ten steps, with a brief print checkpoint after each.
-
-1. **Load & Inspect**
-
-   - Show head(10), shape, info, missing counts, and Location value counts.
-   - Note the key issues you find.
-
-2. **Clean Target Formatting (Price)**
-
-   - Remove currency symbols and commas; ensure the column is numeric.
-   - Report the dtype and skewness.
-
-3. **Fix Category Errors before Imputation**
-
-   - Normalize Location text and map typos (e.g., Subrb → Suburb).
-   - Convert unknowns (e.g., "??") to missing, then recount including missing.
-
-4. **Impute Missing Values (justify choices)**
-
-   - Odometer_km → median; Doors/Accidents → mode; Location → mode.
-   - Confirm post-imputation missing counts.
-
-5. **Remove Duplicates**
-
-   - Report shape before/after and the number of rows removed.
-
-6. **Outliers (IQR capping)**
-
-   - Compute bounds and clip for Price and Odometer_km.
-   - Show a short summary after capping.
-
-7. **One-Hot Encode Categorical(s)**
-
-   - Encode Location as 0/1 columns and list the new columns created.
-
-8. **Feature Engineering (no leakage)**
-
-   - Add at least three sensible features (e.g., CarAge, Km_per_year with safe handling, Is_Urban).
-   - Add **LogPrice = log(Price + 1)** as an alternative target (not a feature).
-
-9. **Feature Scaling (X only)**
-
-   - Standardize continuous features; do **not** scale Price or LogPrice.
-   - Prefer leaving 0/1 dummies unscaled; show a small sample of scaled values.
-
-10. **Final Checks & Save**
-
-    - Show final info, missing counts (all zero), and a small describe table.
-    - Save the result to **clean_car_dataset.csv**.
+- **Dataset (датасет) (обязательно):** Используйте Car Price датасет — **dataset/raw_car_dataset.csv**.
+- Файл намеренно содержит пропущенные значения, опечатки, выбросы и дубликаты.
+- Колонки: Price (смешанные числовые значения и строки с валютой), Odometer_km, Doors, Accidents, Location (City/Suburb/Rural с опечатками/неизвестными), Year.
+- Вы можете использовать AI **только для советов и разъяснения концепций** (например, "Что такое IQR capping?", "Когда использовать модальную импутацию?").
+- **Не используйте AI для генерации кода или полных решений.** Вся реализация должна быть написана **вами**.
 
 ---
 
-## Deliverables
+## Task (Задание)
 
-- **Script:** `car_preprocess.py` implementing Steps 1–10 with clear print checkpoints.
-- **Cleaned data:** `clean_car_dataset.csv`.
-- **Reflection:** `reflection.md` (≤ 1 page) explaining your decisions for each major step (why median vs mode, why IQR capping, which features you engineered and why).
-- **requirements.txt** with the exact package versions you used.
+Выполните следующие десять шагов, с кратким выводом checkpoint (контрольной точки) после каждого.
+
+1. **Load & Inspect (Загрузка и просмотр)**
+
+   - Покажите head(10), shape, info, количество пропущенных значений и value counts для Location.
+   - Отметьте ключевые проблемы, которые вы обнаружили.
+
+2. **Clean Target Formatting (Очистка форматирования целевого признака) - Price**
+
+   - Удалите символы валюты и запятые; убедитесь, что колонка числовая.
+   - Сообщите dtype и skewness (асимметрию).
+
+3. **Fix Category Errors before Imputation (Исправление ошибок в категориях до импутации)**
+
+   - Нормализуйте текст Location и исправьте опечатки (например, Subrb → Suburb).
+   - Преобразуйте неизвестные значения (например, "??") в пропущенные, затем пересчитайте с учётом пропущенных.
+
+4. **Impute Missing Values (Импутация пропущенных значений) (обоснуйте выбор)**
+
+   - Odometer_km → median (медиана); Doors/Accidents → mode (мода); Location → mode (мода).
+   - Подтвердите количество пропущенных значений после импутации.
+
+5. **Remove Duplicates (Удаление дубликатов)**
+
+   - Сообщите shape до и после, а также количество удалённых строк.
+
+6. **Outliers (IQR capping) (Выбросы — ограничение через IQR)**
+
+   - Вычислите границы и примените clipping (ограничение) для Price и Odometer_km.
+   - Покажите краткую сводку после capping (ограничения).
+
+7. **One-Hot Encode Categorical(s) (One-hot кодирование категориальных признаков)**
+
+   - Закодируйте Location в колонки 0/1 и перечислите созданные новые колонки.
+
+8. **Feature Engineering (no leakage) (Создание признаков без утечки данных)**
+
+   - Добавьте как минимум три осмысленных признака (например, CarAge, Km_per_year с безопасной обработкой, Is_Urban).
+   - Добавьте **LogPrice = log(Price + 1)** как альтернативную целевую переменную (не признак).
+
+9. **Feature Scaling (X only) (Масштабирование признаков только для X)**
+
+   - Стандартизируйте непрерывные признаки; **не** масштабируйте Price или LogPrice.
+   - Предпочтительно оставлять 0/1 дамми-переменные немасштабированными; покажите небольшой образец масштабированных значений.
+
+10. **Final Checks & Save (Финальные проверки и сохранение)**
+
+    - Покажите финальные info, количество пропущенных значений (все нули) и небольшую таблицу describe.
+    - Сохраните результат в **clean_car_dataset.csv**.
 
 ---
 
-## Sanity checks (recommended as assertions)
+## Deliverables (Результаты)
 
-- Price is float; LogPrice exists and is numeric.
-- No missing values remain at the end.
-- At least one Location_* dummy column exists.
-- Scaled columns have mean ≈ 0 and population std ≈ 1.
+- **Script (Скрипт):** `car_preprocess.py`, реализующий шаги 1–10 с чёткими print checkpoint (контрольными точками вывода).
+- **Cleaned data (Очищенные данные):** `clean_car_dataset.csv`.
+- **Reflection (Рефлексия):** `reflection.md` (≤ 1 страница) с объяснением ваших решений для каждого ключевого шага (почему median vs mode, почему IQR capping, какие признаки вы создали и почему).
+- **requirements.txt** с точными версиями пакетов, которые вы использовали.
+
+---
+
+## Sanity checks (Проверки) (рекомендуется как assertions (утверждения))
+
+- Price имеет тип float; LogPrice существует и является числовым.
+- В конце не осталось пропущенных значений.
+- Существует как минимум одна дамми-колонка Location_*.
+- Масштабированные колонки имеют mean ≈ 0 и population std ≈ 1.
 
 ---

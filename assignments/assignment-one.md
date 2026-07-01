@@ -1,24 +1,24 @@
-# Research Assignment: Introduction to Data Science and Machine Learning
+# Research Assignment (Исследовательское задание): Introduction to Data Science and Machine Learning
 
-**Due:** Monday, June 15, 2026 — 12:00 PM (Africa/Mogadishu / EAT)
+**Due (Срок сдачи):** Monday, June 15, 2026 — 12:00 PM (Africa/Mogadishu / EAT)
 
-**Goal:** Understand the foundational concepts of Data Science and Machine Learning, including the DS lifecycle, learning types, overfitting, and model evaluation.
+**Goal (Цель):** Понять фундаментальные концепции Data Science и Machine Learning, включая DS lifecycle (жизненный цикл DS), типы обучения (learning types), overfitting (переобучение) и оценку модели (model evaluation).
 
-## Instructions
-- **Do not use** the explanations or examples we provided earlier (e.g., classroom notes).  
-- You must conduct **deep research** using books, scholarly articles, and reliable sources.  
-- **You may use AI tools**, but **do not rely blindly**: do not submit answers you don’t fully understand or verify.  
-- The purpose is for you to **learn through research** — therefore, explain ideas clearly, restate key concepts in your own words, and reference the sources you used.  
-- Write in **English**, in a research-oriented style (with headings, paragraphs, and tables/figures where appropriate), and include **references** at the end.  
+## Instructions (Инструкции)
+- **Не используйте** объяснения или примеры, которые мы давали ранее (например, конспекты занятий).
+- Вы должны провести **глубокое исследование (deep research)**, используя книги, научные статьи и надёжные источники.
+- **Вы можете использовать AI tools (инструменты ИИ)**, но **не полагайтесь слепо**: не сдавайте ответы, которые вы полностью не понимаете или не проверили.
+- Цель — чтобы вы **учились через исследование** — поэтому объясняйте идеи чётко, переформулируйте ключевые концепции своими словами и указывайте использованные источники.
+- Пишите на **английском**, в исследовательском стиле (с заголовками, абзацами и таблицами/рисунками, где уместно) и включайте **references (ссылки)** в конце.
 
-1. Define **Data Science** and **Machine Learning**. What is the relationship between them? Use a real-life example to illustrate how they work together.
+1. Дайте определение **Data Science** и **Machine Learning**. Какова взаимосвязь между ними? Используйте реальный пример, чтобы проиллюстрировать, как они работают вместе.
 
-2. Describe the **Data Science lifecycle** (from problem definition to deployment). At which stage does Machine Learning typically fit in, and why?
+2. Опишите **Data Science lifecycle (жизненный цикл Data Science)** (от определения проблемы до развёртывания). На каком этапе обычно применяется Machine Learning и почему?
 
-3. Compare **Supervised Learning** and **Unsupervised Learning**, giving an example of each.
+3. Сравните **Supervised Learning (обучение с учителем)** и **Unsupervised Learning (обучение без учителя)**, приведя пример каждого.
 
-4. What causes **Overfitting**? How can it be prevented?
+4. Что вызывает **Overfitting (переобучение)**? Как его можно предотвратить?
 
-5. Explain how **training data** and **test data** are split, and why this process is necessary.
+5. Объясните, как разделяются **training data (обучающие данные)** и **test data (тестовые данные)**, и почему этот процесс необходим.
 
-6. Find one **case study** (research paper or article) that explains how Data Science or Machine Learning has been applied in healthcare, business, or transportation. Summarize its findings and identify which part of the Data Science lifecycle it covers.
+6. Найдите одно **case study (исследование)** (научную статью или статью), которое объясняет, как Data Science или Machine Learning были применены в healthcare (здравоохранении), business (бизнесе) или transportation (транспорте). Обобщите его результаты и определите, какую часть Data Science lifecycle (жизненного цикла Data Science) оно охватывает.

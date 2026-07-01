@@ -34,6 +34,7 @@ venv.bak/
 .env
 .env.*
 *.local
+.github_token
 
 # ---- Jupyter / IPython ----
 .ipynb_checkpoints/

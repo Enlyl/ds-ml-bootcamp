@@ -1,48 +1,48 @@
-# Lesson 3 – Data Foundations
+# Lesson 3 – Data Foundations (Основы данных)
 
-> Lesson 2 covered what ML is and how it works. Now we focus on the raw material every model depends on: **data** — how it’s structured, collected, and prepared.
-
----
-
-## What You'll Learn
-
-By the end of this lesson, students will be able to:
-
-1. Understand the concepts of **features (X)** and **labels (y)**, and explain their role in ML problems.
-2. Distinguish between a **sample** (single row) and a **dataset** (collection of samples).
-3. Recognize the importance of **data collection**, and identify what makes data relevant, accurate, sufficient, and representative.
-4. Explain why **preprocessing** is necessary before training ML models.
-5. Apply knowledge of the main preprocessing techniques conceptually, including:
-
-   - Handling missing values
-   - Encoding categorical data
-   - Scaling numerical features
-   - Engineering and selecting features
-   - Performing advanced data processing (dimensionality reduction, balancing, noise removal)
+> Lesson 2 охватывал, что такое ML и как он работает. Теперь мы сосредоточимся на сыром материале, от которого зависит каждая модель: **data (данные)** — как они структурированы, собраны и подготовлены.
 
 ---
 
-## Features & Labels
+## What You'll Learn (Что вы изучите)
 
-Before training any Machine Learning model, we must clearly define what goes **into** the model and what we want to **get out** of it.
-The **inputs** are called **features (X)**, and the **output** we want to predict is called the **label (y)**.
+К концу этого урока студенты смогут:
 
-Understanding features and labels is the **first step** in framing an ML problem, because they tell us exactly what the model should learn from the data. Without this distinction, the model has no direction.
+1. Понимать концепции **features (X) (признаков)** и **labels (y) (меток)**, и объяснять их роль в ML задачах.
+2. Различать **sample (отдельную запись)** и **dataset (набор данных)** (коллекцию записей).
+3. Осознавать важность **data collection (сбора данных)** и определять, что делает данные релевантными, точными, достаточными и репрезентативными.
+4. Объяснять, почему **preprocessing (предобработка)** необходима перед обучением ML моделей.
+5. Применять знания основных техник preprocessing (предобработки) концептуально, включая:
 
----
-
-### Visual Analogy
-
-Think of solving a mystery:
-
-- **Features (X) = clues** 🕵️ (footprints, fingerprints, witness reports).
-- **Label (y) = the answer** 🧩 (who committed the crime).
-
-Just like a detective uses many clues to figure out the truth, an ML model uses features to predict the correct label.
+   - Обработку пропущенных значений
+   - Кодирование категориальных данных
+   - Масштабирование числовых признаков
+   - Feature engineering (создание) и feature selection (отбор признаков)
+   - Продвинутую обработку данных (снижение размерности, балансировку, удаление шума)
 
 ---
 
-### Example: Housing Dataset
+## Features & Labels (Признаки и метки)
+
+Прежде чем обучать любую Machine Learning модель, мы должны чётко определить, что **входит** в модель и что мы хотим **получить** на выходе.
+**Входные данные** называются **features (X) (признаками)**, а **выходные данные**, которые мы хотим предсказать, называются **label (y) (меткой)**.
+
+Понимание признаков и меток — это **первый шаг** в формулировке ML задачи, потому что они говорят нам, чему именно модель должна учиться на данных. Без этого различия у модели нет направления.
+
+---
+
+### Visual Analogy (Визуальная аналогия)
+
+Представьте, что вы расследуете тайну:
+
+- **Features (X) = улики** 🕵️ (отпечатки ног, отпечатки пальцев, показания свидетелей).
+- **Label (y) = ответ** 🧩 (кто совершил преступление).
+
+Как детектив использует множество улик, чтобы выяснить правду, так и ML модель использует признаки, чтобы предсказать правильную метку.
+
+---
+
+### Example: Housing Dataset (Пример: датасет жилья)
 
 | Size (sq ft) | Bedrooms | Location | Price (\$) |
 | ------------ | -------- | -------- | ---------- |
@@ -54,24 +54,24 @@ Just like a detective uses many clues to figure out the truth, an ML model uses 
 - **Features (X):** Size, Bedrooms, Location
 - **Label (y):** Price
 
-Each row is one **sample** (features + label). Together, all rows form the **dataset**.
+Каждая строка — это один **sample (пример)** (признаки + метка). Все строки вместе образуют **dataset (датасет)**.
 
 ---
 
-## Sample vs Dataset
+## Sample vs Dataset (Пример vs Набор данных)
 
-Once we know what features and labels are, the next step is to see how they are organized in our data.
-In ML, data is structured into **samples** (individual examples) and **datasets** (collections of samples).
+Теперь, когда мы знаем, что такое признаки и метки, следующий шаг — увидеть, как они организованы в наших данных.
+В ML данные структурированы как **samples (примеры)** (отдельные записи) и **datasets (наборы данных)** (коллекции примеров).
 
 ---
 
-### What is a Sample?
+### What is a Sample? (Что такое пример?)
 
-- **Definition:** A **sample** is a single example from the dataset.
-- It contains all the **feature values (X)** and the **label (y)** for one case.
-- Usually represented as **one row in a table**.
+- **Definition (Определение):** **Sample (Пример)** — это одна запись из датасета.
+- Он содержит все **значения признаков (X)** и **метку (y)** для одного случая.
+- Обычно представлен как **одна строка в таблице**.
 
-#### Example: One house (sample)
+#### Example: One house (Пример: один дом)
 
 | Size (sq ft) | Bedrooms | Location | Price (\$) |
 | ------------ | -------- | -------- | ---------- |
@@ -80,18 +80,18 @@ In ML, data is structured into **samples** (individual examples) and **datasets*
 - **Features (X):** \[1500, 3, “City”]
 - **Label (y):** 300,000
 
-Think of a sample as one **flashcard** — clues (features) on the front, answer (label) on the back.
+Думайте о примере как об одной **карточке** — улики (признаки) на лицевой стороне, ответ (метка) на обратной.
 
-### What is a Dataset?
+### What is a Dataset? (Что такое набор данных?)
 
-- **Definition:** A **dataset** is a collection of many samples.
-- It is the full table we use to train and test models.
-- In tabular form:
+- **Definition (Определение):** **Dataset (Набор данных)** — это коллекция множества примеров.
+- Это полная таблица, которую мы используем для обучения и тестирования моделей.
+- В табличной форме:
 
-  - **Rows = samples**
-  - **Columns = features + label**
+  - **Rows (Строки) = samples (примеры)**
+  - **Columns (Столбцы) = features (признаки) + label (метка)**
 
-#### Example Dataset (Houses)
+#### Example Dataset (Пример датасета)
 
 | Size (sq ft) | Bedrooms | Location | Price (\$) |
 | ------------ | -------- | -------- | ---------- |
@@ -100,86 +100,84 @@ Think of a sample as one **flashcard** — clues (features) on the front, answer
 | 2000         | 4        | Suburb   | 400,000    |
 | 1800         | 3        | Rural    | 220,000    |
 
-- Each **row = sample**
-- Entire **table = dataset**
+- Каждая **строка = sample (пример)**
+- Вся **таблица = dataset (набор данных)**
 
 ---
 
----
+## Data Collection (Сбор данных)
 
-## Data Collection
+Каждый Machine Learning проект начинается с **data (данных)**.
+Если у вас нет хороших данных, вы не сможете построить хорошую модель — независимо от того, насколько продвинут алгоритм.
 
-Every Machine Learning project starts with **data**.
-If you don’t have good data, you can’t build a good model — no matter how advanced the algorithm is.
+В ML есть известная поговорка:
 
-There’s a famous saying in ML:
+> **Garbage in → Garbage out (Мусор на входе → мусор на выходе)**
 
-> **Garbage in → Garbage out**
+Если ваш датасет низкого качества, предсказания тоже будут низкого качества.
 
-If your dataset is poor quality, the predictions will also be poor.
-
-So before preprocessing or modeling, we must carefully consider **where our data comes from** and whether it’s good enough for the task.
+Поэтому перед preprocessing (предобработкой) или моделированием мы должны тщательно рассмотреть, **откуда берутся наши данные** и достаточно ли они хороши для задачи.
 
 ---
 
-### Sources of Data
+### Sources of Data (Источники данных)
 
-Data can come from many places. Some common sources include:
+Данные могут поступать из разных мест. Некоторые распространённые источники включают:
 
-1. **Databases (internal company systems):**
+1. **Databases (internal company systems) (Базы данных — внутренние системы компаний):**
 
-   - Sales records, customer information, product inventories.
-   - Example: Amazon using purchase history to recommend products.
+   - Записи продаж, информация о клиентах, товарные запасы.
+   - Пример: Amazon использует историю покупок для рекомендации товаров.
 
-2. **Sensors & IoT devices:**
+2. **Sensors & IoT devices (Датчики и IoT устройства):**
 
-   - Cameras, microphones, GPS trackers, weather stations.
-   - Example: Tesla cars collecting driving data from sensors.
+   - Камеры, микрофоны, GPS трекеры, метеостанции.
+   - Пример: Автомобили Tesla собирают данные вождения с датчиков.
 
-3. **User-generated behavior:**
+3. **User-generated behavior (Поведение пользователей):**
 
-   - Clicks, likes, shares, time spent on a page.
-   - Example: YouTube recommending videos based on your watch history.
+   - Клики, лайки, репосты, время на странице.
+   - Пример: YouTube рекомендует видео на основе вашей истории просмотров.
 
-4. **Public datasets:**
+4. **Public datasets (Публичные датасеты):**
 
-   - Kaggle, UCI ML Repository, government open data portals.
-   - Example: Titanic passenger dataset (predict survival).
+   - Kaggle, UCI ML Repository, правительственные порталы открытых данных.
+   - Пример: Датасет пассажиров Титаника (предсказание выживаемости).
 
-5. **APIs / Web Scraping:**
+5. **APIs / Web Scraping (API / Веб-скрапинг):**
 
-   - Twitter API for tweets, financial APIs for stock prices.
-   - Example: Collecting live news headlines to predict market sentiment.
+   - Twitter API для твитов, финансовые API для цен акций.
+   - Пример: Сбор заголовков новостей в реальном времени для прогнозирования настроений рынка.
 
-> Always ensure legal basis, consent, and anonymization when working with sensitive data.
-
----
-
-### Qualities of Good Data
-
-Not all data is useful. Good datasets should be:
-
-1. **Relevant** – Must match the problem you want to solve.
-
-   - If predicting house prices, don’t collect unrelated data like the owner’s favorite color.
-
-2. **Accurate** – Free from mistakes and errors.
-
-   - Wrong house sizes or incorrect prices will mislead the model.
-
-3. **Sufficient** – Enough examples to learn patterns.
-
-   - A dataset with only 10 houses isn’t enough to build a reliable price predictor.
-
-4. **Representative** – Covers all types of cases.
-
-   - If you only collect city houses, your model won’t work for rural houses.
+> Всегда обеспечивайте законное основание, согласие и анонимизацию при работе с чувствительными данными.
 
 ---
 
-### Example: Housing Dataset (Collected)
+### Qualities of Good Data (Качества хороших данных)
 
-Let’s say we collect housing sales data from a real estate website.
+Не все данные полезны. Хорошие датасеты должны быть:
+
+1. **Relevant (Релевантными)** – Должны соответствовать решаемой проблеме.
+
+   - Если предсказываете цены на дома, не собирайте несвязанные данные, такие как любимый цвет владельца.
+
+2. **Accurate (Точными)** – Без ошибок и неточностей.
+
+   - Неправильные размеры домов или некорректные цены введут модель в заблуждение.
+
+3. **Sufficient (Достаточными)** – Достаточно примеров для изучения паттернов.
+
+   - Датасет всего из 10 домов недостаточен для построения надёжного предсказателя цен.
+
+4. **Representative (Репрезентативными)** – Охватывает все типы случаев.
+
+   - Если вы собираете только городские дома, ваша модель не будет работать для сельских домов.
+
+---
+
+### Example: Housing Dataset (Collected) (Пример: собранный датасет жилья)
+
+Допустим, мы собираем данные о продажах жилья с сайта недвижимости.
 
 | Size (sq ft) | Bedrooms | Location | Price (\$) |
 | ------------ | -------- | -------- | ---------- |
@@ -189,50 +187,50 @@ Let’s say we collect housing sales data from a real estate website.
 | 1800         | 3        | Rural    | 220,000    |
 | 1200         | 2        | City     | 250,000    |
 
-- **Relevant:** All columns help predict price.
-- **Accurate:** Sizes and prices are correct.
-- **Sufficient:** We would need **thousands** of rows like this.
-- **Representative:** Must include houses from different regions (City, Suburb, Rural).
+- **Relevant (Релевантны):** Все колонки помогают предсказать цену.
+- **Accurate (Точны):** Размеры и цены верны.
+- **Sufficient (Достаточны):** Нам понадобятся **тысячи** таких строк.
+- **Representative (Репрезентативны):** Должны включать дома из разных регионов (City, Suburb, Rural).
 
 ---
 
-### Common Challenges in Data Collection
+### Common Challenges in Data Collection (Общие проблемы при сборе данных)
 
-- **Missing data:** Some rows don’t have complete information.
-- **Bias:** If only one group is represented (e.g., city houses only).
-- **Noisy data:** Wrong entries or typos (e.g., “3000000” instead of “300000”).
-- **Privacy:** Some data (like medical or financial) may be restricted.
+- **Missing data (Пропущенные данные):** В некоторых строках нет полной информации.
+- **Bias (Смещение):** Если представлена только одна группа (например, только городские дома).
+- **Noisy data (Зашумлённые данные):** Неверные записи или опечатки (например, "3000000" вместо "300000").
+- **Privacy (Конфиденциальность):** Некоторые данные (например, медицинские или финансовые) могут быть ограничены.
 
-This is why preprocessing (next step) is critical.
-
----
-
-## Data Preprocessing
-
-Raw data in the real world is **messy**:
-
-- Some values are missing.
-- Some columns are text, which computers can’t process directly.
-- Some features are on very different scales.
-
-**Preprocessing** is the step where we **clean and transform** raw data into a format that a machine learning model can use effectively.
-
-Without preprocessing, even the best algorithm will give poor results.
+Вот почему preprocessing (предобработка) (следующий шаг) критически важен.
 
 ---
 
-### Why Preprocessing is Important
+## Data Preprocessing (Предобработка данных)
 
-- **Completeness:** Missing data confuses the model.
-- **Consistency:** Text categories must be converted into numbers.
-- **Fairness:** Features on large scales shouldn’t dominate small-scale features.
-- **Accuracy:** Cleaned data → better predictions.
+Сырые данные в реальном мире **грязные**:
 
-Think of preprocessing as _washing and preparing ingredients before cooking_.
+- Некоторые значения отсутствуют.
+- Некоторые колонки содержат текст, который компьютеры не могут обработать напрямую.
+- Некоторые признаки находятся в совершенно разных масштабах.
+
+**Preprocessing (Предобработка)** — это этап, на котором мы **очищаем и преобразуем** сырые данные в формат, который может эффективно использовать Machine Learning модель.
+
+Без preprocessing даже лучший алгоритм даст плохие результаты.
 
 ---
 
-### Example Raw Housing Dataset
+### Why Preprocessing is Important (Почему предобработка важна)
+
+- **Completeness (Полнота):** Пропущенные данные сбивают модель с толку.
+- **Consistency (Согласованность):** Текстовые категории должны быть преобразованы в числа.
+- **Fairness (Справедливость):** Признаки с большими масштабами не должны доминировать над признаками с малыми масштабами.
+- **Accuracy (Точность):** Очищенные данные → лучшие предсказания.
+
+Думайте о preprocessing как о _мытье и подготовке ингредиентов перед приготовлением_.
+
+---
+
+### Example Raw Housing Dataset (Пример сырого датасета жилья)
 
 | Size (sq ft) | Bedrooms | Location | Price (\$) |
 | ------------ | -------- | -------- | ---------- |
@@ -242,54 +240,54 @@ Think of preprocessing as _washing and preparing ingredients before cooking_.
 | 1800         | NaN      | Rural    | 220,000    |
 | 1200         | 2        | **??**   | 250,000    |
 
-Problems here:
+Проблемы здесь:
 
-- Missing **Size** (row 3).
-- Missing **Bedrooms** (row 4).
-- Unknown **Location** (row 5).
-
----
-
-### Preprocessing Techniques
-
-### Handling Missing Values
-
-Options:
-
-1. **Remove** rows/columns (if very few are missing).
-
-   - Example: Drop row 5 (location unknown).
-
-2. **Fill (Impute)** missing values with:
-
-   - **Numerical columns** → Mean, Median, or Mode.
-
-     - Example: Replace missing Size with average of other sizes.
-
-   - **Categorical columns** → Most Frequent Category.
-
-     - Example: Fill missing Bedrooms with the most common number of bedrooms (3).
-
-This ensures the dataset stays usable.
+- Отсутствует **Size** (строка 3).
+- Отсутствует **Bedrooms** (строка 4).
+- Неизвестный **Location** (строка 5).
 
 ---
 
-### Encoding Categorical Data
+### Preprocessing Techniques (Техники предобработки)
 
-ML models only understand **numbers**, not text like “City” or “Suburb.”
+### Handling Missing Values (Обработка пропущенных значений)
 
-Two main methods:
+Варианты:
 
-1. **Label Encoding**
+1. **Remove (Удалить)** строки/столбцы (если пропущенных очень мало).
 
-   - Assign a unique number to each category.
-   - Example: City=0, Suburb=1, Rural=2.
-   - Problem: Implies order (City < Suburb < Rural), which may not be true.
+   - Пример: Удалить строку 5 (неизвестное местоположение).
 
-2. **One-Hot Encoding (preferred for most ML)**
+2. **Fill (Impute) (Заполнить)** пропущенные значения с помощью:
 
-   - Create a new column for each category.
-   - Example:
+   - **Numerical columns (Числовые колонки)** → Mean (среднее), Median (медиана) или Mode (мода).
+
+     - Пример: Заменить пропущенный Size средним размером других домов.
+
+   - **Categorical columns (Категориальные колонки)** → Most Frequent Category (самая частая категория).
+
+     - Пример: Заполнить пропущенные Bedrooms наиболее распространённым количеством спален (3).
+
+Это гарантирует, что датасет остаётся пригодным для использования.
+
+---
+
+### Encoding Categorical Data (Кодирование категориальных данных)
+
+ML модели понимают только **числа**, а не текст вроде "City" или "Suburb."
+
+Два основных метода:
+
+1. **Label Encoding (Меточное кодирование)**
+
+   - Присвоить уникальный номер каждой категории.
+   - Пример: City=0, Suburb=1, Rural=2.
+   - Проблема: Подразумевает порядок (City < Suburb < Rural), который может не соответствовать действительности.
+
+2. **One-Hot Encoding (One-hot кодирование) (предпочтительно для большинства ML)**
+
+   - Создать новую колонку для каждой категории.
+   - Пример:
 
 | Size | Bedrooms | Loc_City | Loc_Suburb | Loc_Rural | Price |
 | ---- | -------- | -------- | ---------- | --------- | ----- |
@@ -298,97 +296,97 @@ Two main methods:
 | 2000 | 4        | 0        | 1          | 0         | 400k  |
 | 1800 | 3        | 0        | 0          | 1         | 220k  |
 
-Now the model can “see” location as numbers without fake ordering.
+Теперь модель может "видеть" местоположение как числа без ложного упорядочивания.
 
 ---
 
-### Feature Scaling
+### Feature Scaling (Масштабирование признаков)
 
-Once features are encoded into numbers, there’s still another problem:
-Different features may exist on **very different scales**.
+Как только признаки закодированы в числа, возникает ещё одна проблема:
+Разные признаки могут находиться в **совершенно разных масштабах**.
 
-For example, in our housing dataset:
+Например, в нашем датасете жилья:
 
 - **Size (sq ft):** 1000–2000
 - **Bedrooms:** 2–4
 - **Price:** 200,000–400,000
 
-Here, “Size” has values in the thousands, while “Bedrooms” is a small integer. If we train models directly, the algorithm may mistakenly think “Size” is far more important than “Bedrooms” simply because its numbers are larger.
+Здесь "Size" имеет значения в тысячах, в то время как "Bedrooms" — это небольшое целое число. Если мы будем обучать модели напрямую, алгоритм может ошибочно решить, что "Size" гораздо важнее, чем "Bedrooms", просто потому что его числа больше.
 
 ---
 
-#### Why Scaling Matters
+#### Why Scaling Matters (Почему масштабирование важно)
 
-- **Distance-based models** (KNN, K-Means, SVM) → need scaling to measure distances fairly.
-- **Gradient-based models** (Logistic Regression, Neural Networks) → scale helps optimization converge faster.
-- **Regularization-based models** (Ridge, Lasso) → penalization depends on feature size.
-- **Tree-based models** (Decision Trees, Random Forest, XGBoost) → mostly unaffected by scaling.
+- **Distance-based models (Модели, основанные на расстоянии)** (KNN, K-Means, SVM) → нужно масштабирование для справедливого измерения расстояний.
+- **Gradient-based models (Модели, основанные на градиенте)** (Logistic Regression, Neural Networks) → масштабирование помогает оптимизации сходиться быстрее.
+- **Regularization-based models (Модели с регуляризацией)** (Ridge, Lasso) → штрафование зависит от размера признаков.
+- **Tree-based models (Древовидные модели)** (Decision Trees, Random Forest, XGBoost) → в основном не подвержены влиянию масштабирования.
 
-In short: **most ML models need scaling**, except for trees.
-
----
-
-#### Methods of Scaling
-
-There are several ways to scale features:
-
-#### A. Normalization (Min-Max Scaling)
-
-- Rescales every feature to fit within a fixed range, usually **[0, 1]**.
-- The smallest value becomes 0, the largest becomes 1, and everything else falls in between.
-
-✅ Keeps values bounded, good for neural networks.
-❌ Sensitive to outliers.
+Короче: **большинству ML моделей нужно масштабирование**, кроме древовидных.
 
 ---
 
-#### B. Standardization (Z-score Scaling)
+#### Methods of Scaling (Методы масштабирования)
 
-- Shifts and stretches each feature so it has a **mean of 0** and a **standard deviation of 1**.
-- Values above average become positive; values below average become negative.
+Существует несколько способов масштабирования признаков:
 
-✅ Good default, works even with outliers.
-✅ Preferred for algorithms assuming normal distribution.
+#### A. Normalization (Min-Max Scaling) (Нормализация)
 
----
+- Перемасштабирует каждый признак в фиксированный диапазон, обычно **[0, 1]**.
+- Наименьшее значение становится 0, наибольшее становится 1, а всё остальное находится между ними.
 
-#### C. Robust Scaling
-
-- Instead of using the mean and range, it uses the **median** and **IQR (interquartile range)**.
-- Because the median and IQR ignore extreme values, outliers have much less influence on the result.
-
-✅ Best choice when the dataset contains many outliers.
+✅ Сохраняет значения в границах, хорошо для neural networks.
+❌ Чувствителен к выбросам (outliers).
 
 ---
 
-#### Which Scaling to Use?
+#### B. Standardization (Z-score Scaling) (Стандартизация)
 
-- **Min-Max Normalization** → Neural Networks, KNN (when no outliers).
-- **Standardization (Z-score)** → General-purpose, safe default.
-- **Robust Scaling** → When dataset has many outliers.
+- Сдвигает и растягивает каждый признак так, чтобы он имел **среднее 0** и **стандартное отклонение 1**.
+- Значения выше среднего становятся положительными; значения ниже среднего становятся отрицательными.
 
----
-
-**Key idea:** Feature scaling doesn’t change the meaning of data — it only makes features comparable, ensuring that algorithms learn fairly.
+✅ Хороший вариант по умолчанию, работает даже с выбросами.
+✅ Предпочтительно для алгоритмов, предполагающих нормальное распределение.
 
 ---
 
-### Feature Engineering & Advanced Data Processing
+#### C. Robust Scaling (Робастное масштабирование)
 
-After **basic preprocessing** (cleaning, encoding, scaling), we often need to go further:
-**Feature Engineering** = creating new features or transforming existing ones to improve model performance.
-**Other Data Processing** = extra steps like dimensionality reduction, balancing datasets, or noise filtering.
+- Вместо использования среднего и диапазона, использует **медиану** и **IQR (межквартильный размах)**.
+- Поскольку медиана и IQR игнорируют экстремальные значения, выбросы оказывают гораздо меньшее влияние на результат.
 
-These steps are often the **”secret sauce”** of good ML projects.
+✅ Лучший выбор, когда датасет содержит много выбросов.
 
 ---
 
-#### What is Feature Engineering?
+#### Which Scaling to Use? (Какое масштабирование использовать?)
 
-**Definition:**
-Feature engineering is the process of using **domain knowledge + creativity** to create, transform, or select features that make machine learning models more effective.
+- **Min-Max Normalization** → Neural Networks, KNN (когда нет выбросов).
+- **Standardization (Z-score)** → Общего назначения, безопасный вариант по умолчанию.
+- **Robust Scaling** → Когда в датасете много выбросов.
 
-#### Examples with Housing Dataset
+---
+
+**Key idea (Ключевая идея):** Feature scaling (масштабирование признаков) не меняет смысла данных — оно только делает признаки сопоставимыми, обеспечивая справедливое обучение алгоритмов.
+
+---
+
+### Feature Engineering & Advanced Data Processing (Создание признаков и продвинутая обработка данных)
+
+После **базового preprocessing (очистки, кодирования, масштабирования)** нам часто нужно идти дальше:
+**Feature Engineering (Создание признаков)** = создание новых признаков или преобразование существующих для улучшения производительности модели.
+**Other Data Processing (Другая обработка данных)** = дополнительные шаги, такие как снижение размерности, балансировка датасетов или фильтрация шума.
+
+Эти шаги часто являются **"секретным ингредиентом"** хороших ML проектов.
+
+---
+
+#### What is Feature Engineering? (Что такое создание признаков?)
+
+**Definition (Определение):**
+Feature engineering — это процесс использования **domain knowledge (знания предметной области) + креативности** для создания, преобразования или отбора признаков, которые делают Machine Learning модели более эффективными.
+
+#### Examples with Housing Dataset (Примеры с датасетом жилья)
 
 | Size (sq ft) | Bedrooms | Location | Price |
 | ------------ | -------- | -------- | ----- |
@@ -397,99 +395,97 @@ Feature engineering is the process of using **domain knowledge + creativity** to
 | 2000         | 4        | Suburb   | 400k  |
 | 1800         | 3        | Rural    | 220k  |
 
-#### Possible Feature Engineering:
+#### Possible Feature Engineering (Возможные варианты создания признаков):
 
-1. **Create new features**
+1. **Create new features (Создать новые признаки)**
 
    - `Price per sq ft = Price / Size`
    - `Bedrooms per 1000 sq ft = Bedrooms / Size`
 
-2. **Transform features**
+2. **Transform features (Преобразовать признаки)**
 
-   - Convert “Location” into urban=1 vs non-urban=0.
-   - Apply log transformation to “Size” if skewed.
+   - Преобразовать "Location" в городской (urban=1) vs негородской (non-urban=0).
+   - Применить логарифмическое преобразование к "Size", если распределение асимметрично.
 
-3. **Combine features**
+3. **Combine features (Комбинировать признаки)**
 
-   - “House Age” + “Renovation Year” → “Effective Age.”
-
----
-
-### Feature Selection
-
-Not all features are useful. Some may be irrelevant or harmful (noise).
-Feature selection is the process of choosing the **most important features**.
-
-#### Methods:
-
-- **Manual selection** using domain knowledge.
-- **Statistical tests** (correlation, chi-square).
-- **Model-based selection** (e.g., Random Forest feature importance).
-
-Example: If “Owner’s favorite color” is in the dataset → drop it, because it’s irrelevant to predicting price.
+   - "House Age" + "Renovation Year" → "Effective Age."
 
 ---
 
-### Other Data Processing Steps
+### Feature Selection (Отбор признаков)
 
-#### A. Dimensionality Reduction
+Не все признаки полезны. Некоторые могут быть нерелевантными или вредными (шум).
+Feature selection — это процесс выбора **наиболее важных признаков**.
 
-- When you have **too many features**, models become slow and may overfit.
-- Technique: **Principal Component Analysis (PCA)** reduces features while keeping most of the information.
-- Example: 1000 pixel features in images → reduce to 50 principal components.
+#### Methods (Методы):
 
----
+- **Manual selection (Ручной отбор)** с использованием domain knowledge (знания предметной области).
+- **Statistical tests (Статистические тесты)** (correlation, chi-square).
+- **Model-based selection (Отбор на основе модели)** (например, Random Forest feature importance).
 
-#### B. Balancing Datasets
-
-- Many real-world datasets are **imbalanced** (e.g., 95% healthy patients, 5% sick).
-- Models tend to predict the majority class always.
-- Solutions:
-
-  - **Oversampling** minority class (e.g., SMOTE).
-  - **Undersampling** majority class.
-
-Example: Fraud detection (only 1% of transactions are fraud) → must balance.
+Пример: Если в датасете есть "Любимый цвет владельца" → удалите его, так как он нерелевантен для предсказания цены.
 
 ---
 
-#### C. Noise Reduction
+### Other Data Processing Steps (Другие шаги обработки данных)
 
-- Real data may contain errors (sensor glitches, typos).
-- Techniques:
+#### A. Dimensionality Reduction (Снижение размерности)
 
-  - Smoothing noisy time-series (moving averages).
-  - Removing outliers (values far from normal distribution).
-
----
+- Когда у вас **слишком много признаков**, модели становятся медленными и могут переобучаться (overfit).
+- Техника: **Principal Component Analysis (PCA)** уменьшает количество признаков, сохраняя большую часть информации.
+- Пример: 1000 пиксельных признаков в изображениях → уменьшить до 50 главных компонент.
 
 ---
 
-## Coding Session
+#### B. Balancing Datasets (Балансировка датасетов)
 
-**Lesson 3 spans two nights** — Night 1 covers the theory above; Night 2 is hands-on coding. Both are the same lesson.
+- Многие реальные датасеты **несбалансированы (imbalanced)** (например, 95% здоровых пациентов, 5% больных).
+- Модели склонны всегда предсказывать основной класс.
+- Решения:
 
-Before the coding session:
+  - **Oversampling (Передискретизация)** миноритарного класса (например, SMOTE).
+  - **Undersampling (Недискретизация)** мажоритарного класса.
 
-1. Complete the **Setup Guide** ([`00-tools-and-setup.md`](00-tools-and-setup.md)) — install Anaconda, launch Jupyter, and verify NumPy, Pandas, and Scikit-learn.
-2. Run the preprocessing pipeline: [`code/data-processing.py`](../code/data-processing.py)
-
-That script applies the techniques from this lesson — imputation, encoding, scaling, and feature engineering — on the housing dataset and saves a cleaned CSV.
-
----
-
-## Summary
-
-- **Features (X):** Inputs used for prediction (e.g., size, bedrooms, location).
-- **Labels (y):** Outputs we want to predict (e.g., house price).
-- **Sample vs Dataset:** One row = sample, collection of rows = dataset.
-- **Data Collection:** Good data must be relevant, accurate, sufficient, and representative.
-- **Preprocessing:** Essential for model success — includes handling missing values, encoding categories, and scaling features.
-- **Feature Engineering & Advanced Processing:** Create new features, drop irrelevant ones, reduce dimensions, balance classes, and handle noise to make data model-ready.
-- **Coding session (Night 2):** Complete the **Setup Guide** ([`00-tools-and-setup.md`](00-tools-and-setup.md)), then run [`code/data-processing.py`](../code/data-processing.py).
+Пример: Обнаружение мошенничества (только 1% транзакций мошеннические) → необходимо балансировать.
 
 ---
 
-*End of Lesson 3*
+#### C. Noise Reduction (Шумоподавление)
+
+- Реальные данные могут содержать ошибки (сбои датчиков, опечатки).
+- Техники:
+
+  - Сглаживание зашумлённых временных рядов (скользящие средние).
+  - Удаление выбросов (значения, далёкие от нормального распределения).
+
+---
+
+## Coding Session (Сессия кодирования)
+
+**Lesson 3 охватывает два вечера** — Night 1 охватывает теорию выше; Night 2 — практическое кодирование. Это один и тот же урок.
+
+Перед сессией кодирования:
+
+1. Завершите **Setup Guide (Руководство по настройке)** ([`00-tools-and-setup.md`](00-tools-and-setup.md)) — установите Anaconda, запустите Jupyter и проверьте NumPy, Pandas и Scikit-learn.
+2. Запустите preprocessing pipeline (конвейер предобработки): [`code/data-processing.py`](../code/data-processing.py)
+
+Этот скрипт применяет техники из этого урока — импутацию, кодирование, масштабирование и создание признаков — на датасете жилья и сохраняет очищенный CSV.
+
+---
+
+## Summary (Итог)
+
+- **Features (X) (Признаки):** Входные данные, используемые для предсказания (например, размер, спальни, местоположение).
+- **Labels (y) (Метки):** Выходные данные, которые мы хотим предсказать (например, цена дома).
+- **Sample vs Dataset (Пример vs Набор данных):** Одна строка = sample (пример), коллекция строк = dataset (набор данных).
+- **Data Collection (Сбор данных):** Хорошие данные должны быть релевантными, точными, достаточными и репрезентативными.
+- **Preprocessing (Предобработка):** Необходима для успеха модели — включает обработку пропущенных значений, кодирование категорий и масштабирование признаков.
+- **Feature Engineering & Advanced Processing (Создание признаков и продвинутая обработка):** Создавайте новые признаки, удаляйте нерелевантные, уменьшайте размерность, балансируйте классы и обрабатывайте шум, чтобы подготовить данные для модели.
+- **Coding session (Сессия кодирования) (Night 2):** Завершите **Setup Guide** ([`00-tools-and-setup.md`](00-tools-and-setup.md)), затем запустите [`code/data-processing.py`](../code/data-processing.py).
+
+---
+
+*End of Lesson 3 (Конец Урока 3)*
 
 ---

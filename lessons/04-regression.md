@@ -1,153 +1,153 @@
-# Lesson 4 – Regression
+# Lesson 4 – Regression (Регрессия)
 
-> Lessons 2–3 gave us ML theory and data prep. Complete the **Setup Guide** if you haven't yet. Now we build our first real predictive model: **Regression**, where the output is a number.
-
----
-
-## What You'll Learn
-
-By the end of this lesson, students will be able to:
-
-- Explain what Regression is and when to use it instead of Classification.
-- Distinguish between Linear, Multiple, and Polynomial Regression.
-- Evaluate model performance using MAE, MSE, RMSE, and R².
+> Lessons 2–3 дали нам теорию ML и подготовку данных. Завершите **Setup Guide** если вы ещё этого не сделали. Теперь мы строим нашу первую реальную прогностическую модель: **Regression (Регрессия)**, где выход — это число.
 
 ---
 
-## What is Regression?
+## What You'll Learn (Что вы изучите)
 
-Instead of just talking about data, we'll actually **predict numbers**. Think house prices, car values, sales forecasts — anywhere you want to estimate a continuous outcome.
+К концу этого урока студенты смогут:
 
-### Definition
-
-- **Regression** is a type of supervised learning that predicts **continuous outputs** (numbers on a scale).
-- The goal is to find the **relationship between input features (X)** and a **numeric target (y)**.
-
-### Real-World Examples
-
-- 🏡 **House Prices:** Predict the price of a house based on size, location, bedrooms, etc.
-- 📈 **Stock Prices:** Forecast the next day's stock price using past prices and market indicators.
-- 🌡️ **Weather Temperature:** Estimate tomorrow's temperature from historical data, humidity, and pressure.
-
-### Contrast with Classification
-
-- **Regression:** Output is a **number** (e.g., \$350,000, 25°C).
-- **Classification:** Output is a **category** (e.g., Spam vs Not Spam, Cat vs Dog, Pass vs Fail).
-
-Quick check:
-
-- Predicting whether an email is spam → **Classification**
-- Predicting the rent price of an apartment → **Regression**
-
-> Regression = predicting **how much**. Classification = predicting **which class**.
+- Объяснить, что такое Regression (Регрессия) и когда её использовать вместо Classification (Классификации).
+- Различать Linear, Multiple и Polynomial Regression.
+- Оценивать производительность модели с помощью MAE, MSE, RMSE и R².
 
 ---
 
-## Regression Basics
+## What is Regression? (Что такое регрессия?)
 
-### Linear Regression
+Вместо того чтобы просто говорить о данных, мы на самом деле **будем предсказывать числа**. Думайте о ценах на дома, стоимости автомобилей, прогнозах продаж — везде, где нужно оценить непрерывный результат.
 
-- Linear Regression is the most basic way to predict numbers.
-- It looks for a **straight-line relationship** between one input and one output.
+### Definition (Определение)
 
-#### Example (House Prices)
+- **Regression (Регрессия)** — это тип supervised learning (обучения с учителем), который предсказывает **непрерывные выходные значения** (числа на шкале).
+- Цель — найти **взаимосвязь между входными признаками (X)** и **числовым целевым значением (y)**.
 
-- **Input (feature):** Size of the house (sq ft).
-- **Output (label):** Price of the house.
+### Real-World Examples (Реальные примеры)
 
-As the size goes up, the price usually goes up too. Linear Regression draws a straight line that shows this trend.
+- 🏡 **House Prices (Цены на дома):** Предсказать цену дома на основе размера, местоположения, количества спален и т.д.
+- 📈 **Stock Prices (Цены акций):** Прогнозировать цену акций на следующий день, используя прошлые цены и рыночные индикаторы.
+- 🌡️ **Weather Temperature (Температура):** Оценить завтрашнюю температуру на основе исторических данных, влажности и давления.
 
-#### Visual Intuition
+### Contrast with Classification (Сравнение с классификацией)
 
-- Imagine a scatter plot of houses: size on the X-axis, price on the Y-axis.
-- Each house is a dot.
-- Linear Regression draws the **best line** through those dots.
-- That line can then be used to **predict prices** of new houses (e.g., a 2200 sq ft house).
+- **Regression (Регрессия):** Выход — это **число** (например, \$350,000, 25°C).
+- **Classification (Классификация):** Выход — это **категория** (например, Спам vs Не спам, Кот vs Собака, Сдал vs Не сдал).
 
-#### Why It's Useful
+Быстрая проверка:
 
-- Simple.
-- Helps us see the **general relationship** between one factor and the target.
-- But it's limited — most real-world problems need **more than one factor** (that's where multiple regression comes in).
+- Предсказать, является ли письмо спамом → **Classification (Классификация)**
+- Предсказать арендную плату за квартиру → **Regression (Регрессия)**
 
-> Linear Regression = predicting an outcome using **just one main factor** with a straight-line relationship.
+> Regression = предсказание **сколько**. Classification = предсказание **какой класс**.
 
-### Multiple Linear Regression
+---
 
-- Real-world problems usually depend on **more than one factor**.
-- Multiple Linear Regression extends the idea of Linear Regression: instead of one line with one input, it looks at **several inputs together** to predict the output.
+## Regression Basics (Основы регрессии)
 
-#### Example (House Prices)
+### Linear Regression (Линейная регрессия)
 
-- **Inputs (features):**
+- Linear Regression — это самый базовый способ предсказания чисел.
+- Она ищет **линейную зависимость** между одним входом и одним выходом.
 
-  - Size of the house (sq ft)
-  - Number of bedrooms
-  - Location (city/suburb/rural)
-  - Year built
+#### Example (House Prices) (Пример — цены на дома)
 
-- **Output (label):**
+- **Input (feature) (Вход — признак):** Размер дома (sq ft).
+- **Output (label) (Выход — метка):** Цена дома.
 
-  - Price of the house
+С увеличением размера цена обычно тоже растёт. Linear Regression проводит прямую линию, показывающую этот тренд.
 
-This way, the model doesn't just say "bigger houses cost more" — it also adjusts for **location**, **bedrooms**, and **other factors**.
+#### Visual Intuition (Визуальная интуиция)
 
-#### Visual Intuition
+- Представьте точечную диаграмму домов: размер на оси X, цена на оси Y.
+- Каждый дом — это точка.
+- Linear Regression проводит **наилучшую линию** через эти точки.
+- Затем эту линию можно использовать для **предсказания цен** новых домов (например, дом площадью 2200 sq ft).
 
-- In 2D (one feature) → regression is a straight line.
-- In 3D (two features, e.g., Size & Bedrooms) → regression becomes a flat **plane**.
-- With even more features → the "plane" extends into higher dimensions (we can't see it, but the math still works).
+#### Why It's Useful (Почему это полезно)
 
-#### Why It's Useful
+- Просто.
+- Помогает увидеть **общую взаимосвязь** между одним фактором и целевым значением.
+- Но она ограничена — большинство реальных задач требуют **более чем одного фактора** (вот где вступает множественная регрессия).
 
-- More realistic: considers **all important factors**, not just one.
-- Gives better predictions when the output depends on **multiple things**.
+> Linear Regression = предсказание результата, используя **только один основной фактор** с линейной зависимостью.
 
-> Multiple Linear Regression = predicting an outcome using **several factors together**, instead of just one.
+### Multiple Linear Regression (Множественная линейная регрессия)
 
-### Polynomial Regression
+- Реальные проблемы обычно зависят от **более чем одного фактора**.
+- Multiple Linear Regression расширяет идею Linear Regression: вместо одной линии с одним входом, она рассматривает **несколько входов вместе** для предсказания выхода.
 
-- Not all relationships in real life are straight lines.
-- **Polynomial Regression** allows us to fit a **curve** instead of a line by adding new features like `size²`, `size³`, etc.
-- This helps capture situations where the effect of a feature changes as the values increase.
+#### Example (House Prices) (Пример — цены на дома)
 
-#### Example (House Prices)
+- **Inputs (features) (Входы — признаки):**
 
-- **Input (feature):** Size of the house (sq ft).
-- **Output (label):** Price of the house.
+  - Размер дома (sq ft)
+  - Количество спален
+  - Местоположение (city/suburb/rural)
+  - Год постройки
 
-In reality, the price doesn't always rise in a perfectly straight line with size.
+- **Output (label) (Выход — метка):**
 
-- A 1000 → 1500 sq ft jump might increase price a lot,
-- But a 2800 → 3300 sq ft jump may not increase price as much.
+  - Цена дома
 
-Polynomial Regression draws a **curved line** to capture this pattern.
+Таким образом, модель не просто говорит "большие дома стоят дороже" — она также корректирует с учётом **местоположения**, **спален** и **других факторов**.
 
-#### Visual Intuition
+#### Visual Intuition (Визуальная интуиция)
 
-- Imagine plotting house sizes on the X-axis and prices on the Y-axis.
-- Each house is still a dot.
-- Instead of one straight line, Polynomial Regression fits a **smooth curve** that bends with the data.
-- With degree 2 (quadratic), the curve bends once.
-- With degree 3 (cubic), it can bend twice, making an S-shape.
+- В 2D (один признак) → регрессия — это прямая линия.
+- В 3D (два признака, например, Size и Bedrooms) → регрессия становится плоской **плоскостью**.
+- С ещё большим количеством признаков → "плоскость" расширяется в более высокие измерения (мы не можем это увидеть, но математика всё ещё работает).
 
-#### Why It's Useful
+#### Why It's Useful (Почему это полезно)
 
-- Better captures **non-linear trends** in data.
-- Still simple and interpretable compared to more complex models.
-- Useful when a straight line is too simple but you don't want to jump into advanced algorithms.
+- Более реалистично: учитывает **все важные факторы**, а не только один.
+- Даёт лучшие предсказания, когда выход зависит от **нескольких вещей**.
 
-> Polynomial Regression = still a linear model, but by adding **powers of a feature**, it can **bend the line into a curve** that fits real-world patterns more accurately.
+> Multiple Linear Regression = предсказание результата с использованием **нескольких факторов вместе**, а не только одного.
+
+### Polynomial Regression (Полиномиальная регрессия)
+
+- Не все взаимосвязи в реальной жизни являются прямыми линиями.
+- **Polynomial Regression** позволяет нам построить **кривую** вместо линии, добавляя новые признаки, такие как `size²`, `size³` и т.д.
+- Это помогает улавливать ситуации, когда влияние признака меняется по мере увеличения значений.
+
+#### Example (House Prices) (Пример — цены на дома)
+
+- **Input (feature) (Вход — признак):** Размер дома (sq ft).
+- **Output (label) (Выход — метка):** Цена дома.
+
+В реальности цена не всегда растёт идеально прямой линией с увеличением размера.
+
+- Скачок с 1000 → 1500 sq ft может сильно увеличить цену,
+- Но скачок с 2800 → 3300 sq ft может не увеличить цену так же сильно.
+
+Polynomial Regression проводит **изогнутую линию**, чтобы уловить этот паттерн.
+
+#### Visual Intuition (Визуальная интуиция)
+
+- Представьте размеры домов на оси X и цены на оси Y.
+- Каждый дом всё ещё точка.
+- Вместо одной прямой линии Polynomial Regression строит **гладкую кривую**, которая изгибается вместе с данными.
+- Со степенью 2 (квадратичная) кривая изгибается один раз.
+- Со степенью 3 (кубическая) она может изгибаться дважды, образуя S-образную форму.
+
+#### Why It's Useful (Почему это полезно)
+
+- Лучше улавливает **нелинейные тренды** в данных.
+- Всё ещё проста и интерпретируема по сравнению с более сложными моделями.
+- Полезна, когда прямая линия слишком проста, но вы не хотите переходить к продвинутым алгоритмам.
+
+> Polynomial Regression = всё ещё линейная модель, но путём добавления **степеней признака** она может **изогнуть линию в кривую**, которая точнее соответствует реальным паттернам.
 
 #### Linear vs Polynomial Regression
 
-| Feature        | Linear Regression      | Polynomial Regression                     |
-| -------------- | ---------------------- | ----------------------------------------- |
-| Shape of line  | Straight               | Curved                                    |
-| Growth pattern | Constant               | Changing (can slow down)                  |
-| Best used when | Data is simple, steady | Data has ups/downs or diminishing returns |
+| Feature (Характеристика) | Linear Regression          | Polynomial Regression                           |
+| ------------------------ | -------------------------- | ----------------------------------------------- |
+| Shape of line (Форма)    | Straight (Прямая)          | Curved (Изогнутая)                              |
+| Growth pattern (Рост)    | Constant (Постоянный)      | Changing (Меняющийся, может замедляться)        |
+| Best used when (Когда)   | Данные простые, стабильные | Данные имеют подъёмы/спады или убывающую отдачу |
 
-**Linear example** — each +500 sq ft adds exactly the same amount to price:
+**Linear example (Линейный пример)** — каждые +500 sq ft добавляют одинаковую сумму к цене:
 
 | Size (sq ft) | Price (\$) |
 | ------------ | ---------- |
@@ -155,7 +155,7 @@ Polynomial Regression draws a **curved line** to capture this pattern.
 | 1500         | 150,000    |
 | 2000         | 200,000    |
 
-**Polynomial example** — early gains are large, later gains shrink:
+**Polynomial example (Полиномиальный пример)** — ранние приросты большие, поздние уменьшаются:
 
 | Size (sq ft) | Price (\$) |
 | ------------ | ---------- |
@@ -167,79 +167,79 @@ Polynomial Regression draws a **curved line** to capture this pattern.
 
 ---
 
-## Regression Metrics
+## Regression Metrics (Метрики регрессии)
 
-When we build a regression model, it makes predictions. But how do we know if those predictions are **good or bad**? **Metrics** are numbers that tell us **how close our predictions are to the actual values**.
+Когда мы строим regression модель, она делает предсказания. Но как узнать, **хороши ли эти предсказания или плохи**? **Metrics (Метрики)** — это числа, которые говорят нам, **насколько наши предсказания близки к фактическим значениям**.
 
-### Mean Absolute Error (MAE)
+### Mean Absolute Error (MAE) (Средняя абсолютная ошибка)
 
-- **Idea:** Take the average of the **absolute differences** between predicted and actual values.
-- **Interpretation:** "On average, how far off are we?"
-- **Example:** If MAE = **10,000**, it means our price predictions are off by about \$10,000 on average.
+- **Idea (Идея):** Взять среднее **абсолютных разностей** между предсказанными и фактическими значениями.
+- **Interpretation (Интерпретация):** "В среднем, насколько мы ошибаемся?"
+- **Example (Пример):** Если MAE = **10,000**, это означает, что наши предсказания цены ошибаются примерно на \$10,000 в среднем.
 
-### Mean Squared Error (MSE)
+### Mean Squared Error (MSE) (Среднеквадратичная ошибка)
 
-- **Idea:** Square the errors before averaging.
-- **Why square?** To punish **big mistakes** more heavily.
-- **Interpretation:** A few very wrong predictions will push MSE up a lot.
+- **Idea (Идея):** Возвести ошибки в квадрат перед усреднением.
+- **Why square? (Зачем квадрат?)** Чтобы **сильнее наказывать** за большие ошибки.
+- **Interpretation (Интерпретация):** Несколько очень неверных предсказаний сильно увеличат MSE.
 
-### Root Mean Squared Error (RMSE)
+### Root Mean Squared Error (RMSE) (Корень из среднеквадратичной ошибки)
 
-- **Idea:** Take the square root of MSE to bring the error back into the original units.
-- **Why useful?** MSE squares the errors, so its units are squared too. RMSE undoes that — if you're predicting prices in dollars, RMSE is also in dollars.
-- **Example:** If MSE = 144,000,000 → RMSE = √144,000,000 = **12,000**. Predictions are typically off by about \$12,000.
-- **Interpretation:** Like MAE but more sensitive to large errors — one big mistake pushes RMSE up more than MAE.
+- **Idea (Идея):** Взять квадратный корень из MSE, чтобы вернуть ошибку в исходные единицы.
+- **Why useful? (Почему полезно?)** MSE возводит ошибки в квадрат, поэтому её единицы тоже в квадрате. RMSE отменяет это — если вы предсказываете цены в долларах, RMSE тоже в долларах.
+- **Example (Пример):** Если MSE = 144,000,000 → RMSE = √144,000,000 = **12,000**. Предсказания обычно ошибаются примерно на \$12,000.
+- **Interpretation (Интерпретация):** Как MAE, но более чувствительна к большим ошибкам — одна большая ошибка увеличивает RMSE больше, чем MAE.
 
-### R² Score (Coefficient of Determination)
+### R² Score (Coefficient of Determination) (Коэффициент детерминации)
 
-- **Idea:** R² tells us **how much of the variation** in the target can be explained by the model.
-- **Range:**
+- **Idea (Идея):** R² показывает, **какую часть вариации** целевой переменной может объяснить модель.
+- **Range (Диапазон):**
 
-  - 1.0 → perfect fit
-  - 0.0 → model is no better than guessing the average
-  - Negative → worse than just guessing the average!
+  - 1.0 → идеальное соответствие
+  - 0.0 → модель не лучше, чем угадывание среднего
+  - Отрицательное → хуже, чем просто угадывание среднего!
 
-- **Example:** R² = 0.85 → "Our model explains 85% of the variation in house prices."
+- **Example (Пример):** R² = 0.85 → "Наша модель объясняет 85% вариации цен на дома."
 
-### Summary Table
+### Summary Table (Сводная таблица)
 
-| Metric | Meaning                | Sensitive to Big Errors? | Units         |
-| ------ | ---------------------- | ------------------------ | ------------- |
-| MAE    | Average absolute error | ❌ No                     | Same as data  |
-| MSE    | Average squared error  | ✅ Yes                    | Squared units |
-| RMSE   | Root of MSE            | ✅ Yes                    | Same as data  |
-| R²     | % of pattern explained | ❌ No                     | 0 to 1        |
+| Metric | Meaning (Значение)                  | Sensitive to Big Errors? (Чувствительность к большим ошибкам) | Units (Единицы)  |
+| ------ | ----------------------------------- | ------------------------------------------------------------- | ---------------- |
+| MAE    | Средняя абсолютная ошибка           | ❌ Нет                                                         | Как у данных     |
+| MSE    | Средняя квадратичная ошибка         | ✅ Да                                                          | Квадратные единицы |
+| RMSE   | Корень из MSE                       | ✅ Да                                                          | Как у данных     |
+| R²     | % объяснённого паттерна             | ❌ Нет                                                         | 0 to 1           |
 
 ---
 
-## Coding Session
+## Coding Session (Сессия кодирования)
 
-Theory done — now we go hands-on. Open the script and run it:
+Теория закончена — теперь переходим к практике. Откройте скрипт и запустите его:
 
 [`code/house-price-predictor.py`](../code/house-price-predictor.py)
 
-The script trains Linear Regression and Random Forest on the cleaned housing dataset, then prints MAE, MSE, RMSE, and R² for both models so you can compare them directly against what you just learned.
+Скрипт обучает Linear Regression и Random Forest на очищенном датасете жилья, затем выводит MAE, MSE, RMSE и R² для обеих моделей, чтобы вы могли сравнить их непосредственно с тем, что только что изучили.
 
 ---
 
-## Summary
+## Summary (Итог)
 
-- **Regression:** A supervised learning method used to **predict continuous values** (like house prices, sales, temperatures).
-- **Linear Regression:** Uses **one feature** to fit a **straight line** — assumes the relationship stays constant.
-- **Multiple Regression:** Uses **several features together** to fit a **plane (or higher-dimensional surface)** — handles more realistic, multi-factor problems.
-- **Polynomial Regression:** Adds **powers of features (x², x³, …)** to fit **curved relationships** — captures non-linear trends.
-- **Key Difference:**
+- **Regression (Регрессия):** Метод supervised learning (обучения с учителем), используемый для **предсказания непрерывных значений** (например, цены на дома, продажи, температуры).
+- **Linear Regression (Линейная регрессия):** Использует **один признак** для построения **прямой линии** — предполагает, что взаимосвязь постоянна.
+- **Multiple Regression (Множественная регрессия):** Использует **несколько признаков вместе** для построения **плоскости (или многомерной поверхности)** — обрабатывает более реалистичные, многофакторные проблемы.
+- **Polynomial Regression (Полиномиальная регрессия):** Добавляет **степени признаков (x², x³, …)** для построения **изогнутых зависимостей** — улавливает нелинейные тренды.
+- **Key Difference (Ключевое различие):**
 
-  - Linear → straight, steady growth.
-  - Polynomial → curved, changing growth (e.g. fast at first, slows later).
+  - Linear → прямой, постоянный рост.
+  - Polynomial → изогнутый, меняющийся рост (например, быстрый вначале, замедляется позже).
 
-- **Metrics to Evaluate Models:**
+- **Metrics to Evaluate Models (Метрики для оценки моделей):**
 
-  - **MAE:** Average size of prediction errors.
-  - **MSE:** Like MAE but **squares errors** to punish large mistakes.
-  - **RMSE:** Square root of MSE — average error in original units, **more sensitive to large errors**.
-  - **R²:** How much of the variation in the target is explained by the model.
+  - **MAE:** Средний размер ошибок предсказания.
+  - **MSE:** Как MAE, но **возводит ошибки в квадрат**, чтобы наказывать за большие ошибки.
+  - **RMSE:** Квадратный корень из MSE — средняя ошибка в исходных единицах, **более чувствительна к большим ошибкам**.
+  - **R²:** Какая часть вариации целевой переменной объясняется моделью.
 
 ---
 
-*End of Lesson 4*
+*End of Lesson 4 (Конец Урока 4)*

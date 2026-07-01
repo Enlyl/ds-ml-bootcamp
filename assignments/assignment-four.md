@@ -1,81 +1,81 @@
-# Assignment Four: Regression — Theory and Practice
+# Assignment Four (Задание 4): Regression (Регрессия) — Theory and Practice (Теория и практика)
 
-**Due:** Tuesday, June 30, 2026 — 12:00 PM (Africa/Mogadishu / EAT)
+**Due (Срок сдачи):** Tuesday, June 30, 2026 — 12:00 PM (Africa/Mogadishu / EAT)
 
-**Goal:** Demonstrate understanding of regression concepts in Machine Learning and apply them by building and comparing Linear Regression and Random Forest models for car price prediction using the dataset you cleaned in Assignment Three.
-
----
-
-## Part A — Theory
-
-Write your answers in English using a clear academic style (headings, paragraphs, and references). Length: 2–3 pages. Use your own words — no copy-paste. You may use AI for clarification, but must understand and verify everything you write.
-
-1. **Introduction to Regression**
-
-   - What is regression in Machine Learning?
-   - How is it different from classification?
-   - Give one real-life example of regression and one of classification.
-
-2. **Types of Regression**
-
-   - Describe and compare the following:
-     - Linear Regression
-     - Multiple Linear Regression
-     - Polynomial Regression
-   - For each type, explain: how it works (basic idea), one real-world use case, and its main advantages and limitations.
-
-3. **Regression Metrics**
-
-   - Define and explain what each metric measures:
-     - MAE (Mean Absolute Error)
-     - MSE (Mean Squared Error)
-     - RMSE (Root Mean Squared Error)
-     - R² (Coefficient of Determination)
-   - Include a comparison table showing their differences (units, sensitivity to large errors, meaning).
-
-4. **Underfitting and Overfitting**
-
-   - Explain what underfitting and overfitting mean in regression models.
-   - What causes overfitting, especially in polynomial regression?
-   - Give 2–3 methods to prevent overfitting.
-
-5. **Real-World Case Study**
-
-   - Research a real-world project or study that used regression (linear, multiple, or polynomial) in any field such as business, healthcare, education, or transportation.
-   - Summarize: the goal, the data used, the type of regression applied, and the key results or insights.
+**Goal (Цель):** Продемонстрировать понимание концепций regression (регрессии) в Machine Learning и применить их, построив и сравнив модели Linear Regression и Random Forest для предсказания цены автомобиля, используя датасет, очищенный в Assignment Three.
 
 ---
 
-## Part B — Practical: Car Price Prediction
+## Part A — Theory (Теория)
 
-**Dataset:** Use the cleaned car dataset you produced in Assignment Three (`clean_car_dataset.csv`).
+Напишите ответы на английском в чётком академическом стиле (заголовки, абзацы и ссылки). Объём: 2–3 страницы. Используйте свои слова — без копипаста. Вы можете использовать AI для разъяснения, но должны понимать и проверять всё, что пишете.
 
-Create a Jupyter Notebook named `car_price_prediction.ipynb` and implement the following steps:
+1. **Introduction to Regression (Введение в регрессию)**
 
-1. **Load Dataset**
+   - Что такое regression (регрессия) в Machine Learning?
+   - Чем она отличается от classification (классификации)?
+   - Приведите один реальный пример regression и один пример classification.
 
-   - Load `clean_car_dataset.csv`.
+2. **Types of Regression (Типы регрессии)**
 
-2. **Prepare Features & Target**
+   - Опишите и сравните следующее:
+     - Linear Regression (Линейная регрессия)
+     - Multiple Linear Regression (Множественная линейная регрессия)
+     - Polynomial Regression (Полиномиальная регрессия)
+   - Для каждого типа объясните: как он работает (основная идея), один реальный пример использования, его основные преимущества и ограничения.
+
+3. **Regression Metrics (Метрики регрессии)**
+
+   - Определите и объясните, что измеряет каждая метрика:
+     - MAE (Mean Absolute Error — средняя абсолютная ошибка)
+     - MSE (Mean Squared Error — среднеквадратичная ошибка)
+     - RMSE (Root Mean Squared Error — корень из среднеквадратичной ошибки)
+     - R² (Coefficient of Determination — коэффициент детерминации)
+   - Включите сравнительную таблицу, показывающую их различия (единицы измерения, чувствительность к большим ошибкам, значение).
+
+4. **Underfitting and Overfitting (Недообучение и переобучение)**
+
+   - Объясните, что означают underfitting (недообучение) и overfitting (переобучение) в regression моделях.
+   - Что вызывает overfitting, особенно в polynomial regression (полиномиальной регрессии)?
+   - Приведите 2–3 метода предотвращения overfitting.
+
+5. **Real-World Case Study (Реальное исследование)**
+
+   - Найдите реальный проект или исследование, в котором использовалась regression (linear, multiple или polynomial) в любой области, такой как business (бизнес), healthcare (здравоохранение), education (образование) или transportation (транспорт).
+   - Обобщите: цель, используемые данные, тип применённой regression и ключевые результаты или выводы.
+
+---
+
+## Part B — Practical (Практика): Car Price Prediction (Предсказание цены автомобиля)
+
+**Dataset (Датасет):** Используйте очищенный датасет автомобилей, созданный в Assignment Three (`clean_car_dataset.csv`).
+
+Создайте Jupyter Notebook с именем `car_price_prediction.ipynb` и реализуйте следующие шаги:
+
+1. **Load Dataset (Загрузка датасета)**
+
+   - Загрузите `clean_car_dataset.csv`.
+
+2. **Prepare Features & Target (Подготовка признаков и целевой переменной)**
 
    - Target (`y`) = `Price`
-   - Features (`X`) = all columns except `Price` and `LogPrice`.
+   - Features (`X`) = все колонки, кроме `Price` и `LogPrice`.
 
-3. **Split Data**
+3. **Split Data (Разделение данных)**
 
-   - Split into 80% training and 20% testing.
-   - Use `random_state=42`.
+   - Разделите на 80% training (обучающая выборка) и 20% testing (тестовая выборка).
+   - Используйте `random_state=42`.
 
-4. **Train Models**
+4. **Train Models (Обучение моделей)**
 
-   - Train a `LinearRegression` model.
-   - Train a `RandomForestRegressor` with `n_estimators=100` and `random_state=42`.
+   - Обучите модель `LinearRegression`.
+   - Обучите модель `RandomForestRegressor` с `n_estimators=100` и `random_state=42`.
 
-5. **Evaluate Performance**
+5. **Evaluate Performance (Оценка производительности)**
 
-   - Write a helper function to print R², MAE, MSE, and RMSE for a given model.
-   - Call it for both models.
-   - Expected output format (exact numbers will vary):
+   - Напишите вспомогательную функцию для вывода R², MAE, MSE и RMSE для заданной модели.
+   - Вызовите её для обеих моделей.
+   - Ожидаемый формат вывода (точные числа будут отличаться):
 
      ```
      Linear Regression Performance:
@@ -89,46 +89,46 @@ Create a Jupyter Notebook named `car_price_prediction.ipynb` and implement the f
        RMSE : 3,400
      ```
 
-6. **Sanity Check**
+6. **Sanity Check (Проверка)**
 
-   - Pick one row from the test set (`X_test.iloc[[i]]`) and compare the actual price with predictions from both models.
-
----
-
-## Part C — Reflection Paper
-
-Write a short paper (1–2 pages, Markdown or PDF) answering the following:
-
-1. **What did you implement?**
-
-   - Briefly describe how you trained Linear Regression and Random Forest to predict car prices using your Assignment Three cleaned dataset.
-
-2. **Comparison of Models**
-
-   - How did predictions differ in your sanity check?
-   - Which model gave more realistic results? Why?
-
-3. **Understanding Random Forest**
-
-   - In your own words: what is Random Forest and how does it work (ensemble of decision trees, averaging predictions)?
-
-4. **Metrics Discussion**
-
-   - Which model had better R² and error metrics (MAE, RMSE)?
-   - What does that tell you about the strengths and weaknesses of each model?
-
-5. **Your Findings**
-
-   - In 1–2 paragraphs, explain which model you prefer for price prediction and why.
+   - Выберите одну строку из test set (`X_test.iloc[[i]]`) и сравните фактическую цену с предсказаниями обеих моделей.
 
 ---
 
-## Deliverables
+## Part C — Reflection Paper (Рефлексия)
 
-Submit these three files:
+Напишите краткую работу (1–2 страницы, Markdown или PDF), отвечая на следующие вопросы:
 
-- `paper.md` or `paper.pdf` — Part A theory answers.
-- `car_price_prediction.ipynb` — Part B notebook with all code and output cells visible.
-- `reflection_paper.md` or `reflection_paper.pdf` — Part C reflection.
+1. **What did you implement? (Что вы реализовали?)**
+
+   - Кратко опишите, как вы обучили Linear Regression и Random Forest для предсказания цен автомобилей, используя очищенный датасет из Assignment Three.
+
+2. **Comparison of Models (Сравнение моделей)**
+
+   - Как различались предсказания в вашей проверке (sanity check)?
+   - Какая модель дала более реалистичные результаты? Почему?
+
+3. **Understanding Random Forest (Понимание Random Forest)**
+
+   - Своими словами: что такое Random Forest и как он работает (ensemble of decision trees — ансамбль деревьев решений, усреднение предсказаний)?
+
+4. **Metrics Discussion (Обсуждение метрик)**
+
+   - У какой модели были лучше R² и метрики ошибок (MAE, RMSE)?
+   - Что это говорит о сильных и слабых сторонах каждой модели?
+
+5. **Your Findings (Ваши выводы)**
+
+   - В 1–2 абзацах объясните, какую модель вы предпочитаете для предсказания цены и почему.
+
+---
+
+## Deliverables (Результаты)
+
+Отправьте эти три файла:
+
+- `paper.md` или `paper.pdf` — ответы на теорию Part A.
+- `car_price_prediction.ipynb` — ноутбук Part B со всем кодом и видимыми ячейками вывода.
+- `reflection_paper.md` или `reflection_paper.pdf` — рефлексия Part C.
 
 ---

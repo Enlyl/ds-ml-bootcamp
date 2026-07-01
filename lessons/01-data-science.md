@@ -1,282 +1,282 @@
 # Lesson 1 – Data Science
 
-## What You'll Learn
+## What You'll Learn (Что вы изучите)
 
-By the end of this lesson, students will be able to:
+К концу этого урока студенты смогут:
 
-1. Define what Data Science is and why it matters.
-2. Understand the relationship between **Data Science**, **Machine Learning**, and **AI**.
-3. Describe the **Data Science lifecycle** from problem to insight.
-4. Identify the core **tools and skills** used by data scientists.
-5. Recognize real-world applications of Data Science.
-
----
-
-## What is Data Science?
-
-We live in a world flooded with data — every click, purchase, search, and sensor reading generates information.
-**Data Science** is the discipline that turns this raw data into meaningful insights and actions.
+1. Определить, что такое Data Science и почему это важно.
+2. Понять взаимосвязь между **Data Science**, **Machine Learning** и **AI**.
+3. Описать **Data Science lifecycle (жизненный цикл Data Science)** от проблемы до инсайта.
+4. Определить основные **tools and skills (инструменты и навыки)**, используемые data scientists (специалистами по данным).
+5. Распознавать реальные применения Data Science.
 
 ---
 
-### Definition
+## What is Data Science? (Что такое Data Science?)
+
+Мы живём в мире, наводнённом данными — каждый клик, покупка, поиск и показание датчика генерирует информацию.
+**Data Science** — это дисциплина, которая превращает эти сырые данные в значимые инсайты и действия.
+
+---
+
+### Definition (Определение)
 
 **Data Science:**
 
-> An interdisciplinary field that uses scientific methods, statistics, algorithms, and software tools to extract knowledge and insights from structured and unstructured data.
+> Междисциплинарная область, которая использует научные методы, статистику, алгоритмы и программные инструменты для извлечения знаний и инсайтов из структурированных и неструктурированных данных.
 
-Think of a data scientist as a **translator** — they take messy, raw data and turn it into stories, decisions, and predictions that humans and organizations can act on.
+Думайте о data scientist (специалисте по данным) как о **переводчике** — он берёт хаотичные сырые данные и превращает их в истории, решения и прогнозы, на основе которых могут действовать люди и организации.
 
 ---
 
-### The Data Science Universe
+### The Data Science Universe (Вселенная Data Science)
 
-Data Science sits at the intersection of three core areas:
+Data Science находится на пересечении трёх основных областей:
 
-| **Area**               | **Focus**                                         |
-| ---------------------- | ------------------------------------------------- |
-| Mathematics/Statistics | Understanding patterns, probability, and testing  |
-| Computer Science       | Programming, algorithms, and data engineering     |
-| Domain Knowledge       | Understanding the business/field the data is from |
+| **Area (Область)**              | **Focus (Фокус)**                                          |
+| ------------------------------- | ---------------------------------------------------------- |
+| Mathematics/Statistics          | Понимание паттернов, вероятности и тестирование            |
+| Computer Science                | Программирование, алгоритмы и data engineering (инженерия данных) |
+| Domain Knowledge (Знание предметной области) | Понимание бизнеса/сферы, из которой получены данные      |
 
-Without all three, a data scientist is incomplete.
+Без всех трёх составляющих data scientist неполноценен.
 
 ---
 
 ### Data Science vs Machine Learning vs AI
 
-These three terms are often confused. Here is how they relate:
+Эти три термина часто путают. Вот как они соотносятся:
 
 ```
 Artificial Intelligence (AI)
     └── Machine Learning (ML)
             └── Deep Learning
-Data Science uses all of the above as tools
+Data Science использует всё вышеперечисленное как инструменты
 ```
 
-- **AI** is the broad goal: making machines simulate human intelligence.
-- **Machine Learning** is one approach to AI: teaching machines to learn from data.
-- **Data Science** is the end-to-end process: collecting, cleaning, analyzing, and communicating data — and using ML when prediction is needed.
+- **AI** — это широкая цель: заставить машины имитировать человеческий интеллект.
+- **Machine Learning** — один из подходов к AI: обучение машин на данных.
+- **Data Science** — это сквозной процесс: сбор, очистка, анализ и коммуникация данных — и использование ML, когда нужно прогнозирование.
 
-A data scientist might spend only 20% of their time on ML models. The other 80% is data wrangling, exploration, and communicating findings.
-
----
-
-### Why Data Science Matters
-
-- **Better decisions**: Companies use data to make evidence-based choices instead of guessing.
-- **Efficiency**: Automated analysis of millions of records in seconds.
-- **Personalization**: Netflix recommends what you'll watch next; doctors predict which patients need urgent care.
-- **Discovery**: Scientists use data science to find patterns in genomics, climate data, and particle physics.
+Data scientist может тратить только 20% своего времени на ML модели. Остальные 80% — это работа с данными (data wrangling), исследование и коммуникация результатов.
 
 ---
 
-### Real-World Examples
+### Why Data Science Matters (Почему Data Science важна)
 
-1. **Healthcare**
-   - Predicting patient readmission rates.
-   - Detecting diseases from medical images.
-
-2. **Finance**
-   - Fraud detection on credit card transactions.
-   - Algorithmic trading and risk modeling.
-
-3. **Retail & E-commerce**
-   - Customer segmentation and targeted marketing.
-   - Demand forecasting to manage inventory.
-
-4. **Social Media**
-   - Sentiment analysis on tweets and posts.
-   - Content recommendation algorithms.
-
-5. **Government & NGOs**
-   - Tracking disease outbreaks (e.g., COVID-19 dashboards).
-   - Optimizing resource distribution in humanitarian crises.
+- **Better decisions (Лучшие решения)**: Компании используют данные для принятия обоснованных решений вместо догадок.
+- **Efficiency (Эффективность)**: Автоматизированный анализ миллионов записей за секунды.
+- **Personalization (Персонализация)**: Netflix рекомендует, что вы посмотрите; врачи предсказывают, какие пациенты нуждаются в срочной помощи.
+- **Discovery (Открытия)**: Учёные используют Data Science для поиска паттернов в геномике, климатических данных и физике частиц.
 
 ---
 
-## The Data Science Lifecycle
+### Real-World Examples (Реальные примеры)
 
-Every data science project follows a lifecycle — a repeating cycle of stages.
-Skipping a stage almost always leads to bad results.
+1. **Healthcare (Здравоохранение)**
+   - Прогнозирование уровня повторной госпитализации пациентов.
+   - Обнаружение заболеваний по медицинским изображениям.
 
----
+2. **Finance (Финансы)**
+   - Обнаружение мошенничества по транзакциям кредитных карт.
+   - Алгоритмическая торговля и моделирование рисков.
 
-### The Stages
+3. **Retail & E-commerce (Розничная торговля и электронная коммерция)**
+   - Сегментация клиентов и таргетированный маркетинг.
+   - Прогнозирование спроса для управления запасами.
 
-#### **Stage 1: Problem Definition**
+4. **Social Media (Социальные сети)**
+   - Анализ тональности (sentiment analysis) твитов и постов.
+   - Алгоритмы рекомендации контента.
 
-- Identify the question or problem to solve.
-- Ask: _What do we want to know? What decision will this data inform?_
-- Example: "Can we predict which customers are likely to cancel their subscription?"
-
-⚠️ A poorly defined problem leads to useless analysis, even with great data.
-
----
-
-#### **Stage 2: Data Collection**
-
-- Gather raw data from relevant sources.
-- Sources include:
-  - Internal databases (sales records, logs)
-  - External APIs (Twitter, weather, financial data)
-  - Public datasets (Kaggle, UCI ML Repository, government open data)
-  - Surveys and web scraping
-
-Example: Collect 3 years of customer purchase history and support ticket logs.
+5. **Government & NGOs (Правительство и НКО)**
+   - Отслеживание вспышек заболеваний (например, COVID-19 дашборды).
+   - Оптимизация распределения ресурсов в гуманитарных кризисах.
 
 ---
 
-#### **Stage 3: Data Cleaning (Preprocessing)**
+## The Data Science Lifecycle (Жизненный цикл Data Science)
 
-Raw data is almost never ready to use. This stage is where most of a data scientist's time is spent.
-
-Tasks include:
-- Handle missing values (fill, drop, or impute).
-- Remove duplicate records.
-- Fix inconsistent formats (dates, units, categories).
-- Filter out outliers that would distort analysis.
-
-> Rule of thumb: 70–80% of data science work is cleaning data.
+Каждый Data Science проект следует жизненному циклу — повторяющемуся циклу этапов.
+Пропуск этапа почти всегда приводит к плохим результатам.
 
 ---
 
-#### **Stage 4: Exploratory Data Analysis (EDA)**
+### The Stages (Этапы)
 
-Before modeling anything, **explore** the data to understand it.
+#### **Stage 1 (Этап 1): Problem Definition (Определение проблемы)**
 
-- Look at distributions, ranges, and correlations.
-- Visualize relationships with charts and graphs.
-- Generate hypotheses about what patterns might exist.
+- Определите вопрос или проблему для решения.
+- Спросите: _Что мы хотим узнать? Какое решение будут информировать эти данные?_
+- Пример: "Можем ли мы предсказать, какие клиенты, вероятно, откажутся от подписки?"
+
+⚠️ Плохо определённая проблема ведёт к бесполезному анализу, даже с отличными данными.
+
+---
+
+#### **Stage 2 (Этап 2): Data Collection (Сбор данных)**
+
+- Соберите сырые данные из релевантных источников.
+- Источники включают:
+  - Внутренние базы данных (записи продаж, логи)
+  - Внешние API (Twitter, погода, финансовые данные)
+  - Публичные датасеты (Kaggle, UCI ML Repository, открытые данные правительств)
+  - Опросы и веб-скрапинг
+
+Пример: Собрать 3 года истории покупок клиентов и логи тикетов поддержки.
+
+---
+
+#### **Stage 3 (Этап 3): Data Cleaning (Очистка данных) (Preprocessing)**
+
+Сырые данные почти никогда не готовы к использованию. На этом этапе data scientist проводит большую часть времени.
+
+Задачи включают:
+- Обработка пропущенных значений (заполнить, удалить или импутировать).
+- Удаление дубликатов записей.
+- Исправление несоответствий форматов (даты, единицы, категории).
+- Фильтрация выбросов (outliers), искажающих анализ.
+
+> Правило большого пальца: 70–80% работы в Data Science — это очистка данных.
+
+---
+
+#### **Stage 4 (Этап 4): Exploratory Data Analysis (EDA) (Исследовательский анализ данных)**
+
+Прежде чем моделировать что-либо, **исследуйте** данные, чтобы понять их.
+
+- Посмотрите на распределения, диапазоны и корреляции.
+- Визуализируйте взаимосвязи с помощью графиков и диаграмм.
+- Сформулируйте гипотезы о том, какие паттерны могут существовать.
 
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
 
 df = pd.read_csv("customers.csv")
-print(df.describe())          # Summary statistics
-df["age"].hist()              # Distribution of customer ages
+print(df.describe())          # Сводная статистика
+df["age"].hist()              # Распределение возраста клиентов
 plt.show()
 ```
 
 ---
 
-#### **Stage 5: Feature Engineering**
+#### **Stage 5 (Этап 5): Feature Engineering (Создание признаков)**
 
-- Transform raw data into features that are useful for a model.
-- Combine, encode, or create new variables.
-- Example: From a "signup date," derive "days since signup," "signup month," or "is weekend signup."
-
----
-
-#### **Stage 6: Modeling (optional, when prediction is needed)**
-
-- Choose and train a Machine Learning model.
-- This is where DS and ML overlap.
-- Not every data science project needs a model — sometimes the insight from EDA is enough.
+- Преобразуйте сырые данные в признаки, полезные для модели.
+- Комбинируйте, кодируйте или создавайте новые переменные.
+- Пример: Из "даты регистрации" получить "дней с момента регистрации", "месяц регистрации" или "регистрация в выходной".
 
 ---
 
-#### **Stage 7: Evaluation**
+#### **Stage 6 (Этап 6): Modeling (Моделирование) (опционально, когда нужно прогнозирование)**
 
-- Test the model or analysis on unseen data.
-- Measure if it answers the original question.
-- Use domain knowledge to sanity-check results.
-
----
-
-#### **Stage 8: Communication & Deployment**
-
-- Share findings with stakeholders (reports, dashboards, presentations).
-- If a model is involved, deploy it to production.
-- Monitor performance over time.
-
-> The best insight in the world has zero value if no one understands or acts on it.
+- Выберите и обучите Machine Learning модель.
+- Это место, где DS и ML пересекаются.
+- Не каждый Data Science проект нуждается в модели — иногда инсайта из EDA достаточно.
 
 ---
 
-## Core Tools of a Data Scientist
+#### **Stage 7 (Этап 7): Evaluation (Оценка)**
 
-### Programming Languages
-
-| **Language** | **Why It's Used**                                     |
-| ------------ | ----------------------------------------------------- |
-| Python       | The most popular language for DS and ML               |
-| R            | Widely used in academia and statistics                |
-| SQL          | Essential for querying databases                      |
+- Протестируйте модель или анализ на невиданных данных.
+- Измерьте, отвечает ли он на исходный вопрос.
+- Используйте знание предметной области для проверки результатов (sanity check).
 
 ---
 
-### Key Python Libraries
+#### **Stage 8 (Этап 8): Communication & Deployment (Коммуникация и развёртывание)**
 
-| **Library**    | **Purpose**                                      |
-| -------------- | ------------------------------------------------ |
-| `numpy`        | Numerical computing, arrays, math operations     |
-| `pandas`       | Data manipulation and analysis (DataFrames)      |
-| `matplotlib`   | Basic plotting and visualization                 |
-| `seaborn`      | Statistical data visualization                   |
-| `scikit-learn` | Machine Learning models and utilities            |
-| `jupyter`      | Interactive notebooks for exploration            |
+- Поделитесь результатами с заинтересованными сторонами (отчёты, дашборды, презентации).
+- Если используется модель, разверните её в production (продакшн).
+- Отслеживайте производительность с течением времени.
 
-> See the **Setup Guide** ([`00-tools-and-setup.md`](00-tools-and-setup.md)) for installation and your first notebook.
+> Лучший инсайт в мире не имеет ценности, если его никто не понимает или не действует на его основе.
 
 ---
 
-### A First Look at the Workflow in Python
+## Core Tools of a Data Scientist (Основные инструменты Data Scientist)
+
+### Programming Languages (Языки программирования)
+
+| **Language (Язык)** | **Why It's Used (Почему используется)**                   |
+| ------------------- | --------------------------------------------------------- |
+| Python              | Самый популярный язык для DS и ML                         |
+| R                   | Широко используется в академических кругах и статистике    |
+| SQL                 | Необходим для запросов к базам данных                     |
+
+---
+
+### Key Python Libraries (Ключевые библиотеки Python)
+
+| **Library (Библиотека)** | **Purpose (Назначение)**                                        |
+| ------------------------ | --------------------------------------------------------------- |
+| `numpy`                  | Численные вычисления, массивы, математические операции          |
+| `pandas`                 | Манипуляция и анализ данных (DataFrames)                        |
+| `matplotlib`             | Базовое построение графиков и визуализация                      |
+| `seaborn`                | Статистическая визуализация данных                               |
+| `scikit-learn`           | Machine Learning модели и утилиты                               |
+| `jupyter`                | Интерактивные ноутбуки для исследования                         |
+
+> См. **Setup Guide (Руководство по настройке)** ([`00-tools-and-setup.md`](00-tools-and-setup.md)) для установки и первого ноутбука.
+
+---
+
+### A First Look at the Workflow in Python (Первый взгляд на workflow в Python)
 
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load data
+# Load data (Загрузка данных)
 df = pd.read_csv("sales_data.csv")
 
-# Inspect the data
-print(df.shape)        # (rows, columns)
-print(df.head())       # First 5 rows
-print(df.isnull().sum()) # Count missing values
+# Inspect the data (Просмотр данных)
+print(df.shape)        # (rows, columns) - (строки, столбцы)
+print(df.head())       # First 5 rows (Первые 5 строк)
+print(df.isnull().sum()) # Count missing values (Количество пропущенных значений)
 
-# Explore a numeric column
+# Explore a numeric column (Изучение числовой колонки)
 print(df["revenue"].describe())
 
-# Visualize
+# Visualize (Визуализация)
 df["revenue"].plot(kind="hist", title="Revenue Distribution")
 plt.show()
 ```
 
-This is the starting point of nearly every real data science project.
+Это отправная точка почти каждого реального Data Science проекта.
 
 ---
 
-## What Does a Data Scientist Actually Do?
+## What Does a Data Scientist Actually Do? (Что на самом деле делает Data Scientist?)
 
-### Typical Day-to-Day Tasks
+### Typical Day-to-Day Tasks (Типичные повседневные задачи)
 
-- Write queries to extract data from databases.
-- Clean and transform messy datasets.
-- Build visualizations to explore trends.
-- Present findings to non-technical stakeholders.
-- Train and evaluate predictive models.
-- Collaborate with engineers to deploy solutions.
+- Писать запросы для извлечения данных из баз данных.
+- Очищать и преобразовывать необработанные датасеты.
+- Строить визуализации для изучения трендов.
+- Представлять результаты нетехническим заинтересованным сторонам.
+- Обучать и оценивать прогностические модели.
+- Сотрудничать с инженерами для развёртывания решений.
 
-### Skills Required
+### Skills Required (Требуемые навыки)
 
-- **Technical**: Python/SQL, statistics, data visualization, ML basics.
-- **Analytical**: Critical thinking, pattern recognition, problem framing.
-- **Communication**: Explaining findings clearly to non-technical audiences.
-
----
-
-## Summary
-
-- Data Science is the end-to-end process of extracting insight from data — using statistics, programming, and domain knowledge.
-- It overlaps with AI and ML but is broader: not every project needs a model.
-- The lifecycle: Define → Collect → Clean → Explore → Model → Evaluate → Communicate.
-- Python (with pandas, numpy, matplotlib, scikit-learn) is the primary toolkit.
-- The most underestimated skill: **communicating results** clearly.
+- **Technical (Технические)**: Python/SQL, статистика, визуализация данных, основы ML.
+- **Analytical (Аналитические)**: Критическое мышление, распознавание паттернов, формулирование проблем.
+- **Communication (Коммуникация)**: Чёткое объяснение результатов нетехнической аудитории.
 
 ---
 
-*End of Lesson 1*
+## Summary (Итог)
+
+- Data Science — это сквозной процесс извлечения инсайтов из данных, использующий статистику, программирование и знание предметной области.
+- Он пересекается с AI и ML, но шире: не каждый проект нуждается в модели.
+- Жизненный цикл: Define (Определить) → Collect (Собрать) → Clean (Очистить) → Explore (Исследовать) → Model (Моделировать) → Evaluate (Оценить) → Communicate (Сообщить).
+- Python (с pandas, numpy, matplotlib, scikit-learn) — основной toolkit (набор инструментов).
+- Самый недооценённый навык: **чёткая коммуникация результатов (communicating results)**.
+
+---
+
+*End of Lesson 1 (Конец Урока 1)*
 
 ---

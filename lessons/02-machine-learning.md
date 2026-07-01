@@ -1,503 +1,503 @@
 # Lesson 2 – Machine Learning
 
-## What You'll Learn
+## What You'll Learn (Что вы изучите)
 
-By the end of this lesson, students will be able to:
+К концу этого урока студенты смогут:
 
-1. Define what Machine Learning (ML) is.
-2. Differentiate between **Supervised** and **Unsupervised** learning.
-3. Understand the **ML workflow** (data → preprocessing → model → evaluation).
-4. Explain **train/test split** and why it’s needed.
-5. Recognize **overfitting** vs **underfitting** in models.
-
----
-
-## What is Machine Learning?
-
-Before we dive into algorithms and math, we need to understand the big picture:
-**What is Machine Learning? Why do we need it?**
-
-Machine Learning (ML) is simply about **teaching computers to learn from data**. Instead of giving the computer step-by-step instructions, we feed it **examples**, and it figures out the rules on its own.
+1. Определить, что такое Machine Learning (ML).
+2. Различать **Supervised (обучение с учителем)** и **Unsupervised (обучение без учителя)** learning.
+3. Понимать **ML workflow (рабочий процесс ML)** (data → preprocessing → model → evaluation).
+4. Объяснить **train/test split (разделение на обучающую/тестовую выборки)** и зачем он нужен.
+5. Распознавать **overfitting (переобучение)** vs **underfitting (недообучение)** в моделях.
 
 ---
 
-### Definition
+## What is Machine Learning? (Что такое Machine Learning?)
+
+Прежде чем мы углубимся в алгоритмы и математику, нам нужно понять общую картину:
+**Что такое Machine Learning? Зачем он нам нужен?**
+
+Machine Learning (ML) — это просто **обучение компьютеров на данных**. Вместо того чтобы давать компьютеру пошаговые инструкции, мы подаём ему **примеры**, и он сам находит правила.
+
+---
+
+### Definition (Определение)
 
 **Machine Learning (ML):**
 
-> A branch of Artificial Intelligence (AI) where computers learn patterns from data without being explicitly programmed.
+> Ветвь Artificial Intelligence (AI), где компьютеры учатся распознавать паттерны из данных без явного программирования.
 
-Example in simple terms:
+Пример простыми словами:
 
-- Traditional program: You write a recipe → computer follows it.
-- Machine Learning: You give the computer lots of finished cakes and ingredients → it figures out the recipe itself.
-
----
-
-### How ML Differs from Traditional Programming
-
-| **Traditional Programming**                                        | **Machine Learning**                                                                    |
-| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| Rules are written by a human.                                      | Rules are _learned_ by the computer.                                                    |
-| Input Data + Rules → Output.                                       | Input Data + Output Labels → Learned Rules (Model).                                     |
-| Example: "If a message contains the word 'lottery', mark as spam." | Example: Show the system thousands of emails labeled spam/not spam, it learns patterns. |
+- Традиционная программа: Вы пишете рецепт → компьютер следует ему.
+- Machine Learning: Вы даёте компьютеру много готовых тортов и ингредиентов → он сам находит рецепт.
 
 ---
 
-### Why Machine Learning?
+### How ML Differs from Traditional Programming (Чем ML отличается от традиционного программирования)
 
-- **Data Explosion:** There’s too much data for humans to manually analyze.
-- **Complex Patterns:** Some problems (like face recognition) are too complicated for explicit rules.
-- **Adaptability:** ML systems can improve over time as they see more data.
-
----
-
-### Real-World Examples of Machine Learning
-
-1. **Spam Filters**
-   - Gmail uses ML to automatically detect unwanted emails.
-   - Learns from billions of messages (words, links, patterns).
-
-2. **Netflix & YouTube Recommendations**
-   - Suggests movies/videos based on your viewing history.
-   - Compares your habits with millions of other users.
-
-3. **Self-Driving Cars**
-   - ML allows cars to detect objects, pedestrians, and traffic lights.
-   - Cars “learn” from millions of driving hours and sensor data.
+| **Traditional Programming (Традиционное программирование)**               | **Machine Learning**                                                                    |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Правила написаны человеком.                                               | Правила _изучаются_ компьютером.                                                        |
+| Input Data + Rules → Output.                                              | Input Data + Output Labels → Learned Rules (Model).                                     |
+| Пример: "Если сообщение содержит слово 'лотерея', пометить как спам."     | Пример: Показать системе тысячи писем, помеченных как спам/не спам, она учит паттерны.  |
 
 ---
 
-### Key Idea: Learning from Data
+### Why Machine Learning? (Зачем Machine Learning?)
 
-- ML works by finding **patterns** in data.
-- These patterns are turned into a **model**.
-- That model can then be used to make **predictions** or **decisions** on new data.
-
-Example:
-
-- Training: Show thousands of cat and dog pictures labeled "cat" or "dog."
-- Model: Learns what makes a cat vs. dog (ears, tails, shapes).
-- Prediction: When shown a new picture, it guesses "This is a cat."
+- **Data Explosion (Взрыв данных):** Люди не могут вручную проанализировать слишком много данных.
+- **Complex Patterns (Сложные паттерны):** Некоторые проблемы (например, распознавание лиц) слишком сложны для явных правил.
+- **Adaptability (Адаптивность):** ML системы могут улучшаться со временем по мере поступления новых данных.
 
 ---
 
-### A Tiny Python Example (optional for clarity)
+### Real-World Examples of Machine Learning (Реальные примеры Machine Learning)
+
+1. **Spam Filters (Спам-фильтры)**
+   - Gmail использует ML для автоматического обнаружения нежелательных писем.
+   - Обучается на миллиардах сообщений (слова, ссылки, паттерны).
+
+2. **Netflix & YouTube Recommendations (Рекомендации Netflix и YouTube)**
+   - Предлагают фильмы/видео на основе вашей истории просмотров.
+   - Сравнивают ваши привычки с миллионами других пользователей.
+
+3. **Self-Driving Cars (Самоуправляемые автомобили)**
+   - ML позволяет автомобилям обнаруживать объекты, пешеходов и светофоры.
+   - Автомобили "учатся" на миллионах часов вождения и данных сенсоров.
+
+---
+
+### Key Idea: Learning from Data (Ключевая идея: обучение на данных)
+
+- ML работает путём нахождения **паттернов** в данных.
+- Эти паттерны превращаются в **model (модель)**.
+- Затем модель может использоваться для **predictions (предсказаний)** или **decisions (решений)** на новых данных.
+
+Пример:
+
+- Training (Обучение): Показать тысячи изображений кошек и собак с метками "кот" или "собака".
+- Model (Модель): Узнаёт, что отличает кота от собаки (уши, хвосты, формы).
+- Prediction (Предсказание): При показе нового изображения угадывает "Это кот."
+
+---
+
+### A Tiny Python Example (optional for clarity) (Маленький пример на Python для ясности)
 
 ```python
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
-# Example: Predict study hours → exam score
-hours = np.array([[1], [2], [3], [4], [5]])   # input data
-scores = np.array([20, 40, 60, 80, 100])      # output labels
+# Example: Predict study hours → exam score (Пример: часы учёбы → балл на экзамене)
+hours = np.array([[1], [2], [3], [4], [5]])   # input data (входные данные)
+scores = np.array([20, 40, 60, 80, 100])      # output labels (выходные метки)
 
-# Train a simple ML model
+# Train a simple ML model (Обучение простой ML модели)
 model = LinearRegression()
 model.fit(hours, scores)
 
-# Predict score for 6 hours of study
+# Predict score for 6 hours of study (Предсказание балла для 6 часов учёбы)
 print(model.predict([[6]]))  # Output: ~120
 ```
 
-This simple model learns the **pattern**:
-More study hours → higher score.
+Эта простая модель учит **паттерн**:
+Больше часов учёбы → выше балл.
 
 ---
 
-## Types of Machine Learning
+## Types of Machine Learning (Типы Machine Learning)
 
-Now that we know what Machine Learning is, let’s look at its two main types.
-Almost every algorithm you’ll encounter falls into one of these categories:
-
----
-
-### Supervised Learning 🧑‍🏫
-
-**Definition**:
-
-- In supervised learning, the computer learns from **labeled data**.
-- Think of it like a teacher giving the correct answers during training.
-
-**Key Tasks in Supervised Learning:**
-
-1. **Regression** → Predicting _numbers_ (continuous values).
-   - Example: Predicting house prices based on size, location, and rooms.
-   - Input: House features → Output: Price in dollars.
-
-2. **Classification** → Predicting _categories_ (discrete classes).
-   - Example: Spam filter.
-   - Input: Email text → Output: “Spam” or “Not Spam.”
+Теперь, когда мы знаем, что такое Machine Learning, давайте посмотрим на два его основных типа.
+Почти каждый алгоритм, с которым вы столкнётесь, относится к одной из этих категорий:
 
 ---
 
-### Unsupervised Learning 🔍
+### Supervised Learning 🧑‍🏫 (Обучение с учителем)
 
-**Definition**:
+**Definition (Определение):**
 
-- The data is **unlabeled**.
-- The computer must find patterns and structure on its own.
+- В supervised learning компьютер учится на **labeled data (размеченных данных)**.
+- Представьте это как учителя, дающего правильные ответы во время обучения.
 
-**Key Tasks in Unsupervised Learning:**
+**Key Tasks in Supervised Learning (Ключевые задачи в обучении с учителем):**
 
-1. **Clustering** → Grouping similar items together.
-   - Example: Customer segmentation in marketing (grouping customers by behavior: frequent buyers, occasional buyers, etc.).
-   - No “teacher” tells the algorithm which customer belongs where.
+1. **Regression (Регрессия)** → Предсказание _чисел_ (непрерывных значений).
+   - Пример: Предсказание цен на дома на основе размера, местоположения и количества комнат.
+   - Input: Характеристики дома → Output: Цена в долларах.
 
-2. **Dimensionality Reduction** → Simplifying complex data.
-   - Example: Compressing high-dimensional images into fewer features without losing important information.
-   - Used in visualization, noise reduction, and speeding up algorithms.
-
----
-
-### Comparing the Types
-
-| **Type**              | **Data**          | **Output**                    | **Examples**                     |
-| --------------------- | ----------------- | ----------------------------- | -------------------------------- |
-| Supervised Learning   | Labeled data ✅   | Predict numbers or categories | House price, Spam filter         |
-| Unsupervised Learning | Unlabeled data ❌ | Find hidden patterns          | Customer groups, Market analysis |
+2. **Classification (Классификация)** → Предсказание _категорий_ (дискретных классов).
+   - Пример: Спам-фильтр.
+   - Input: Текст письма → Output: "Спам" или "Не спам."
 
 ---
 
-### Mini Python Example (for clarity)
+### Unsupervised Learning 🔍 (Обучение без учителя)
 
-**Supervised (Regression):**
+**Definition (Определение):**
+
+- Данные **не размечены (unlabeled)**.
+- Компьютер должен сам находить паттерны и структуру.
+
+**Key Tasks in Unsupervised Learning (Ключевые задачи в обучении без учителя):**
+
+1. **Clustering (Кластеризация)** → Группировка похожих элементов вместе.
+   - Пример: Сегментация клиентов в маркетинге (группировка клиентов по поведению: частые покупатели, редкие и т.д.).
+   - Нет "учителя", который говорит алгоритму, к какому кластеру принадлежит клиент.
+
+2. **Dimensionality Reduction (Снижение размерности)** → Упрощение сложных данных.
+   - Пример: Сжатие многомерных изображений в меньшее количество признаков без потери важной информации.
+   - Используется в визуализации, шумоподавлении и ускорении алгоритмов.
+
+---
+
+### Comparing the Types (Сравнение типов)
+
+| **Type (Тип)**              | **Data (Данные)**      | **Output (Выход)**                      | **Examples (Примеры)**                   |
+| --------------------------- | ---------------------- | --------------------------------------- | ---------------------------------------- |
+| Supervised Learning         | Labeled data ✅        | Предсказание чисел или категорий        | Цена дома, Спам-фильтр                   |
+| Unsupervised Learning       | Unlabeled data ❌      | Поиск скрытых паттернов                 | Группы клиентов, Анализ рынка            |
+
+---
+
+### Mini Python Example (for clarity) (Мини-пример на Python для ясности)
+
+**Supervised (Regression) (Регрессия):**
 
 ```python
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
-# Study hours vs exam scores
-X = np.array([[1], [2], [3], [4]])  # Hours studied
-y = np.array([20, 40, 60, 80])      # Scores
+# Study hours vs exam scores (Часы учёбы vs баллы на экзамене)
+X = np.array([[1], [2], [3], [4]])  # Hours studied (Часы учёбы)
+y = np.array([20, 40, 60, 80])      # Scores (Баллы)
 
 model = LinearRegression()
 model.fit(X, y)
 
-print(model.predict([[5]]))  # Predict score for 5 hours study
+print(model.predict([[5]]))  # Predict score for 5 hours study (Предсказание для 5 часов)
 ```
 
-**Unsupervised (Clustering):**
+**Unsupervised (Clustering) (Кластеризация):**
 
 ```python
 from sklearn.cluster import KMeans
 import numpy as np
 
-# Fake customer data: [age, spending score]
+# Fake customer data: [age, spending score] (Пример данных клиентов: [возраст, балл трат])
 X = np.array([[25, 70], [30, 90], [40, 40], [60, 20], [65, 30]])
 
 kmeans = KMeans(n_clusters=2, random_state=0)
 kmeans.fit(X)
 
-print(kmeans.labels_)  # Shows which group each customer belongs to
+print(kmeans.labels_)  # Shows which group each customer belongs to (Показывает, к какой группе относится каждый клиент)
 ```
 
 ---
 
-## The Machine Learning Workflow
+## The Machine Learning Workflow (Рабочий процесс Machine Learning)
 
-Machine Learning isn’t just about choosing an algorithm.
-It’s a **workflow**: a set of stages that every project goes through.
-If you skip one, your model may fail.
-
----
-
-### The Workflow (Step by Step)
-
-#### **Step 1: Problem Definition**
-
-- Ask: _What are we trying to solve?_
-- Example: Predict house prices? Detect spam emails?
-
-⚠️ Tip: Be clear whether it’s **classification**, **regression**, or another type.
+Machine Learning — это не просто выбор алгоритма.
+Это **workflow (рабочий процесс)**: набор этапов, через которые проходит каждый проект.
+Если вы пропустите один, ваша модель может не сработать.
 
 ---
 
-#### **Step 2: Data Collection**
+### The Workflow (Step by Step) (Рабочий процесс шаг за шагом)
 
-- ML needs data — the more, the better (but quality matters too).
-- Sources:
-  - Databases
-  - Sensors (IoT)
-  - Public datasets (Kaggle, UCI ML Repo)
-  - User-generated data (clicks, likes, reviews)
+#### **Step 1 (Шаг 1): Problem Definition (Определение проблемы)**
 
-Example: Collect 10,000 house sales with features like size, rooms, location.
+- Спросите: _Что мы пытаемся решить?_
+- Пример: Предсказать цены на дома? Обнаружить спам-письма?
+
+⚠️ Tip (Совет): Чётко определите, будет ли это **classification (классификация)**, **regression (регрессия)** или другой тип.
 
 ---
 
-#### **Step 3: Data Preprocessing (Cleaning)**
+#### **Step 2 (Шаг 2): Data Collection (Сбор данных)**
 
-Raw data is messy. We prepare it:
+- ML нужны данные — чем больше, тем лучше (но качество тоже важно).
+- Источники:
+  - Databases (Базы данных)
+  - Sensors (IoT) (Датчики)
+  - Public datasets (Публичные датасеты) (Kaggle, UCI ML Repo)
+  - User-generated data (Пользовательские данные) (клики, лайки, отзывы)
 
-- Handle missing values (fill or remove).
-- Remove duplicates.
-- Convert text/images into numerical form.
-- Normalize/scale numbers.
-
-Example: If house sizes are in m² and ft², unify them into one unit.
-
----
-
-#### **Step 4: Splitting the Dataset**
-
-- Split data into:
-  - **Training set** → used to teach the model.
-  - **Test set** → used to check if the model generalizes well.
-
-- Common split: 80% train, 20% test.
+Пример: Собрать 10,000 продаж домов с характеристиками: размер, комнаты, местоположение.
 
 ---
 
-#### **Step 5: Model Training**
+#### **Step 3 (Шаг 3): Data Preprocessing (Предобработка данных) (Cleaning)**
 
-- Choose an algorithm (Linear Regression, Decision Trees, Neural Networks).
-- Feed training data into it.
-- Model learns patterns → creates a “rule” (mathematical function).
+Сырые данные грязные. Мы подготавливаем их:
 
----
+- Обработка пропущенных значений (заполнить или удалить).
+- Удаление дубликатов.
+- Преобразование текста/изображений в числовую форму.
+- Нормализация/масштабирование чисел.
 
-#### **Step 6: Model Evaluation**
-
-- Test the model on unseen test data.
-- Use metrics like:
-  - Accuracy (for classification).
-  - Mean Squared Error (for regression).
-  - Precision/Recall (for imbalance problems like fraud detection).
-
-Example: If the spam filter says 95% of emails are classified correctly → accuracy = 95%.
+Пример: Если размеры домов указаны в м² и фут², унифицировать их в одну единицу.
 
 ---
 
-#### **Step 7: Deployment**
+#### **Step 4 (Шаг 4): Splitting the Dataset (Разделение датасета)**
 
-- Once the model works well → deploy it into the real world.
-- Integrated into apps, websites, or devices.
-- Example: Your phone camera recognizing faces in real time.
+- Разделите данные на:
+  - **Training set (Обучающая выборка)** → используется для обучения модели.
+  - **Test set (Тестовая выборка)** → используется для проверки, насколько хорошо модель обобщается.
 
----
-
-#### **Step 8: Monitoring & Maintenance**
-
-- Models degrade over time (data changes = concept drift).
-- Example: Spam emails evolve with new tricks.
-- Solution: retrain with fresh data regularly.
+- Обычное разделение: 80% train, 20% test.
 
 ---
 
-### Mini Example in Python
+#### **Step 5 (Шаг 5): Model Training (Обучение модели)**
+
+- Выберите алгоритм (Linear Regression, Decision Trees, Neural Networks).
+- Подайте обучающие данные в него.
+- Модель находит паттерны → создаёт "правило" (математическую функцию).
+
+---
+
+#### **Step 6 (Шаг 6): Model Evaluation (Оценка модели)**
+
+- Протестируйте модель на невиданных тестовых данных.
+- Используйте метрики, такие как:
+  - Accuracy (Точность) (для classification).
+  - Mean Squared Error (Среднеквадратичная ошибка) (для regression).
+  - Precision/Recall (Точность/Полнота) (для несбалансированных задач, таких как обнаружение мошенничества).
+
+Пример: Если спам-фильтр правильно классифицирует 95% писем → accuracy = 95%.
+
+---
+
+#### **Step 7 (Шаг 7): Deployment (Развёртывание)**
+
+- Как только модель хорошо работает → разверните её в реальном мире.
+- Интегрируется в приложения, веб-сайты или устройства.
+- Пример: Камера вашего телефона распознаёт лица в реальном времени.
+
+---
+
+#### **Step 8 (Шаг 8): Monitoring & Maintenance (Мониторинг и обслуживание)**
+
+- Модели ухудшаются со временем (данные меняются = concept drift (дрейф концепции)).
+- Пример: Спам-письма эволюционируют с новыми уловками.
+- Решение: переобучать с новыми данными регулярно.
+
+---
+
+### Mini Example in Python (Мини-пример на Python)
 
 ```python
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
-# Step 2: Data Collection
-X = np.array([[1], [2], [3], [4], [5]])  # study hours
-y = np.array([20, 40, 60, 80, 100])      # scores
+# Step 2: Data Collection (Сбор данных)
+X = np.array([[1], [2], [3], [4], [5]])  # study hours (часы учёбы)
+y = np.array([20, 40, 60, 80, 100])      # scores (баллы)
 
-# Step 4: Split dataset
+# Step 4: Split dataset (Разделение датасета)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Step 5: Train model
+# Step 5: Train model (Обучение модели)
 model = LinearRegression()
 model.fit(X_train, y_train)
 
-# Step 6: Evaluate
+# Step 6: Evaluate (Оценка)
 print("Test Score:", model.score(X_test, y_test))
 ```
 
 ---
 
-## Key Machine Learning Algorithms
+## Key Machine Learning Algorithms (Ключевые алгоритмы Machine Learning)
 
-After understanding the **workflow**, we now ask:
-_Which algorithms do we actually use to train models?_
+После понимания **workflow (рабочего процесса)** мы теперь спрашиваем:
+_Какие алгоритмы мы на самом деле используем для обучения моделей?_
 
-There are hundreds, but we’ll focus on the **core family** of algorithms you must know first.
+Их сотни, но мы сосредоточимся на **основном семействе** алгоритмов, которые вы должны знать в первую очередь.
 
 ---
 
-### Supervised Learning Algorithms
+### Supervised Learning Algorithms (Алгоритмы обучения с учителем)
 
-#### **A. Linear Regression (for Regression Tasks)**
+#### **A. Linear Regression (Линейная регрессия) (for Regression Tasks)**
 
-- **Goal:** Predict continuous numbers.
-- **How it works:** Fits a straight line (or curve) through data points.
-- **Example:** Predicting house prices based on size.
+- **Goal (Цель):** Предсказание непрерывных чисел.
+- **How it works (Как работает):** Строит прямую линию (или кривую) через точки данных.
+- **Example (Пример):** Предсказание цен на дома на основе размера.
 
-**Tiny Example:**
+**Tiny Example (Маленький пример):**
 
 ```python
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
-X = np.array([[1], [2], [3], [4]])   # study hours
-y = np.array([20, 40, 60, 80])       # scores
+X = np.array([[1], [2], [3], [4]])   # study hours (часы учёбы)
+y = np.array([20, 40, 60, 80])       # scores (баллы)
 
 model = LinearRegression()
 model.fit(X, y)
 
-print(model.predict([[5]]))  # Predict score for 5 hours
+print(model.predict([[5]]))  # Predict score for 5 hours (Предсказание для 5 часов)
 ```
 
 ---
 
-#### **B. Logistic Regression (for Classification Tasks)**
+#### **B. Logistic Regression (Логистическая регрессия) (for Classification Tasks)**
 
-- **Goal:** Predict categories (Yes/No, Spam/Not Spam).
-- **Despite the name:** It’s used for _classification_, not regression.
-- **How it works:** Uses a sigmoid curve to separate categories.
+- **Goal (Цель):** Предсказание категорий (Да/Нет, Спам/Не спам).
+- **Despite the name (Несмотря на название):** Используется для _classification (классификации)_, а не regression (регрессии).
+- **How it works (Как работает):** Использует сигмоидальную кривую для разделения категорий.
 
-**Example:**
+**Example (Пример):**
 
-- Predict whether a student will pass (1) or fail (0) based on study hours.
-
----
-
-#### **C. Decision Trees**
-
-- **Goal:** Predict categories or numbers by asking a series of “questions.”
-- **How it works:** Splits data into branches like a flowchart.
-- **Example:**
-  - Question 1: Is income > \$50k?
-  - Question 2: Is age < 30?
-  - Then → Predict “Buy product” or “Not buy.”
+- Предсказать, сдаст ли студент экзамен (1) или провалит (0) на основе часов учёбы.
 
 ---
 
-#### **D. Random Forests**
+#### **C. Decision Trees (Деревья решений)**
 
-- **Goal:** Improve accuracy by combining many decision trees.
-- **Idea:** “Wisdom of the crowd.” Each tree votes, and the majority wins.
-- **Example:** Used in banking for fraud detection.
-
----
-
-#### **E. Support Vector Machines (SVM)**
-
-- **Goal:** Find the best boundary that separates classes.
-- **How it works:** Draws a hyperplane (line in 2D, plane in 3D).
-- **Example:** Classify emails as spam or not spam.
+- **Goal (Цель):** Предсказание категорий или чисел через серию "вопросов".
+- **How it works (Как работает):** Разделяет данные на ветви, как блок-схема.
+- **Example (Пример):**
+  - Вопрос 1: Доход > \$50k?
+  - Вопрос 2: Возраст < 30?
+  - Затем → Предсказать "Купит товар" или "Не купит."
 
 ---
 
-#### **F. Neural Networks (Deep Learning)**
+#### **D. Random Forests (Случайные леса)**
 
-- **Goal:** Mimic how the brain works (layers of neurons).
-- **How it works:** Passes data through multiple layers, each learning features.
-- **Example:** Used in image recognition, speech recognition, self-driving cars.
-
----
-
-### Unsupervised Learning Algorithms
-
-#### **A. K-Means Clustering**
-
-- **Goal:** Group similar data points.
-- **How it works:** Places “k” centers and assigns points to nearest center.
-- **Example:** Customer segmentation in marketing.
+- **Goal (Цель):** Повышение точности путём объединения множества decision trees (деревьев решений).
+- **Idea (Идея):** "Мудрость толпы." Каждое дерево голосует, и большинство выигрывает.
+- **Example (Пример):** Используется в банковском деле для обнаружения мошенничества.
 
 ---
 
-#### **B. Principal Component Analysis (PCA)**
+#### **E. Support Vector Machines (SVM) (Метод опорных векторов)**
 
-- **Goal:** Reduce dimensions (features) while keeping most information.
-- **Example:** Compress image data from 1000 features → 2 or 3 features for visualization.
-
----
-
-### Reinforcement Learning Algorithms
-
-- **Q-Learning**: Agent learns best actions using a reward system.
-- **Deep Q-Networks (DQN)**: Uses deep learning + reinforcement learning.
-- **Examples:**
-  - Robots learning to walk.
-  - AlphaGo beating human champions in Go.
+- **Goal (Цель):** Найти наилучшую границу, разделяющую классы.
+- **How it works (Как работает):** Проводит гиперплоскость (линию в 2D, плоскость в 3D).
+- **Example (Пример):** Классификация писем на спам и не спам.
 
 ---
 
-### Algorithm Cheat Sheet (Summary Table)
+#### **F. Neural Networks (Нейронные сети) (Deep Learning)**
 
-| **Algorithm**        | **Type**      | **Used For**                        |
-| -------------------- | ------------- | ----------------------------------- |
-| Linear Regression    | Supervised    | Predict numbers (regression)        |
-| Logistic Regression  | Supervised    | Classify categories                 |
-| Decision Tree        | Supervised    | Simple predictions, easy to explain |
-| Random Forest        | Supervised    | Ensemble for higher accuracy        |
-| SVM                  | Supervised    | Best boundary for classification    |
-| Neural Networks (DL) | Supervised    | Complex patterns (images, speech)   |
-| K-Means              | Unsupervised  | Grouping (clustering)               |
-| PCA                  | Unsupervised  | Dimensionality reduction            |
-| Q-Learning / DQN     | Reinforcement | Game AI, robotics                   |
+- **Goal (Цель):** Имитация работы мозга (слои нейронов).
+- **How it works (Как работает):** Пропускает данные через несколько слоёв, каждый изучает признаки.
+- **Example (Пример):** Используется в распознавании изображений, речи, самоуправляемых автомобилях.
 
 ---
 
-## Overfitting vs Underfitting
+### Unsupervised Learning Algorithms (Алгоритмы обучения без учителя)
 
-One of the **biggest challenges** in Machine Learning is making models that generalize well.
-Too simple → the model misses patterns (**underfitting**).
-Too complex → the model memorizes instead of learning (**overfitting**).
+#### **A. K-Means Clustering (Кластеризация K-средних)**
 
----
-
-### What is Underfitting?
-
-- **Definition:** Model is too simple, cannot capture the underlying structure of the data.
-- **Cause:**
-  - Using too few features.
-  - Using a very basic algorithm (e.g., straight line for nonlinear data).
-
-- **Result:** Both training and test accuracy are low.
-
-**Example:**
-Trying to fit a straight line to curved data → it will miss important trends.
+- **Goal (Цель):** Группировка похожих точек данных.
+- **How it works (Как работает):** Размещает "k" центров и назначает точки ближайшему центру.
+- **Example (Пример):** Сегментация клиентов в маркетинге.
 
 ---
 
-### What is Overfitting?
+#### **B. Principal Component Analysis (PCA) (Анализ главных компонент)**
 
-- **Definition:** Model is too complex, memorizes the training data instead of learning general rules.
-- **Cause:**
-  - Too many features.
-  - Using a very flexible model without enough data.
-
-- **Result:**
-  - Training accuracy is very high (almost perfect).
-  - Test accuracy is low (fails on unseen data).
-
-**Example:**
-Fitting a very wiggly curve through every training point, but it performs poorly on new data.
+- **Goal (Цель):** Уменьшение размерности (признаков) с сохранением большей части информации.
+- **Example (Пример):** Сжатие данных изображения с 1000 признаков → 2 или 3 признака для визуализации.
 
 ---
 
-### The Balance
+### Reinforcement Learning Algorithms (Алгоритмы обучения с подкреплением)
 
-- Goal in ML: **Find the sweet spot** → not too simple, not too complex.
-- This is called the **Bias-Variance Tradeoff**:
-  - Underfitting → High bias (too many wrong assumptions).
-  - Overfitting → High variance (model is too sensitive to training data).
-
----
-
-### Preventing Overfitting
-
-- Use more training data.
-- Use simpler models (Occam’s Razor).
-- Regularization techniques (L1, L2 penalties).
-- Cross-validation to check performance.
+- **Q-Learning**: Агент учится оптимальным действиям через систему вознаграждений.
+- **Deep Q-Networks (DQN)**: Использует deep learning + reinforcement learning.
+- **Examples (Примеры):**
+  - Роботы учатся ходить.
+  - AlphaGo побеждает чемпионов мира в Go.
 
 ---
 
-## Summary
+### Algorithm Cheat Sheet (Шпаргалка по алгоритмам) (Summary Table)
 
-- Machine Learning = teaching computers to learn patterns from data.
-- Two main types: **Supervised** (labeled data) & **Unsupervised** (unlabeled data).
-- Workflow: Problem → Data → Preprocessing → Train/Test → Model → Evaluation → Deployment.
-- Key challenge: balance between **underfitting** and **overfitting**.
+| **Algorithm (Алгоритм)** | **Type (Тип)**      | **Used For (Используется для)**              |
+| ------------------------ | ------------------- | -------------------------------------------- |
+| Linear Regression        | Supervised          | Предсказание чисел (regression)              |
+| Logistic Regression      | Supervised          | Классификация категорий                      |
+| Decision Tree            | Supervised          | Простые предсказания, легко объяснить        |
+| Random Forest            | Supervised          | Ансамбль для более высокой точности          |
+| SVM                      | Supervised          | Наилучшая граница для классификации          |
+| Neural Networks (DL)     | Supervised          | Сложные паттерны (изображения, речь)         |
+| K-Means                  | Unsupervised        | Группировка (clustering)                     |
+| PCA                      | Unsupervised        | Снижение размерности                         |
+| Q-Learning / DQN         | Reinforcement       | Игровой AI, робототехника                    |
 
 ---
 
-*End of Lesson 2*
+## Overfitting vs Underfitting (Переобучение vs Недообучение)
+
+Одна из **самых больших проблем** в Machine Learning — создание моделей, которые хорошо обобщаются.
+Слишком просто → модель пропускает паттерны (**underfitting (недообучение)**).
+Слишком сложно → модель запоминает вместо обучения (**overfitting (переобучение)**).
+
+---
+
+### What is Underfitting? (Что такое недообучение?)
+
+- **Definition (Определение):** Модель слишком проста, не может уловить основную структуру данных.
+- **Cause (Причина):**
+  - Использование слишком малого количества признаков.
+  - Использование очень простого алгоритма (например, прямая линия для нелинейных данных).
+
+- **Result (Результат):** И обучающая, и тестовая точность низкие.
+
+**Example (Пример):**
+Попытка подогнать прямую линию к изогнутым данным → она пропустит важные тренды.
+
+---
+
+### What is Overfitting? (Что такое переобучение?)
+
+- **Definition (Определение):** Модель слишком сложна, запоминает обучающие данные вместо изучения общих правил.
+- **Cause (Причина):**
+  - Слишком много признаков.
+  - Использование очень гибкой модели без достаточного количества данных.
+
+- **Result (Результат):**
+  - Обучающая точность очень высока (почти идеальна).
+  - Тестовая точность низкая (не работает на новых данных).
+
+**Example (Пример):**
+Подгонка очень извилистой кривой через каждую обучающую точку, но она плохо работает на новых данных.
+
+---
+
+### The Balance (Баланс)
+
+- Goal in ML (Цель в ML): **Найти золотую середину** → не слишком просто, не слишком сложно.
+- Это называется **Bias-Variance Tradeoff (Компромисс смещения и дисперсии)**:
+  - Underfitting → High bias (высокое смещение) (слишком много неверных предположений).
+  - Overfitting → High variance (высокая дисперсия) (модель слишком чувствительна к обучающим данным).
+
+---
+
+### Preventing Overfitting (Предотвращение переобучения)
+
+- Используйте больше обучающих данных.
+- Используйте более простые модели (бритва Оккама / Occam's Razor).
+- Техники регуляризации (L1, L2 penalties).
+- Cross-validation (кросс-валидация) для проверки производительности.
+
+---
+
+## Summary (Итог)
+
+- Machine Learning = обучение компьютеров нахождению паттернов в данных.
+- Два основных типа: **Supervised (обучение с учителем)** (размеченные данные) и **Unsupervised (обучение без учителя)** (неразмеченные данные).
+- Workflow (Рабочий процесс): Problem (Проблема) → Data (Данные) → Preprocessing (Предобработка) → Train/Test → Model (Модель) → Evaluation (Оценка) → Deployment (Развёртывание).
+- Ключевая задача: баланс между **underfitting (недообучением)** и **overfitting (переобучением)**.
+
+---
+
+*End of Lesson 2 (Конец Урока 2)*
 
 ---
