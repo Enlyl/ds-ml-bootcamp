@@ -36,16 +36,9 @@
 
 - [@sharafdin](https://github.com/sharafdin)
 - [@omartood](https://github.com/omartood)
+- [Dugsiiye](https://dugsiiye.com)
 
 Вместе наша цель — помочь следующему поколению data scientists (специалистов по данным).
-
----
-
-## 🤝 Sponsored By (Спонсор)
-
-Этот bootcamp полностью спонсируется:
-
-- **[Dugsiiye](https://dugsiiye.com)**
 
 ---
 
