@@ -1,7 +1,8 @@
 # 📊 DS-ML Bootcamp (Интенсив по Data Science и Machine Learning)
 
 > **Руссифицированная версия** оригинального bootcamp от [@sharafdin](https://github.com/sharafdin) и [@omartood](https://github.com/omartood).  
-> Добавлена **интерактивная оболочка управления** ([`index.html`](index.html)) — визуальный хаб с киберпанк-терминалом, звуковым движком, маркдаун-редактором, синтвейв-анимациями и переключением тёмной/светлой темы.
+> Добавлена **интерактивная оболочка управления** ([`index.html`](index.html)) — визуальный хаб с киберпанк-терминалом, звуковым движком, маркдаун-редактором, синтвейв-анимациями и переключением тёмной/светлой темы.  
+> **🌐 Live:** [enlyl.github.io/ds-ml-bootcamp](https://enlyl.github.io/ds-ml-bootcamp)
 
 Добро пожаловать в репозиторий **Data Science & Machine Learning Bootcamp**! 🚀
 
