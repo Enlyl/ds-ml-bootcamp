@@ -999,7 +999,6 @@ function updateProgress(){
       '<div class="check-wrap"><input type="checkbox" class="step-check" id="check'+i+'" onchange="updateProgress();if(typeof soundOn!==\'undefined\'&&soundOn)beep(700,.05,\'sine\',.03)"><label for="check'+i+'">Отметить пройденным</label></div>'+
       '</div></div></div>';
     con.appendChild(step);
-    if(i===0)step.classList.add('open');
   });
   for(let i=0;i<STEPS.length;i++){if(localStorage.getItem('dsml_check_'+i)==='1'){const c=document.getElementById('check'+i);if(c)c.checked=true;}}
   updateProgress();
