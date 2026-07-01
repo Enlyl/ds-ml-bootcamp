@@ -414,6 +414,12 @@
   [data-theme="light"] .file-list .fd { background:rgba(0,0,0,.06); color:rgba(0,0,0,.55); }
 
   .links-grid { display:flex; flex-wrap:wrap; gap:5px; margin:8px 0; }
+
+  /* ── NOTEBOOK (COLAB) BUTTON ── */
+  .nb-btn { display:inline-flex; align-items:center; gap:7px; margin:10px 0; padding:8px 16px; border-radius:10px; background:linear-gradient(135deg,#f37626,#e05a1a); color:#fff; font-family:var(--font-mono); font-size:.78em; font-weight:600; cursor:pointer; text-decoration:none; border:none; transition:all .3s var(--curve); box-shadow:0 0 20px rgba(243,118,38,.25); }
+  .nb-btn:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 0 30px rgba(243,118,38,.4); }
+  .nb-btn:active { transform:scale(.96); }
+  .nb-btn .nb-icon { font-size:1.3em; line-height:1; }
   .link-card { padding:8px 14px; border-radius:10px; background:var(--surface-hover); transition:all .3s var(--curve); border:1px solid transparent; }
   .link-card:hover { background:rgba(0,229,255,.03); border-color:var(--border-hover); transform:translateY(-2px) scale(1.02); box-shadow:0 0 20px var(--glow); }
   .link-card a { color:var(--accent); text-decoration:none; font-weight:500; font-size:.84em; }
@@ -1110,10 +1116,10 @@ const STEPS=[
   {icon:"🤖",title:"Machine Learning — теория",badge:"lecture",badgeText:"THEORY",desc:"Supervised и Unsupervised learning, ML workflow, split, overfitting vs underfitting, алгоритмы.",files:[{i:"📄",n:"02-machine-learning.md",p:"lessons/02-machine-learning.md",d:"Урок 02"}]},
   {icon:"📝",title:"Задание 2 — Свой датасет",badge:"task",badgeText:"TASK-02",desc:"Собрать свой датасет (≥50 строк, ≥5 признаков) + исследовательская работа 2–3 стр.",files:[{i:"📄",n:"assignment-two.md",p:"assignments/assignment-two.md",d:"Текст"}]},
   {icon:"🧹",title:"Data Foundations — предобработка",badge:"lecture",badgeText:"THEORY",desc:"Features (X) и Labels (y), сбор данных, preprocessing: пропуски, кодирование, масштабирование.",files:[{i:"📄",n:"03-data-foundations.md",p:"lessons/03-data-foundations.md",d:"Урок 03"}]},
-  {icon:"⚙️",title:"Preprocessing pipeline (код)",badge:"code",badgeText:"SOURCE",desc:"Готовый пайплайн очистки: удаление символов, исправление опечаток, импутация, OHE, IQR, масштабирование.",files:[{i:"🐍",n:"data-processing.py",p:"code/data-processing.py",d:"Скрипт"},{i:"📄",n:"raw_house_dataset.csv",p:"dataset/raw_house_dataset.csv",d:"Данные (дома)"}]},
+  {icon:"⚙️",title:"Preprocessing pipeline (код)",badge:"code",badgeText:"SOURCE",desc:"Готовый пайплайн очистки: удаление символов, исправление опечаток, импутация, OHE, IQR, масштабирование.",files:[{i:"🐍",n:"data-processing.py",p:"code/data-processing.py",d:"Скрипт"},{i:"📄",n:"raw_house_dataset.csv",p:"dataset/raw_house_dataset.csv",d:"Данные (дома)"}],nb:"code/data-processing.ipynb"},
   {icon:"📝",title:"Задание 3 — Preprocessing",badge:"task",badgeText:"TASK-03",desc:"Написать pipeline для raw_car_dataset.csv: 10 шагов, от загрузки до сохранения.",files:[{i:"📄",n:"assignment-three.md",p:"assignments/assignment-three.md",d:"Текст"},{i:"📄",n:"raw_car_dataset.csv",p:"dataset/raw_car_dataset.csv",d:"Датасет"}]},
   {icon:"📈",title:"Regression — теория",badge:"lecture",badgeText:"THEORY",desc:"Linear, Multiple, Polynomial Regression. Метрики: MAE, MSE, RMSE, R².",files:[{i:"📄",n:"04-regression.md",p:"lessons/04-regression.md",d:"Урок 04"}]},
-  {icon:"🏠",title:"House Price Predictor (код)",badge:"code",badgeText:"SOURCE",desc:"Готовый скрипт: Linear Regression vs Random Forest на clean_house_dataset. Метрики + sanity check.",files:[{i:"🐍",n:"house-price-predictor.py",p:"code/house-price-predictor.py",d:"Скрипт"}]},
+  {icon:"🏠",title:"House Price Predictor (код)",badge:"code",badgeText:"SOURCE",desc:"Готовый скрипт: Linear Regression vs Random Forest на clean_house_dataset. Метрики + sanity check.",files:[{i:"🐍",n:"house-price-predictor.py",p:"code/house-price-predictor.py",d:"Скрипт"}],nb:"code/house-price-predictor.ipynb"},
   {icon:"📝",title:"Задание 4 — Регрессия",badge:"task",badgeText:"TASK-04",desc:"Три части: A — теория регрессии; B — ноутбук car_price_prediction.ipynb; C — рефлексия.",files:[{i:"📄",n:"assignment-four.md",p:"assignments/assignment-four.md",d:"Текст"}]}
 ];
 
@@ -1144,6 +1150,7 @@ function updateProgress(){
       '<div class="code-block"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span style="margin-left:8px;color:var(--text-dimmer);font-size:.85em">bootcamp/'+s.badgeText.toLowerCase()+'.py</span><button class="copy-btn" onclick="copyCode(this)" title="Копировать">📋</button></div><div class="code-body" id="codeBody'+i+'"></div></div>'+
       (s.files?'<ul class="file-list">'+s.files.map(f=>'<li><span class="fi">'+f.i+'</span><a href="'+f.p+'" target="_blank">'+f.n+'</a><span class="fd">'+f.d+'</span></li>').join('')+'</ul>':'')+
       (s.links?'<div class="links-grid">'+s.links.map(l=>'<div class="link-card"><a href="'+l.u+'" target="_blank">'+l.t+'</a><div class="lc-desc">'+l.d+'</div></div>').join('')+'</div>':'')+
+      (s.nb?'<a class="nb-btn" href="https://colab.research.google.com/github/Enlyl/ds-ml-bootcamp/blob/main/'+s.nb+'" target="_blank"><span class="nb-icon">▶</span> Запустить в Colab</a>':'')+
       '<div class="check-wrap"><input type="checkbox" class="step-check" id="check'+i+'" onchange="updateProgress();if(typeof soundOn!==\'undefined\'&&soundOn)beep(700,.05,\'sine\',.03)"><label for="check'+i+'">Отметить пройденным</label></div>'+
       '</div></div></div>';
     con.appendChild(step);
