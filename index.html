@@ -420,6 +420,23 @@
   .nb-btn:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 0 30px rgba(243,118,38,.4); }
   .nb-btn:active { transform:scale(.96); }
   .nb-btn .nb-icon { font-size:1.3em; line-height:1; }
+
+  /* ── BACK TO TOP ── */
+  .back-top { position:fixed; bottom:28px; right:20px; width:42px; height:42px; border-radius:50%; border:1px solid var(--border); background:var(--surface); backdrop-filter:blur(20px); color:var(--text-dim); cursor:pointer; font-size:1.1em; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transform:translateY(12px); transition:all .35s var(--curve); z-index:9998; box-shadow:0 4px 20px rgba(0,0,0,.25); }
+  .back-top.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+  .back-top:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-3px); box-shadow:0 0 24px var(--glow); }
+
+  /* ── SEARCH ── */
+  .search-wrap { position:relative; max-width:420px; margin:0 auto 16px; }
+  .search-wrap input { width:100%; padding:11px 40px 11px 16px; border-radius:12px; border:1px solid var(--border); background:var(--surface); color:var(--text); font-family:var(--font-mono); font-size:.82em; backdrop-filter:blur(14px); transition:border-color .3s, box-shadow .3s; outline:none; box-shadow:var(--shadow); }
+  .search-wrap input::placeholder { color:var(--text-dim); }
+  .search-wrap input:focus { border-color:var(--accent); box-shadow:0 0 24px var(--glow); }
+  .search-wrap .search-clear { position:absolute; right:10px; top:50%; transform:translateY(-50%); width:24px; height:24px; border-radius:50%; border:none; background:transparent; color:var(--text-dim); cursor:pointer; font-size:.75em; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .2s, color .2s; pointer-events:none; }
+  .search-wrap input:not(:placeholder-shown) ~ .search-clear { opacity:1; pointer-events:auto; }
+  .search-wrap .search-clear:hover { color:var(--accent); }
+  .search-no-results { text-align:center; padding:40px 20px; color:var(--text-dim); font-family:var(--font-mono); font-size:.85em; display:none; }
+  .search-no-results.show { display:block; }
+
   .header-colab { margin:18px auto 0; display:inline-flex; }
   .link-card { padding:8px 14px; border-radius:10px; background:var(--surface-hover); transition:all .3s var(--curve); border:1px solid transparent; }
   .link-card:hover { background:rgba(0,229,255,.03); border-color:var(--border-hover); transform:translateY(-2px) scale(1.02); box-shadow:0 0 20px var(--glow); }
@@ -790,6 +807,13 @@
       <span class="progress-label" id="progressLabel">00 / 11</span>
     </div>
   </header>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Поиск по шагам..." autocomplete="off">
+    <button class="search-clear" onclick="document.getElementById('searchInput').value='';filterSteps()">✕</button>
+  </div>
+  <div class="search-no-results" id="searchNoResults">Ничего не найдено</div>
 
   <!-- TOC -->
   <nav class="toc cyber"><div class="toc-title">// СОДЕРЖАНИЕ</div><div class="toc-grid" id="tocGrid"></div></nav>
@@ -1379,6 +1403,32 @@ document.addEventListener('keydown',e=>{
     e.preventDefault();
   }
   if(e.ctrlKey&&e.key==='t'){e.preventDefault();cycleTheme()}
+  if(e.key==='/'&&document.activeElement.tagName!=='INPUT'){e.preventDefault();document.getElementById('searchInput').focus()}
+  if(e.key==='Escape'){document.getElementById('searchInput').blur();document.getElementById('searchInput').value='';filterSteps()}
+});
+
+/* ── BACK TO TOP ── */
+const _btt=document.createElement('button');_btt.className='back-top';_btt.innerHTML='↑';_btt.title='Наверх';
+_btt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+document.body.appendChild(_btt);
+window.addEventListener('scroll',()=>{_btt.classList.toggle('show',window.scrollY>300)},{passive:true});
+
+/* ── SEARCH ── */
+function filterSteps(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  const steps=[...document.querySelectorAll('.step')];
+  const toc=[...document.querySelectorAll('.toc-item')];
+  let found=0;
+  STEPS.forEach((s,i)=>{
+    const match=!q||s.title.toLowerCase().includes(q)||s.desc.toLowerCase().includes(q);
+    if(steps[i])steps[i].style.display=match?'':'none';
+    if(toc[i])toc[i].style.display=match?'':'none';
+    if(match)found++;
+  });
+  document.getElementById('searchNoResults').classList.toggle('show',found===0&&q.length>0);
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('searchInput').addEventListener('input',filterSteps);
 });
 </script>
 
