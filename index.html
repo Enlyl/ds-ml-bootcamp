@@ -139,6 +139,37 @@
   .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--surface); border:1px solid var(--border); backdrop-filter:blur(20px); padding:8px 18px; border-radius:12px; font-family:var(--font-mono); font-size:.75em; color:var(--text); z-index:99999; opacity:0; transition:all .4s var(--curve); pointer-events:none; box-shadow:0 4px 30px rgba(0,0,0,.3); }
   .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
+  /* ── LINE NUMBERS ── */
+  .code-body { counter-reset:line; }
+  .code-body .code-line { display:block; }
+  .code-body .code-line::before { counter-increment:line; content:counter(line); display:inline-block; width:2.2em; text-align:right; margin-right:12px; color:var(--text-dimmer); font-size:.85em; user-select:none; }
+
+  /* ── NOTES ── */
+  .step-notes { margin-top:10px; padding-top:10px; border-top:1px solid var(--border); }
+  .step-notes summary { font-family:var(--font-mono); font-size:.72em; color:var(--text-dim); cursor:pointer; user-select:none; list-style:none; }
+  .step-notes summary::-webkit-details-marker { display:none; }
+  .step-notes summary::before { content:'▸ '; }
+  .step-notes[open] summary::before { content:'▾ '; }
+  .step-notes textarea { width:100%; margin-top:6px; padding:10px; border-radius:8px; border:1px solid var(--border); background:rgba(0,0,0,.06); color:var(--text); font-family:var(--font-mono); font-size:.75em; resize:vertical; min-height:60px; outline:none; transition:border-color .3s; }
+  .step-notes textarea:focus { border-color:var(--accent); }
+  .step-notes textarea::placeholder { color:var(--text-dimmer); }
+  [data-theme="light"] .step-notes textarea { background:rgba(0,0,0,.02); }
+
+  /* ── SEARCH HIGHLIGHT ── */
+  mark.search-hl { background:rgba(0,229,255,.25); color:inherit; border-radius:2px; padding:0 2px; }
+  [data-theme="light"] mark.search-hl { background:rgba(79,70,229,.15); }
+
+  /* ── SHORTCUTS MODAL ── */
+  .shortcuts-modal { position:fixed; inset:0; z-index:99995; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.6); backdrop-filter:blur(8px); }
+  .shortcuts-modal.open { display:flex; }
+  .shortcuts-content { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px 32px; max-width:420px; width:90%; max-height:80vh; overflow-y:auto; backdrop-filter:blur(24px); box-shadow:0 16px 64px rgba(0,0,0,.4); }
+  .shortcuts-content h3 { font-family:var(--font-mono); font-size:.9em; color:var(--text); margin-bottom:16px; }
+  .shortcut-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,.03); }
+  .shortcut-row:last-child { border-bottom:none; }
+  .shortcut-key { font-family:var(--font-mono); font-size:.72em; padding:3px 8px; border-radius:5px; background:rgba(255,255,255,.06); border:1px solid var(--border); color:var(--accent); min-width:50px; text-align:center; }
+  .shortcut-desc { font-size:.78em; color:var(--text-dim); }
+  .shortcuts-close { position:absolute; top:12px; right:16px; background:none; border:none; color:var(--text-dim); cursor:pointer; font-size:1.1em; }
+
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; box-shadow: 0 0 10px var(--glow-strong); }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -1232,6 +1263,7 @@ function renderSteps(){
       (s.links?'<div class="links-grid">'+s.links.map(l=>'<div class="link-card"><a href="'+l.u+'" target="_blank">'+l.t+'</a><div class="lc-desc">'+(typeof l.d==='object'?l.d[LANG]:l.d)+'</div></div>').join('')+'</div>':'')+
       (s.nb?'<a class="nb-btn" href="https://colab.research.google.com/github/Enlyl/ds-ml-bootcamp/blob/main/'+s.nb+'" target="_blank"><span class="nb-icon">▶</span> '+t('colabBtn')+'</a>':'')+
       '<div class="check-wrap"><input type="checkbox" class="step-check" id="check'+i+'" onchange="updateProgress();if(typeof soundOn!==\'undefined\'&&soundOn)beep(700,.05,\'sine\',.03)"><label for="check'+i+'">'+t('check')+'</label></div>'+
+      '<details class="step-notes"><summary>'+(LANG==='en'?'Notes':'Заметки')+'</summary><textarea placeholder="'+(LANG==='en'?'Your notes here...':'Ваши заметки...')+'" oninput="localStorage.setItem(\'dsml_note_'+i+'\',this.value)">'+(localStorage.getItem('dsml_note_'+i)||'')+'</textarea></details>'+
       '</div></div></div>';
     con.appendChild(step);
   });
@@ -1260,13 +1292,13 @@ function renderSteps(){
         const body = document.getElementById('codeBody'+idx);
         if(body){
           if(_to) clearTimeout(_to);
-          body.innerHTML = '';
+          body.innerHTML = '<span class="code-line">';
           const code = codeSnippets[idx] || '# bootcamp content';
           let pos=0;
           (function typeCode(){
             if(pos<code.length){
               const ch = code.charAt(pos);
-              if(ch==='\n') body.innerHTML += '<br>';
+              if(ch==='\n') body.innerHTML += '</span><span class="code-line">';
               else if(ch===' ') body.innerHTML += '&nbsp;';
               else if(ch==='&') body.innerHTML += '&amp;';
               else if(ch==='<') body.innerHTML += '&lt;';
@@ -1275,7 +1307,7 @@ function renderSteps(){
               pos++;
               if(ch!==' '&&ch!=='\n'&&Math.random()<.2) keyClick();
               _to = setTimeout(typeCode, 4+Math.random()*8);
-            }
+            } else { body.innerHTML += '</span>'; }
           })();
         }
       }
@@ -1475,7 +1507,8 @@ document.addEventListener('keydown',e=>{
   }
   if(e.ctrlKey&&e.key==='t'){e.preventDefault();cycleTheme()}
   if(e.key==='/'&&document.activeElement.tagName!=='INPUT'){e.preventDefault();document.getElementById('searchInput').focus()}
-  if(e.key==='Escape'){document.getElementById('searchInput').blur();document.getElementById('searchInput').value='';filterSteps()}
+  if(e.key==='Escape'){document.getElementById('searchInput').blur();document.getElementById('searchInput').value='';filterSteps();closeShortcuts()}
+  if(e.key==='?'&&document.activeElement.tagName!=='INPUT'){e.preventDefault();openShortcuts()}
 });
 
 /* ── BACK TO TOP ── */
@@ -1491,17 +1524,58 @@ function filterSteps(){
   const toc=[...document.querySelectorAll('.toc-item')];
   let found=0;
   STEPS.forEach((s,i)=>{
-    const match=!q||s.title[LANG].toLowerCase().includes(q)||s.desc[LANG].toLowerCase().includes(q);
-    if(steps[i])steps[i].style.display=match?'':'none';
-    if(toc[i])toc[i].style.display=match?'':'none';
+    const titleText=s.title[LANG], descText=s.desc[LANG];
+    const match=!q||titleText.toLowerCase().includes(q)||descText.toLowerCase().includes(q);
+    if(steps[i]){
+      steps[i].style.display=match?'':'none';
+      if(match&&q){
+        const titleEl=steps[i].querySelector('.step-title');
+        const descEl=steps[i].querySelector('.step-body-content > p');
+        if(titleEl)titleEl.innerHTML=pad(i+1)+'. '+highlightText(titleText,q);
+        if(descEl)descEl.innerHTML=highlightText(descText,q);
+      } else if(match) {
+        const titleEl=steps[i].querySelector('.step-title');
+        const descEl=steps[i].querySelector('.step-body-content > p');
+        if(titleEl)titleEl.innerHTML=pad(i+1)+'. '+titleText;
+        if(descEl)descEl.innerHTML=descText;
+      }
+    }
+    if(toc[i]){
+      toc[i].style.display=match?'':'none';
+      if(match&&q)toc[i].innerHTML='<span class="toc-num">'+pad(i+1)+'</span>'+highlightText(titleText,q);
+      else if(match)toc[i].innerHTML='<span class="toc-num">'+pad(i+1)+'</span>'+titleText;
+    }
     if(match)found++;
   });
   document.getElementById('searchNoResults').classList.toggle('show',found===0&&q.length>0);
 }
+function highlightText(text,q){
+  if(!q)return text;
+  const re=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return text.replace(re,'<mark class="search-hl">$1</mark>');
+}
+function openShortcuts(){document.getElementById('shortcutsModal').classList.add('open');}
+function closeShortcuts(){document.getElementById('shortcutsModal').classList.remove('open');}
 document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('searchInput').addEventListener('input',filterSteps);
 });
 </script>
+
+<!-- SHORTCUTS MODAL -->
+<div class="shortcuts-modal" id="shortcutsModal" onclick="if(event.target===this)closeShortcuts()">
+  <div class="shortcuts-content">
+    <h3>⌨ Keyboard Shortcuts</h3>
+    <div class="shortcut-row"><span class="shortcut-desc">Previous step</span><span class="shortcut-key">←</span></div>
+    <div class="shortcut-row"><span class="shortcut-desc">Next step</span><span class="shortcut-key">→</span></div>
+    <div class="shortcut-row"><span class="shortcut-desc">Open step 1–9</span><span class="shortcut-key">1-9</span></div>
+    <div class="shortcut-row"><span class="shortcut-desc">Search</span><span class="shortcut-key">/</span></div>
+    <div class="shortcut-row"><span class="shortcut-desc">Close search</span><span class="shortcut-key">Esc</span></div>
+    <div class="shortcut-row"><span class="shortcut-desc">Cycle theme</span><span class="shortcut-key">Ctrl+T</span></div>
+    <div class="shortcut-row"><span class="shortcut-desc">Show shortcuts</span><span class="shortcut-key">?</span></div>
+  </div>
+</div>
+
+<!-- BACK TO TOP (generated by JS) -->
 
 </body>
 </html>
