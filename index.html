@@ -770,6 +770,7 @@
   <div class="ui-toggles-panel">
     <button class="ui-btn install-pwa" id="installBtn" onclick="installPWA()" title="Установить приложение">⬇</button>
     <button class="ui-btn" id="soundToggle" onclick="toggleSound()" title="Звук">🔇</button>
+    <button class="ui-btn" id="langBtn" onclick="cycleLang()" title="Сменить язык">🇷🇺</button>
     <div class="theme-dropdown">
       <button class="ui-btn" onclick="toggleThemeDropdown()" title="Тема оформления" id="themeVariantBtn">🎨</button>
       <div class="theme-dropdown-menu" id="themeDropdown"></div>
@@ -792,15 +793,15 @@
       <span class="ch">Bootcamp</span>
       <span class="ac">//</span>
     </h1>
-    <p class="sub"><span class="bl">➤</span> <span id="typingEl"></span></p>
+    <p class="sub"><span class="bl">➤</span> <span id="typingEl" data-i18n="subtitle">Interactive guide to Data Science & Machine Learning</span></p>
 
     <!-- TERMINAL -->
     <div class="term-header" id="termHeader">
       <span class="prompt">$</span> <span class="cmd">python3 -c "import ds_ml_bootcamp"</span><br>
-      <span class="out" id="termOutput"></span><span class="cursor">▌</span>
+      <span class="out" id="termOutput">Module loaded — Neural Shell v4 ready.</span><span class="cursor">▌</span>
     </div>
 
-    <a class="nb-btn header-colab" href="https://colab.research.google.com/github/Enlyl/ds-ml-bootcamp/blob/main/code/blank-colab.ipynb" target="_blank"><span class="nb-icon">▶</span> Запустить в Colab</a>
+    <a class="nb-btn header-colab" href="https://colab.research.google.com/github/Enlyl/ds-ml-bootcamp/blob/main/code/blank-colab.ipynb" target="_blank"><span class="nb-icon">▶</span> <span data-i18n="colabBtn">Open in Colab</span></a>
 
     <div class="progress-wrap">
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
@@ -810,13 +811,13 @@
 
   <!-- SEARCH -->
   <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="Поиск по шагам..." autocomplete="off">
+    <input type="text" id="searchInput" placeholder="Search steps..." autocomplete="off">
     <button class="search-clear" onclick="document.getElementById('searchInput').value='';filterSteps()">✕</button>
   </div>
-  <div class="search-no-results" id="searchNoResults">Ничего не найдено</div>
+  <div class="search-no-results" id="searchNoResults" data-i18n="noResults">No results found</div>
 
   <!-- TOC -->
-  <nav class="toc cyber"><div class="toc-title">// СОДЕРЖАНИЕ</div><div class="toc-grid" id="tocGrid"></div></nav>
+  <nav class="toc cyber"><div class="toc-title" id="tocTitle">// TABLE OF CONTENTS</div><div class="toc-grid" id="tocGrid"></div></nav>
 
   <!-- STEPS -->
   <div id="stepsContainer"></div>
@@ -825,7 +826,7 @@
   <div class="step cyber">
     <button class="step-header" onclick="toggle(this.parentElement)">
       <span class="step-icon">📊</span>
-      <span class="step-title">Сводка по проекту</span>
+      <span class="step-title" id="summaryTitle">Project Summary</span>
       <span class="badge info">SYS</span>
       <span class="arrow">▶</span>
     </button>
@@ -833,12 +834,12 @@
       <div class="step-body-inner">
         <div class="step-body-content">
           <div class="summary-grid">
-            <div class="summary-card"><div class="summary-num">5</div><div class="summary-label">Уроков</div></div>
-            <div class="summary-card"><div class="summary-num">4</div><div class="summary-label">Задания</div></div>
-            <div class="summary-card"><div class="summary-num">2</div><div class="summary-label">Скрипта</div></div>
-            <div class="summary-card"><div class="summary-num">2</div><div class="summary-label">Датасета</div></div>
+            <div class="summary-card"><div class="summary-num">5</div><div class="summary-label" id="summLessons">Lessons</div></div>
+            <div class="summary-card"><div class="summary-num">4</div><div class="summary-label" id="summTasks">Tasks</div></div>
+            <div class="summary-card"><div class="summary-num">2</div><div class="summary-label" id="summScripts">Scripts</div></div>
+            <div class="summary-card"><div class="summary-num">2</div><div class="summary-label" id="summDatasets">Datasets</div></div>
           </div>
-          <div class="summary-footer"><strong>╔══ КАЖДЫЙ УРОК → ПРАКТИЧЕСКОЕ ЗАДАНИЕ</strong><br><strong>╚══ СТАРТ:</strong> ШАГ 01 · <strong>ФИНАЛ:</strong> ШАГ 11</div>
+          <div class="summary-footer" id="summFooter"><strong>╔══ EVERY LESSON → PRACTICAL TASK</strong><br><strong>╚══ START:</strong> STEP 01 · <strong>FINAL:</strong> STEP 11</div>
         </div>
       </div>
     </div>
@@ -847,6 +848,56 @@
 </div>
 
 <script>
+/* ═══════════════════════════════════════════════
+   LANG + TRANSLATIONS
+   ═══════════════════════════════════════════════ */
+let LANG=localStorage.getItem('dsml_lang')||'en';
+const T={
+  en:{
+    search:'Search steps...',noResults:'No results found',toc:'// TABLE OF CONTENTS',
+    summaryTitle:'Project Summary',lessons:'Lessons',tasks:'Tasks',scripts:'Scripts',datasets:'Datasets',
+    summaryFooter:'EVERY LESSON → PRACTICAL TASK',start:'START:',final:'FINAL:',
+    colabBtn:'Open in Colab',check:'Mark as completed',
+    stepFile:'File',stepScript:'Script',stepData:'Data',stepText:'Text',stepGuide:'Guide',stepDownload:'Download',
+    termCmd:'python3 -c "import ds_ml_bootcamp"',
+    termOut:'Module loaded — Neural Shell v4 ready.',
+    subtitle:'Interactive guide to Data Science & Machine Learning',
+    installTitle:'Installing Tools',installDesc:'Install Python, Anaconda and Jupyter Notebook. Verify NumPy, Pandas, Scikit-learn.',
+    dsTitle:'Data Science — Basics',dsDesc:'What is Data Science, lifecycle, differences from ML and AI, data scientist tools.',
+    task1Title:'Assignment 1 — Research',task1Desc:'Research: DS/ML definitions, lifecycle, supervised vs unsupervised, overfitting, case study.',
+    mlTitle:'Machine Learning — Theory',mlDesc:'Supervised and Unsupervised learning, ML workflow, split, overfitting vs underfitting, algorithms.',
+    task2Title:'Assignment 2 — Own Dataset',task2Desc:'Collect your own dataset (≥50 rows, ≥5 features) + research paper 2–3 pages.',
+    dfTitle:'Data Foundations — Preprocessing',dfDesc:'Features (X) and Labels (y), data collection, preprocessing: missing values, encoding, scaling.',
+    ppTitle:'Preprocessing Pipeline (code)',ppDesc:'Ready cleaning pipeline: remove symbols, fix typos, imputation, OHE, IQR, scaling.',
+    task3Title:'Assignment 3 — Preprocessing',task3Desc:'Write pipeline for raw_car_dataset.csv: 10 steps, from loading to saving.',
+    regTitle:'Regression — Theory',regDesc:'Linear, Multiple, Polynomial Regression. Metrics: MAE, MSE, RMSE, R².',
+    hpTitle:'House Price Predictor (code)',hpDesc:'Ready script: Linear Regression vs Random Forest on clean_house_dataset. Metrics + sanity check.',
+    task4Title:'Assignment 4 — Regression',task4Desc:'Three parts: A — regression theory; B — car_price_prediction.ipynb notebook; C — reflection.',
+  },
+  ru:{
+    search:'Поиск по шагам...',noResults:'Ничего не найдено',toc:'// СОДЕРЖАНИЕ',
+    summaryTitle:'Сводка по проекту',lessons:'Уроков',tasks:'Задания',scripts:'Скрипта',datasets:'Датасета',
+    summaryFooter:'КАЖДЫЙ УРОК → ПРАКТИЧЕСКОЕ ЗАДАНИЕ',start:'СТАРТ:',final:'ФИНАЛ:',
+    colabBtn:'Запустить в Colab',check:'Отметить пройденным',
+    stepFile:'Файл',stepScript:'Скрипт',stepData:'Данные',stepText:'Текст',stepGuide:'Руководство',stepDownload:'Скачать',
+    termCmd:'python3 -c "import ds_ml_bootcamp"',
+    termOut:'Модуль загружен — Neural Shell v4 готов.',
+    subtitle:'Интерактивный гайд по Data Science & Machine Learning',
+    installTitle:'Установка инструментов',installDesc:'Установите Python, Anaconda и Jupyter Notebook. Проверьте NumPy, Pandas, Scikit-learn.',
+    dsTitle:'Data Science — основы',dsDesc:'Что такое Data Science, жизненный цикл, отличия от ML и AI, инструменты data scientist.',
+    task1Title:'Задание 1 — Research',task1Desc:'Исследовательская работа: определения DS/ML, lifecycle, supervised vs unsupervised, overfitting, case study.',
+    mlTitle:'Machine Learning — теория',mlDesc:'Supervised и Unsupervised learning, ML workflow, split, overfitting vs underfitting, алгоритмы.',
+    task2Title:'Задание 2 — Свой датасет',task2Desc:'Собрать свой датасет (≥50 строк, ≥5 признаков) + исследовательская работа 2–3 стр.',
+    dfTitle:'Data Foundations — предобработка',dfDesc:'Features (X) и Labels (y), сбор данных, preprocessing: пропуски, кодирование, масштабирование.',
+    ppTitle:'Preprocessing pipeline (код)',ppDesc:'Готовый пайплайн очистки: удаление символов, исправление опечаток, импутация, OHE, IQR, масштабирование.',
+    task3Title:'Задание 3 — Preprocessing',task3Desc:'Написать pipeline для raw_car_dataset.csv: 10 шагов, от загрузки до сохранения.',
+    regTitle:'Regression — теория',regDesc:'Linear, Multiple, Polynomial Regression. Метрики: MAE, MSE, RMSE, R².',
+    hpTitle:'House Price Predictor (код)',hpDesc:'Готовый скрипт: Linear Regression vs Random Forest на clean_house_dataset. Метрики + sanity check.',
+    task4Title:'Задание 4 — Регрессия',task4Desc:'Три части: A — теория регрессии; B — ноутбук car_price_prediction.ipynb; C — рефлексия.',
+  }
+};
+function t(k){return T[LANG][k]||T.en[k]||k;}
+
 /* ═══════════════════════════════════════════════
    SOUND ENGINE v2 — master gain, sub, noise
    ═══════════════════════════════════════════════ */
@@ -1050,8 +1101,8 @@ function toggleSound(){
 
 /* ── TYPING EFFECT ── */
 (function(){
-  const txt="ИНТЕРАКТИВНЫЙ ПУТЕВОДИТЕЛЬ // от установки до предсказания цен";
-  const el=document.getElementById('typingEl'); let i=0;
+  const txt=LANG==='en'?"INTERACTIVE GUIDE // from setup to price prediction":"ИНТЕРАКТИВНЫЙ ПУТЕВОДИТЕЛЬ // от установки до предсказания цен";
+  const el=document.getElementById('typingEl'); el.textContent=''; let i=0;
   (function t(){if(i<txt.length){el.textContent+=txt.charAt(i++);setTimeout(t,14+Math.random()*18);}})();
 })();
 
@@ -1137,17 +1188,17 @@ setTimeout(()=>document.getElementById('preloader').classList.add('hidden'),1800
 
 /* ── STEP LOGIC ── */
 const STEPS=[
-  {icon:"🛠️",title:"Установка инструментов",badge:"lecture",badgeText:"INSTALL",desc:"Установите Python, Anaconda и Jupyter Notebook. Проверьте NumPy, Pandas, Scikit-learn.",files:[{i:"📄",n:"00-tools-and-setup.md",p:"lessons/00-tools-and-setup.md",d:"Руководство"}],links:[{t:"Anaconda",u:"https://www.anaconda.com/download",d:"Скачать"}]},
-  {icon:"📊",title:"Data Science — основы",badge:"lecture",badgeText:"THEORY",desc:"Что такое Data Science, жизненный цикл, отличия от ML и AI, инструменты data scientist.",files:[{i:"📄",n:"01-data-science.md",p:"lessons/01-data-science.md",d:"Урок 01"}]},
-  {icon:"📝",title:"Задание 1 — Research",badge:"task",badgeText:"TASK-01",desc:"Исследовательская работа: определения DS/ML, lifecycle, supervised vs unsupervised, overfitting, case study.",files:[{i:"📄",n:"assignment-one.md",p:"assignments/assignment-one.md",d:"Текст"}]},
-  {icon:"🤖",title:"Machine Learning — теория",badge:"lecture",badgeText:"THEORY",desc:"Supervised и Unsupervised learning, ML workflow, split, overfitting vs underfitting, алгоритмы.",files:[{i:"📄",n:"02-machine-learning.md",p:"lessons/02-machine-learning.md",d:"Урок 02"}]},
-  {icon:"📝",title:"Задание 2 — Свой датасет",badge:"task",badgeText:"TASK-02",desc:"Собрать свой датасет (≥50 строк, ≥5 признаков) + исследовательская работа 2–3 стр.",files:[{i:"📄",n:"assignment-two.md",p:"assignments/assignment-two.md",d:"Текст"}]},
-  {icon:"🧹",title:"Data Foundations — предобработка",badge:"lecture",badgeText:"THEORY",desc:"Features (X) и Labels (y), сбор данных, preprocessing: пропуски, кодирование, масштабирование.",files:[{i:"📄",n:"03-data-foundations.md",p:"lessons/03-data-foundations.md",d:"Урок 03"}]},
-  {icon:"⚙️",title:"Preprocessing pipeline (код)",badge:"code",badgeText:"SOURCE",desc:"Готовый пайплайн очистки: удаление символов, исправление опечаток, импутация, OHE, IQR, масштабирование.",files:[{i:"🐍",n:"data-processing.py",p:"code/data-processing.py",d:"Скрипт"},{i:"📄",n:"raw_house_dataset.csv",p:"dataset/raw_house_dataset.csv",d:"Данные (дома)"}],nb:"code/data-processing.ipynb"},
-  {icon:"📝",title:"Задание 3 — Preprocessing",badge:"task",badgeText:"TASK-03",desc:"Написать pipeline для raw_car_dataset.csv: 10 шагов, от загрузки до сохранения.",files:[{i:"📄",n:"assignment-three.md",p:"assignments/assignment-three.md",d:"Текст"},{i:"📄",n:"raw_car_dataset.csv",p:"dataset/raw_car_dataset.csv",d:"Датасет"}]},
-  {icon:"📈",title:"Regression — теория",badge:"lecture",badgeText:"THEORY",desc:"Linear, Multiple, Polynomial Regression. Метрики: MAE, MSE, RMSE, R².",files:[{i:"📄",n:"04-regression.md",p:"lessons/04-regression.md",d:"Урок 04"}]},
-  {icon:"🏠",title:"House Price Predictor (код)",badge:"code",badgeText:"SOURCE",desc:"Готовый скрипт: Linear Regression vs Random Forest на clean_house_dataset. Метрики + sanity check.",files:[{i:"🐍",n:"house-price-predictor.py",p:"code/house-price-predictor.py",d:"Скрипт"}],nb:"code/house-price-predictor.ipynb"},
-  {icon:"📝",title:"Задание 4 — Регрессия",badge:"task",badgeText:"TASK-04",desc:"Три части: A — теория регрессии; B — ноутбук car_price_prediction.ipynb; C — рефлексия.",files:[{i:"📄",n:"assignment-four.md",p:"assignments/assignment-four.md",d:"Текст"}]}
+  {icon:"🛠️",badge:"lecture",badgeText:"INSTALL",title:{en:"Installing Tools",ru:"Установка инструментов"},desc:{en:"Install Python, Anaconda and Jupyter Notebook. Verify NumPy, Pandas, Scikit-learn.",ru:"Установите Python, Anaconda и Jupyter Notebook. Проверьте NumPy, Pandas, Scikit-learn."},files:[{i:"📄",n:"00-tools-and-setup.md",p:"lessons/00-tools-and-setup.md",d:{en:"Guide",ru:"Руководство"}}],links:[{t:"Anaconda",u:"https://www.anaconda.com/download",d:{en:"Download",ru:"Скачать"}}],nb:"lessons/00-tools-and-setup.ipynb"},
+  {icon:"📊",badge:"lecture",badgeText:"THEORY",title:{en:"Data Science — Basics",ru:"Data Science — основы"},desc:{en:"What is Data Science, lifecycle, differences from ML and AI, data scientist tools.",ru:"Что такое Data Science, жизненный цикл, отличия от ML и AI, инструменты data scientist."},files:[{i:"📄",n:"01-data-science.md",p:"lessons/01-data-science.md",d:{en:"Lesson 01",ru:"Урок 01"}}]},
+  {icon:"📝",badge:"task",badgeText:"TASK-01",title:{en:"Assignment 1 — Research",ru:"Задание 1 — Research"},desc:{en:"Research: DS/ML definitions, lifecycle, supervised vs unsupervised, overfitting, case study.",ru:"Исследовательская работа: определения DS/ML, lifecycle, supervised vs unsupervised, overfitting, case study."},files:[{i:"📄",n:"assignment-one.md",p:"assignments/assignment-one.md",d:{en:"Text",ru:"Текст"}}]},
+  {icon:"🤖",badge:"lecture",badgeText:"THEORY",title:{en:"Machine Learning — Theory",ru:"Machine Learning — теория"},desc:{en:"Supervised and Unsupervised learning, ML workflow, split, overfitting vs underfitting, algorithms.",ru:"Supervised и Unsupervised learning, ML workflow, split, overfitting vs underfitting, алгоритмы."},files:[{i:"📄",n:"02-machine-learning.md",p:"lessons/02-machine-learning.md",d:{en:"Lesson 02",ru:"Урок 02"}}]},
+  {icon:"📝",badge:"task",badgeText:"TASK-02",title:{en:"Assignment 2 — Own Dataset",ru:"Задание 2 — Свой датасет"},desc:{en:"Collect your own dataset (≥50 rows, ≥5 features) + research paper 2–3 pages.",ru:"Собрать свой датасет (≥50 строк, ≥5 признаков) + исследовательская работа 2–3 стр."},files:[{i:"📄",n:"assignment-two.md",p:"assignments/assignment-two.md",d:{en:"Text",ru:"Текст"}}]},
+  {icon:"🧹",badge:"lecture",badgeText:"THEORY",title:{en:"Data Foundations — Preprocessing",ru:"Data Foundations — предобработка"},desc:{en:"Features (X) and Labels (y), data collection, preprocessing: missing values, encoding, scaling.",ru:"Features (X) и Labels (y), сбор данных, preprocessing: пропуски, кодирование, масштабирование."},files:[{i:"📄",n:"03-data-foundations.md",p:"lessons/03-data-foundations.md",d:{en:"Lesson 03",ru:"Урок 03"}}]},
+  {icon:"⚙️",badge:"code",badgeText:"SOURCE",title:{en:"Preprocessing Pipeline (code)",ru:"Preprocessing pipeline (код)"},desc:{en:"Ready cleaning pipeline: remove symbols, fix typos, imputation, OHE, IQR, scaling.",ru:"Готовый пайплайн очистки: удаление символов, исправление опечаток, импутация, OHE, IQR, масштабирование."},files:[{i:"🐍",n:"data-processing.py",p:"code/data-processing.py",d:{en:"Script",ru:"Скрипт"}},{i:"📄",n:"raw_house_dataset.csv",p:"dataset/raw_house_dataset.csv",d:{en:"Data (houses)",ru:"Данные (дома)"}}],nb:"code/data-processing.ipynb"},
+  {icon:"📝",badge:"task",badgeText:"TASK-03",title:{en:"Assignment 3 — Preprocessing",ru:"Задание 3 — Preprocessing"},desc:{en:"Write pipeline for raw_car_dataset.csv: 10 steps, from loading to saving.",ru:"Написать pipeline для raw_car_dataset.csv: 10 шагов, от загрузки до сохранения."},files:[{i:"📄",n:"assignment-three.md",p:"assignments/assignment-three.md",d:{en:"Text",ru:"Текст"}},{i:"📄",n:"raw_car_dataset.csv",p:"dataset/raw_car_dataset.csv",d:{en:"Dataset",ru:"Датасет"}}]},
+  {icon:"📈",badge:"lecture",badgeText:"THEORY",title:{en:"Regression — Theory",ru:"Regression — теория"},desc:{en:"Linear, Multiple, Polynomial Regression. Metrics: MAE, MSE, RMSE, R².",ru:"Linear, Multiple, Polynomial Regression. Метрики: MAE, MSE, RMSE, R²."},files:[{i:"📄",n:"04-regression.md",p:"lessons/04-regression.md",d:{en:"Lesson 04",ru:"Урок 04"}}]},
+  {icon:"🏠",badge:"code",badgeText:"SOURCE",title:{en:"House Price Predictor (code)",ru:"House Price Predictor (код)"},desc:{en:"Ready script: Linear Regression vs Random Forest on clean_house_dataset. Metrics + sanity check.",ru:"Готовый скрипт: Linear Regression vs Random Forest на clean_house_dataset. Метрики + sanity check."},files:[{i:"🐍",n:"house-price-predictor.py",p:"code/house-price-predictor.py",d:{en:"Script",ru:"Скрипт"}}],nb:"code/house-price-predictor.ipynb"},
+  {icon:"📝",badge:"task",badgeText:"TASK-04",title:{en:"Assignment 4 — Regression",ru:"Задание 4 — Регрессия"},desc:{en:"Three parts: A — regression theory; B — car_price_prediction.ipynb notebook; C — reflection.",ru:"Три части: A — теория регрессии; B — ноутбук car_price_prediction.ipynb; C — рефлексия."},files:[{i:"📄",n:"assignment-four.md",p:"assignments/assignment-four.md",d:{en:"Text",ru:"Текст"}}],nb:"assignments/assignment-04-notebook.ipynb"}
 ];
 
 function toggle(el){ el.classList.toggle('open'); if(soundOn)beep(400,.06,'sine',.03); }
@@ -1161,30 +1212,31 @@ function updateProgress(){
   if(ck===STEPS.length&&soundOn){beep(523,.1,'square',.05);setTimeout(()=>beep(659,.1,'square',.05),120);setTimeout(()=>{beep(784,.18,'square',.07);termBell();},240);}
 }
 
-(function(){
+function renderSteps(){
   const con=document.getElementById('stepsContainer'), tg=document.getElementById('tocGrid');
+  con.innerHTML=''; tg.innerHTML='';
   STEPS.forEach((s,i)=>{
     const n=i+1;
-    const t=document.createElement('div'); t.className='toc-item';
-    t.innerHTML='<span class="toc-num">'+pad(n)+'</span>'+s.title;
-    t.addEventListener('click',()=>{const st=document.querySelectorAll('.step');if(st[i]){st[i].classList.add('open');st[i].scrollIntoView({behavior:'smooth',block:'start'});}});
-    tg.appendChild(t);
+    const title=s.title[LANG], desc=s.desc[LANG];
+    const tocItem=document.createElement('div'); tocItem.className='toc-item';
+    tocItem.innerHTML='<span class="toc-num">'+pad(n)+'</span>'+title;
+    tocItem.addEventListener('click',()=>{const st=document.querySelectorAll('.step');if(st[i]){st[i].classList.add('open');st[i].scrollIntoView({behavior:'smooth',block:'start'});}});
+    tg.appendChild(tocItem);
     const step=document.createElement('div'); step.className='step cyber';
     step.innerHTML=
-      '<button class="step-header" onclick="toggle(this.parentElement)"><span class="step-icon">'+s.icon+'</span><span class="step-title">'+pad(n)+'. '+s.title+'</span><span class="badge '+s.badge+'">'+s.badgeText+'</span><span class="arrow">▶</span></button>'+
+      '<button class="step-header" onclick="toggle(this.parentElement)"><span class="step-icon">'+s.icon+'</span><span class="step-title">'+pad(n)+'. '+title+'</span><span class="badge '+s.badge+'">'+s.badgeText+'</span><span class="arrow">▶</span></button>'+
       '<div class="step-body"><div class="step-body-inner"><div class="step-body-content">'+
-      '<p>'+s.desc+'</p>'+
+      '<p>'+desc+'</p>'+
       '<div class="code-block"><div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span style="margin-left:8px;color:var(--text-dimmer);font-size:.85em">bootcamp/'+s.badgeText.toLowerCase()+'.py</span><button class="copy-btn" onclick="copyCode(this)" title="Копировать">📋</button></div><div class="code-body" id="codeBody'+i+'"></div></div>'+
-      (s.files?'<ul class="file-list">'+s.files.map(f=>'<li><span class="fi">'+f.i+'</span><a href="'+f.p+'" target="_blank">'+f.n+'</a><span class="fd">'+f.d+'</span></li>').join('')+'</ul>':'')+
-      (s.links?'<div class="links-grid">'+s.links.map(l=>'<div class="link-card"><a href="'+l.u+'" target="_blank">'+l.t+'</a><div class="lc-desc">'+l.d+'</div></div>').join('')+'</div>':'')+
-      (s.nb?'<a class="nb-btn" href="https://colab.research.google.com/github/Enlyl/ds-ml-bootcamp/blob/main/'+s.nb+'" target="_blank"><span class="nb-icon">▶</span> Запустить в Colab</a>':'')+
-      '<div class="check-wrap"><input type="checkbox" class="step-check" id="check'+i+'" onchange="updateProgress();if(typeof soundOn!==\'undefined\'&&soundOn)beep(700,.05,\'sine\',.03)"><label for="check'+i+'">Отметить пройденным</label></div>'+
+      (s.files?'<ul class="file-list">'+s.files.map(f=>'<li><span class="fi">'+f.i+'</span><a href="'+f.p+'" target="_blank">'+f.n+'</a><span class="fd">'+(typeof f.d==='object'?f.d[LANG]:f.d)+'</span></li>').join('')+'</ul>':'')+
+      (s.links?'<div class="links-grid">'+s.links.map(l=>'<div class="link-card"><a href="'+l.u+'" target="_blank">'+l.t+'</a><div class="lc-desc">'+(typeof l.d==='object'?l.d[LANG]:l.d)+'</div></div>').join('')+'</div>':'')+
+      (s.nb?'<a class="nb-btn" href="https://colab.research.google.com/github/Enlyl/ds-ml-bootcamp/blob/main/'+s.nb+'" target="_blank"><span class="nb-icon">▶</span> '+t('colabBtn')+'</a>':'')+
+      '<div class="check-wrap"><input type="checkbox" class="step-check" id="check'+i+'" onchange="updateProgress();if(typeof soundOn!==\'undefined\'&&soundOn)beep(700,.05,\'sine\',.03)"><label for="check'+i+'">'+t('check')+'</label></div>'+
       '</div></div></div>';
     con.appendChild(step);
   });
   for(let i=0;i<STEPS.length;i++){if(localStorage.getItem('dsml_check_'+i)==='1'){const c=document.getElementById('check'+i);if(c)c.checked=true;}}
   updateProgress();
-  document.addEventListener('change',e=>{if(e.target.classList.contains('step-check')){const idx=e.target.id.replace('check','');localStorage.setItem('dsml_check_'+idx,e.target.checked?'1':'0');}});
   document.querySelectorAll('.step-header').forEach(el=>{el.addEventListener('mouseenter',()=>{if(soundOn){const b=el.querySelector('.badge');if(b)zoneBeep(b.textContent);}});});
 
   // ── CODE TYPING INSIDE STEPS ──
@@ -1201,8 +1253,6 @@ function updateProgress(){
     'from sklearn.ensemble import RandomForestRegressor\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\nlr = LinearRegression()\nrf = RandomForestRegressor(n_estimators=100)\n\nlr.fit(X_train, y_train)\nrf.fit(X_train, y_train)\n\nprint("Linear Regression R²:", lr.score(X_test, y_test))\nprint("Random Forest R²:", rf.score(X_test, y_test))',
     '# Assignment 4 — Regression\n# Part A: Theory (2-3 pages)\n# Part B: car_price_prediction.ipynb\n#   - Load cleaned dataset\n#   - Train LinearRegression & RandomForest\n#   - Evaluate with MAE, MSE, RMSE, R²\n# Part C: Reflection paper (1-2 pages)'
   ];
-
-  // Type code into each code block when step opens
   document.querySelectorAll('.step').forEach((step, idx)=>{
     let _to = null;
     const obs = new MutationObserver(()=>{
@@ -1232,7 +1282,28 @@ function updateProgress(){
     });
     obs.observe(step, {attributes:true, attributeFilter:['class']});
   });
-})();
+}
+applyLang(LANG);
+document.addEventListener('change',e=>{if(e.target.classList.contains('step-check')){const idx=e.target.id.replace('check','');localStorage.setItem('dsml_check_'+idx,e.target.checked?'1':'0');}});
+
+/* ── APPLY LANG ── */
+function applyLang(lang){
+  LANG=lang; localStorage.setItem('dsml_lang',lang);
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t(k)!==k)el.textContent=t(k);});
+  document.getElementById('searchInput').placeholder=t('search');
+  document.getElementById('tocTitle').textContent=t('toc');
+  document.getElementById('summaryTitle').textContent=t('summaryTitle');
+  document.getElementById('summLessons').textContent=t('lessons');
+  document.getElementById('summTasks').textContent=t('tasks');
+  document.getElementById('summScripts').textContent=t('scripts');
+  document.getElementById('summDatasets').textContent=t('datasets');
+  document.getElementById('summFooter').innerHTML='<strong>╔══ '+t('summaryFooter')+'</strong><br><strong>╚══ '+t('start')+'</strong> STEP 01 · <strong>'+t('final')+'</strong> STEP 11';
+  document.getElementById('typingEl').textContent=t('subtitle');
+  document.getElementById('termOutput').textContent=t('termOut');
+  document.getElementById('langBtn').textContent=LANG==='en'?'🇷🇺':'🇬🇧';
+  renderSteps(); filterSteps();
+}
+function cycleLang(){applyLang(LANG==='en'?'ru':'en');}
 </script>
 
 <!-- MD EDITOR -->
@@ -1420,7 +1491,7 @@ function filterSteps(){
   const toc=[...document.querySelectorAll('.toc-item')];
   let found=0;
   STEPS.forEach((s,i)=>{
-    const match=!q||s.title.toLowerCase().includes(q)||s.desc.toLowerCase().includes(q);
+    const match=!q||s.title[LANG].toLowerCase().includes(q)||s.desc[LANG].toLowerCase().includes(q);
     if(steps[i])steps[i].style.display=match?'':'none';
     if(toc[i])toc[i].style.display=match?'':'none';
     if(match)found++;
