@@ -770,7 +770,7 @@
   <div class="ui-toggles-panel">
     <button class="ui-btn install-pwa" id="installBtn" onclick="installPWA()" title="Установить приложение">⬇</button>
     <button class="ui-btn" id="soundToggle" onclick="toggleSound()" title="Звук">🔇</button>
-    <button class="ui-btn" id="langBtn" onclick="cycleLang()" title="Сменить язык">🇷🇺</button>
+    <button class="ui-btn" id="langBtn" onclick="cycleLang()" title="Сменить язык">ru</button>
     <div class="theme-dropdown">
       <button class="ui-btn" onclick="toggleThemeDropdown()" title="Тема оформления" id="themeVariantBtn">🎨</button>
       <div class="theme-dropdown-menu" id="themeDropdown"></div>
@@ -1300,7 +1300,7 @@ function applyLang(lang){
   document.getElementById('summFooter').innerHTML='<strong>╔══ '+t('summaryFooter')+'</strong><br><strong>╚══ '+t('start')+'</strong> STEP 01 · <strong>'+t('final')+'</strong> STEP 11';
   document.getElementById('typingEl').textContent=t('subtitle');
   document.getElementById('termOutput').textContent=t('termOut');
-  document.getElementById('langBtn').textContent=LANG==='en'?'🇷🇺':'🇬🇧';
+  document.getElementById('langBtn').textContent=LANG==='en'?'ru':'en';
   renderSteps(); filterSteps();
 }
 function cycleLang(){applyLang(LANG==='en'?'ru':'en');}
